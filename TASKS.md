@@ -23,7 +23,7 @@ For details and acceptance criteria, see `docs/PLAN.md` §6. At the end of each 
   - Try fitlocale hands-on against the seed fixtures (MIT; v0.4.3 on 21 Oct 2026; 22 rules). Map its rules to our taxonomy as overlaps and gaps. Relevant rules: rtl/bidi-order, rtl/missing-dir, rtl/font-fallback, rtl/clipped-marks, rtl/not-mirrored, rtl/icon-not-mirrored, overflow/*.
   - Cover Android pseudo-locales, rtlcss and existing RTL corpora.
   - Catalogue the open RTL issues in AI-tool repos, with links and status.
-- [ ] 0.7 [P] Name check. Look at npm and GitHub availability and the risk of confusion with WebDriver BiDi. Propose 2–3 options with evidence.
+- [x] 0.7 [P] Name check. Look at npm and GitHub availability and the risk of confusion with WebDriver BiDi. Propose 2–3 options with evidence.
 - [ ] 0.8 [P] Taxonomy review. Propose changes to docs/FIXTURE_SPEC.md §2 — for example, should the symptom categories NP and NUM be folded into the cause categories BD and ISO?
 - [ ] 0.9 [Y] Create the GitHub repo. Claude prepares the `gh repo create` command; you run it. Recommended: public with a WIP banner. Alternative: private until Phase 6.
 - [ ] G0 [Y] Decide the fitlocale strategy, the name and the taxonomy. Claude then writes ADR-0001…0003.
