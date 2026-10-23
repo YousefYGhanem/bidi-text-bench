@@ -80,10 +80,12 @@ The validator (`npm run corpus:validate`) enforces:
 - unique IDs;
 - every span is a substring of `text`;
 - NFC normalisation;
-- no bidi control characters unless `expected_notes` names them;
+- no bidi control characters (U+061C, U+200E, U+200F, U+202A–U+202E, U+2066–U+2069) in `title`, `text` or spans, unless `expected_notes` names each one by code point in the form `U+200E`;
+- each fixture sits in the folder of its `lang` and in the file of its `category` (files starting with `_`, such as the seeds, are exempt), and its ID starts with `<lang>-<category>-`;
+- a draft has `verification: null`;
 - for every verified fixture, `verification.hash` matches the current content.
 
-**Hash** = SHA-256 of the canonical JSON of `{lang, text, markdown, base_direction, isolate_spans, author_spans, expected_notes}`. Any edit to a verified fixture invalidates it, and CI fails until it is re-verified.
+**Hash** = SHA-256 of the canonical JSON of `{lang, text, markdown, base_direction, isolate_spans, author_spans, expected_notes}`. Canonical JSON means object keys are sorted at every level and there is no whitespace. The implementation is `fixtureHash` in [src/corpus/validate.ts](../src/corpus/validate.ts), and the schema is [corpus/schema/fixture.schema.json](../corpus/schema/fixture.schema.json). Any edit to a verified fixture invalidates it, and CI fails until it is re-verified.
 
 ## 5. Verification workflow
 1. Claude (or a contributor) adds fixtures with `status: draft`. Open questions go inside `expected_notes`, marked `NEEDS-YOUSEF: …`.

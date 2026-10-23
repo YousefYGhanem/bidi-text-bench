@@ -16,7 +16,7 @@
     "test": "vitest run",
     "test:e2e": "playwright test",
     "docker:test": "docker build -t bidi-text-bench-test . && docker run --rm --init --ipc=host -e CI bidi-text-bench-test",
-    "corpus:validate": "node scripts/todo.mjs corpus:validate 1.1 --skip",
+    "corpus:validate": "node src/cli/corpus-validate.ts",
     "review": "node scripts/todo.mjs review 1.3",
     "zoo": "node scripts/todo.mjs zoo 2.4",
     "mock-llm": "node scripts/todo.mjs mock-llm 3.1",
@@ -31,5 +31,9 @@
     "@types/node": "24.19.2",
     "typescript": "7.0.2",
     "vitest": "5.0.5"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "yaml": "2.9.1"
   }
 }

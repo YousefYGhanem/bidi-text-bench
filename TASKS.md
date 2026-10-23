@@ -29,7 +29,7 @@ For details and acceptance criteria, see `docs/PLAN.md` §6. At the end of each 
 - [x] G0 [Y] Decide the fitlocale strategy, the name and the taxonomy. Claude then writes ADR-0001…0003.
 
 ## Phase 1 — Corpus v0 + review tool (week 2)
-- [ ] 1.1 [C] Write corpus/schema/fixture.schema.json and `npm run corpus:validate`. It checks the schema, unique IDs, that every span is inside the text, NFC normalisation, stray bidi controls and the verification hash.
+- [x] 1.1 [C] Write corpus/schema/fixture.schema.json and `npm run corpus:validate`. It checks the schema, unique IDs, that every span is inside the text, NFC normalisation, stray bidi controls and the verification hash.
 - [ ] 1.2 [C] Build the reference renderer with correct markup: dir, isolates, logical CSS and Markdown. The review tool uses it, and it doubles as zoo/golden.html.
 - [ ] 1.3 [C] Build the review tool, `npm run review`:
   - It lists the drafts. For each one it shows the reference render, the logical text and the expected_notes.
