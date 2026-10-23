@@ -35,6 +35,13 @@ describe('renderFixture', () => {
     expect(html).toContain('&#60;b&#62;');
   });
 
+  it('shows author spans as correctly authored LTR isolates', () => {
+    const html = renderFixture(
+      fx({ text: 'התקשרו ל-+972-50-000-0000 היום', author_spans: ['+972-50-000-0000'] }),
+    );
+    expect(html).toContain('<bdi dir="ltr">+972-50-000-0000</bdi>');
+  });
+
   it('isolates Markdown spans that are not code or links, such as mentions', () => {
     const html = renderFixture(
       fx({

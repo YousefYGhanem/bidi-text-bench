@@ -34,11 +34,11 @@
   surfaces: [message]
   severity: blocker
   expected_notes: >-
-    Manual check. Double-click or drag-select only "AB-1042", copy, and paste into a plain-text
-    editor: the result is exactly AB-1042. Do the same for +972-50-000-0000: the pasted text starts
-    with "+" even though, in plain text, the plus sign is drawn at the far end of the number (UAX #9;
-    an author span, so the on-screen position is not a UI failure). Neither value may come out
-    reversed or with a stray control character.
+    Manual check. The phone number shows as +972-50-000-0000 with the plus sign at its left end (an
+    author span: plain-text UIs may draw the plus at the right end without being penalised).
+    Double-click or drag-select only "AB-1042", copy, and paste into a plain-text editor: the result
+    is exactly AB-1042. Do the same for the phone number: the pasted text starts with "+". Neither
+    value may come out reversed or with a stray control character.
   status: draft
   verification: null
   source: original

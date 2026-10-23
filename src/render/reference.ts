@@ -9,15 +9,22 @@ export const escapeHtml = (s: string) => s.replace(/[&<>"']/g, (c) => `&#${c.cha
 // Fixtures can arrive in contributors' PRs: raw HTML inside Markdown is shown as text, never run.
 const markdown = new Marked({ gfm: true, renderer: { html: ({ text }) => escapeHtml(text) } });
 
-/** Plain text, escaped, with each renderer-owned span isolated in <bdi> (FIXTURE_SPEC §1.7). */
+// Renderer-owned spans get <bdi> (direction from their content). Author-owned spans are shown as
+// correctly authored: an LTR isolate, as if the author had added LRI…PDI (FIXTURE_SPEC §1.7).
+const isolateTag = (fx: Fixture, span: string) =>
+  fx.author_spans.includes(span) ? '<bdi dir="ltr">' : '<bdi>';
+
+/** Plain text, escaped, with each listed span isolated (FIXTURE_SPEC §1.7). */
 function plainText(fx: Fixture): string {
-  const spans = [...new Set(fx.isolate_spans)].sort((a, b) => b.length - a.length);
+  const spans = [...new Set([...fx.isolate_spans, ...fx.author_spans])].sort(
+    (a, b) => b.length - a.length,
+  );
   let html = '';
   let i = 0;
   while (i < fx.text.length) {
     const span = spans.find((s) => fx.text.startsWith(s, i));
     if (span) {
-      html += `<bdi>${escapeHtml(span)}</bdi>`;
+      html += `${isolateTag(fx, span)}${escapeHtml(span)}</bdi>`;
       i += span.length;
     } else {
       html += escapeHtml(fx.text[i] as string);
@@ -31,7 +38,7 @@ function plainText(fx: Fixture): string {
  * In rendered Markdown, isolate each listed span that is not already inside code or a link
  * (mentions, for example). Only text between tags is touched, never attributes.
  */
-function isolateLooseSpans(html: string, spans: string[]): string {
+function isolateLooseSpans(fx: Fixture, html: string, spans: string[]): string {
   let inside = 0;
   return html
     .split(/(<[^>]+>)/)
@@ -42,16 +49,16 @@ function isolateLooseSpans(html: string, spans: string[]): string {
         return part;
       }
       if (inside > 0) return part;
-      return spans.reduce((text, s) => text.replaceAll(s, `<bdi>${s}</bdi>`), part);
+      return spans.reduce((text, s) => text.replaceAll(s, `${isolateTag(fx, s)}${s}</bdi>`), part);
     })
     .join('');
 }
 
 export function renderFixture(fx: Fixture): string {
   // Spans with HTML-special characters are left alone here; in practice those are code or links.
-  const loose = fx.isolate_spans.filter((s) => s === escapeHtml(s));
+  const loose = [...fx.isolate_spans, ...fx.author_spans].filter((s) => s === escapeHtml(s));
   const body = fx.markdown
-    ? isolateLooseSpans(markdown.parse(fx.text, { async: false }) as string, loose)
+    ? isolateLooseSpans(fx, markdown.parse(fx.text, { async: false }) as string, loose)
     : plainText(fx);
   return `<article class="fx" id="${escapeHtml(fx.id)}" lang="${fx.lang}" dir="${fx.base_direction}">\n${body.trim()}\n</article>`;
 }

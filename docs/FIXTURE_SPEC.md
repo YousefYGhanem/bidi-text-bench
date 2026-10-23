@@ -18,6 +18,7 @@ A **fixture** is one short, realistic piece of mixed-direction text, plus a nati
 7. **Who is responsible?**
    - A span goes in `isolate_spans` only if the *renderer* controls it: Markdown code, links and auto-linked URLs, emails, mentions, chips.
    - If correct display needs the *author* to add markup (e.g. plain-text `C++` inside Hebrew), put the span in `author_spans` instead. UIs are not penalised for it; Track B checks whether models emit safe markup.
+   - The reference render (golden page, review tool) shows author spans *as correctly authored*: an LTR isolate, as if the author had added LRI…PDI. `expected_notes` describe that correct display, and add that plain-text UIs may show it otherwise without being penalised.
 
 ## 2. Taxonomy
 | ID | Category | What breaks | Checked |
