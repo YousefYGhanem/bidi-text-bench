@@ -85,3 +85,6 @@
 {"id":"ar-num-004","decision":"needs-fix","note":"\"+1-555-000-0000\" is writtem \"+1-555-000-0000\", it should be flipped","by":"Yousef Ghanem","at":"2026-10-23T12:39:08.524Z","hash":"c3e481e997ec33982bea367e07607cde9223c79f183e584c484be86cafac9f19"}
 {"id":"he-copy-002","decision":"needs-fix","note":"The plus sign in the number \"+972-50-000-0000\" is at the right and not the left, it should be at the left","by":"Yousef Ghanem","at":"2026-10-23T12:39:46.632Z","hash":"70dbf75f9dd8149dba9c8280ed55dfd194518dd6cc8ad4cd453ebc2f232cd6e6"}
 {"id":"he-num-004","decision":"needs-fix","note":"The plus sign at the number \"+972-50-000-0000\" is at the right not the left, it should be at the left.","by":"Yousef Ghanem","at":"2026-10-23T12:40:13.906Z","hash":"f6695e730390de56d8102ebda3657efd36fa6b50a9758e0135ac4b4c1cc41252"}
+{"id":"ar-num-004","decision":"approve","note":"","by":"Yousef Ghanem","at":"2026-10-23T12:57:39.535Z","hash":"8ca438c624737b862d301e85a35909cd976c77888f0aeff9a031f45fca5adb7c"}
+{"id":"he-copy-002","decision":"approve","note":"","by":"Yousef Ghanem","at":"2026-10-23T12:57:39.774Z","hash":"3055bde2727bd812d31a1939bccf30c9ca77d93f840c3be1ab19110f3b40408b"}
+{"id":"he-num-004","decision":"approve","note":"","by":"Yousef Ghanem","at":"2026-10-23T12:57:40.423Z","hash":"7c0ea099f022a6aa59873dccc7efee70f5603831717dd54e73eec8189e3d9222"}

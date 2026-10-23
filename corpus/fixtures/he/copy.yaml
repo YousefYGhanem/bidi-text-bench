@@ -39,7 +39,7 @@
     Double-click or drag-select only "AB-1042", copy, and paste into a plain-text editor: the result
     is exactly AB-1042. Do the same for the phone number: the pasted text starts with "+". Neither
     value may come out reversed or with a stray control character.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T12:57:39.774Z', hash: '3055bde2727bd812d31a1939bccf30c9ca77d93f840c3be1ab19110f3b40408b' }
   source: original
   related_issues: []

@@ -77,7 +77,7 @@
     and the final period is at the far left. The number is an author span: in plain text UAX #9 draws
     the plus sign at the right end, and only author markup (LRI/PDI, an LRM before "+", or backticks)
     fixes that. UIs are not penalised for the plus sign; the digit groups must still keep their order.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T12:57:40.423Z', hash: '7c0ea099f022a6aa59873dccc7efee70f5603831717dd54e73eec8189e3d9222' }
   source: original
   related_issues: []
