@@ -1,0 +1,78 @@
+# Candidate audit targets for the v1 audit.
+# In task 5.1, Claude verifies each one: does it run locally or is the page public,
+# what is the current version and report channel, and is there a terms-of-service note.
+# mode:
+#   auto-chat — self-hosted open-source UI pointed at the mock LLM
+#   auto-page — public page, no login, low rate
+#   manual    — human protocol only (docs/AUDIT_PROTOCOL.md §4)
+# Never put credentials in this file.
+
+# --- Open-source AI chat UIs (self-hosted in Docker, automated) ---
+- id: open-webui
+  name: Open WebUI
+  mode: auto-chat
+  repo: https://github.com/open-webui/open-webui
+  notes: try WEBUI_AUTH=False for a local single-user instance
+- id: librechat
+  name: LibreChat
+  mode: auto-chat
+  repo: https://github.com/danny-avila/LibreChat
+  notes: custom OpenAI-compatible endpoint via librechat.yaml; needs a MongoDB container
+- id: lobechat
+  name: LobeChat
+  mode: auto-chat
+  repo: https://github.com/lobehub/lobe-chat
+- id: nextchat
+  name: NextChat
+  mode: auto-chat
+  repo: https://github.com/ChatGPTNextWeb/NextChat
+- id: hf-chat-ui
+  name: Hugging Face Chat UI
+  mode: auto-chat
+  repo: https://github.com/huggingface/chat-ui
+- id: big-agi
+  name: big-AGI
+  mode: auto-chat
+  repo: https://github.com/enricoros/big-AGI
+
+# --- Public pages (automated, no login, low rate) ---
+- id: github-issues
+  name: GitHub issue and comment rendering
+  mode: auto-page
+  notes: Yousef posts the fixtures once in an issue of his own repo; Claude audits that public page
+
+# --- Closed products (manual protocol only, never automated) ---
+- id: chatgpt-web
+  name: ChatGPT (web)
+  mode: manual
+- id: claude-web
+  name: Claude (web and desktop app)
+  mode: manual
+- id: gemini-web
+  name: Gemini (web)
+  mode: manual
+- id: copilot-web
+  name: Microsoft Copilot (web)
+  mode: manual
+- id: perplexity-web
+  name: Perplexity (web)
+  mode: manual
+- id: lechat-web
+  name: Mistral Le Chat (web)
+  mode: manual
+- id: vscode-copilot-chat
+  name: GitHub Copilot Chat in VS Code
+  mode: manual
+- id: cursor
+  name: Cursor chat panel
+  mode: manual
+- id: claude-code-cli
+  name: Claude Code (terminal)
+  mode: manual
+  repo: https://github.com/anthropics/claude-code
+  notes: record which terminal app was used; terminal bidi support varies widely
+- id: codex-cli
+  name: OpenAI Codex CLI (terminal)
+  mode: manual
+  repo: https://github.com/openai/codex
+  notes: open source, so a PR is possible; issue openai/codex#31903 asks for an RTL fixture suite

@@ -1,0 +1,112 @@
+# Seed drafts showing the fixture format. Yousef reviews them in Phase 1 (npm run review).
+# Move each one into corpus/fixtures/ar/<category>.yaml during task 1.4.
+
+- id: ar-bd-001
+  lang: ar
+  category: BD
+  title: Arabic sentence that starts with an English product name
+  text: 'Python لغة برمجة مناسبة للمبتدئين، وتُستخدم كثيرًا في اختبار البرمجيات.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message, input, stream]
+  severity: major
+  expected_notes: >-
+    The whole paragraph runs right-to-left and is right-aligned. "Python" is the first word, at the
+    far right. The Arabic comma follows "للمبتدئين" and the final period is at the far left.
+    First-strong detection (dir="auto") gets this wrong, because the first strong character is Latin.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-iso-001
+  lang: ar
+  category: ISO
+  title: Windows folder path ending in a backslash, inside inline code
+  text: 'افتح المجلد `C:\Users\demo\reports\` ثم احذف النسخ القديمة.'
+  markdown: true
+  base_direction: rtl
+  isolate_spans: ['C:\Users\demo\reports\']
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    The path appears exactly as typed, as one left-to-right unit: C:\Users\demo\reports\ with the
+    trailing backslash at its right end. If the code span is not isolated, the trailing backslash
+    jumps to the left of "C:". That misleads anyone who reads or retypes the path.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-np-001
+  lang: ar
+  category: NP
+  title: Colons and comma next to a Latin username and an email
+  text: 'اسم المستخدم: lina_dev، والبريد الإلكتروني: lina@example.com.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message, input]
+  severity: major
+  expected_notes: >-
+    Reads right-to-left. Each colon sits immediately after (to the left of) its Arabic label.
+    "lina_dev" and the email each read left-to-right. The Arabic comma is just left of "lina_dev",
+    and the final period is at the far left, after the email.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-num-001
+  lang: ar
+  category: NUM
+  title: Price, percentage and date in one sentence
+  text: 'سعر الاشتراك 49.90 دولارًا شهريًا، مع خصم 20% حتى 31/12/2026.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: blocker
+  expected_notes: >-
+    Every number keeps its internal left-to-right order: 49.90, 20%, 31/12/2026 (day/month/year).
+    The final period is at the far left. Reordered digits or date parts change the meaning (blocker).
+    NEEDS-YOUSEF: as typed, the % sits to the right of 20. Is that what Arabic readers expect here,
+    or do they expect "%20"?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-code-001
+  lang: ar
+  category: CODE
+  title: Shell prompt lines in a fenced code block between Arabic paragraphs
+  text: |
+    لتثبيت المكتبة نفّذ الأمرين التاليين:
+
+    ```bash
+    $ npm install bidi-js --save-dev
+    $ npm test
+    ```
+
+    بعدها يجب أن تظهر رسالة `All tests passed`.
+  markdown: true
+  base_direction: rtl
+  isolate_spans: ['All tests passed']
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    The two Arabic paragraphs are right-to-left and right-aligned. The code block is left-to-right:
+    each line starts with "$" at the left edge. If the block inherits RTL, the "$" jumps to the right
+    end of each line. The inline code "All tests passed" is one left-to-right unit, and the final
+    period is at the far left.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
