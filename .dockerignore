@@ -1,0 +1,14 @@
+.git
+node_modules
+.env
+.env.*
+!.env.example
+drafts
+scratch
+coverage
+dist
+test-results
+playwright-report
+blob-report
+audit/runs
+audit/manual

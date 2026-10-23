@@ -15,6 +15,7 @@
     "typecheck": "tsc",
     "test": "vitest run",
     "test:e2e": "playwright test",
+    "docker:test": "docker build -t bidi-bench-test . && docker run --rm --init --ipc=host -e CI bidi-bench-test",
     "corpus:validate": "node scripts/todo.mjs corpus:validate 1.1 --skip",
     "review": "node scripts/todo.mjs review 1.3",
     "zoo": "node scripts/todo.mjs zoo 2.4",

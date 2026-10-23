@@ -89,7 +89,7 @@ export interface Adapter {
 - Ships with `node --test` self-tests for both modes.
 
 ## 7. Determinism and evidence
-- Run audits and take screenshots in the project Docker image. It is based on `mcr.microsoft.com/playwright:v<X.Y.Z>-noble`, with the version pinned to match `@playwright/test`. The official image ships no Arabic- or Hebrew-specific fonts, so add `fonts-noto-core` and `fonts-noto-mono`. The image build asserts both languages with `fc-list :lang=ar` and `:lang=he`.
+- Run audits and take screenshots in the project Docker image. It is based on `mcr.microsoft.com/playwright:v<X.Y.Z>-noble`, with the version pinned to match `@playwright/test`. The official image ships no Arabic- or Hebrew-specific fonts, so add `fonts-noto-core` and `fonts-noto-mono`. The image build asserts both languages with `fc-list :lang=ar` and `:lang=he`, filtered to Noto faces: the base image's generic fonts already cover both languages (8 Arabic and 28 Hebrew faces in v1.64.1), so an unfiltered check would always pass. A unit test keeps the image tag equal to the `@playwright/test` version.
 - Environment:
   - `TZ=UTC`;
   - browser locale `en-US` for v1 (an RTL app-UI pass comes later);
