@@ -1,4 +1,4 @@
-import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { expect, test } from '@playwright/test';
@@ -14,6 +14,13 @@ let url: string;
 test.beforeEach(async () => {
   root = mkdtempSync(join(tmpdir(), 'review-')).replaceAll('\\', '/');
   cpSync('corpus/fixtures', `${root}/corpus/fixtures`, { recursive: true });
+  // Reset the copy to drafts, so the test doesn't depend on Yousef's review state.
+  for (const f of loadFixtureFiles(`${root}/corpus/fixtures`)) {
+    const text = readFileSync(f.path, 'utf8')
+      .replace(/status: (verified|rejected)/g, 'status: draft')
+      .replace(/verification: {[^}]*}/g, 'verification: null');
+    writeFileSync(f.path, text);
+  }
   ({ url, close } = await startReviewServer({ root, port: 0, reviewer: 'E2E Reviewer' }));
 });
 

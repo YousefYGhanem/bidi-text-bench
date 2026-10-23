@@ -7,8 +7,12 @@ import {
   validateFixtures,
 } from '../../src/corpus/validate.ts';
 
-const base = (): Fixture =>
-  structuredClone(allFixtures(loadFixtureFiles()).find((f) => f.id === 'ar-iso-001') as Fixture);
+// A real fixture reset to draft, so these tests don't depend on Yousef's review state.
+const base = (): Fixture => ({
+  ...structuredClone(allFixtures(loadFixtureFiles()).find((f) => f.id === 'ar-iso-001') as Fixture),
+  status: 'draft',
+  verification: null,
+});
 const check = (fixtures: unknown[], path = 'corpus/fixtures/ar/iso.yaml') =>
   validateFixtures([{ path, fixtures }]);
 

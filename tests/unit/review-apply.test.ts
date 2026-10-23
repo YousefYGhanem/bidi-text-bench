@@ -5,7 +5,10 @@ import { type Fixture, fixtureHash, validateFixtures } from '../../src/corpus/va
 import { applyDecision } from '../../src/review/apply.ts';
 
 const path = 'corpus/fixtures/he/np.yaml';
-const source = readFileSync(path, 'utf8');
+// The real file reset to drafts, so these tests don't depend on Yousef's review state.
+const source = readFileSync(path, 'utf8')
+  .replace(/status: (verified|rejected)/g, 'status: draft')
+  .replace(/verification: {[^}]*}/g, 'verification: null');
 const AT = '2026-11-01T10:00:00.000Z';
 const run = (id: string, decision: 'approve' | 'reject' | 'needs-fix', text = source) =>
   applyDecision(path, text, id, decision, 'note', "Yousef O'Test", AT);
