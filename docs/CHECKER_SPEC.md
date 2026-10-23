@@ -18,7 +18,7 @@
 - API note: `bidiFactory()` → `getEmbeddingLevels(text, dir)` and `getReorderSegments(text, levels, lineStart, lineEnd)`. All ranges are **inclusive**.
 - For the computation only, each `isolate_spans` entry is wrapped in FSI (U+2068) … PDI (U+2069). The indices are then mapped back to the original text.
 - Line breaks come from the probe, which records which graphemes landed on which line. Each line is reordered with the paragraph's embedding levels (UAX #9 rule L2).
-- **Calibration test:** for every verified fixture, probing the **golden page** (correct markup) must give the engine's expected order. This must hold in Chromium, Firefox and WebKit. A mismatch means one of these:
+- **Calibration test:** for every verified fixture, probing the **golden page** (`zoo/golden.html`, correct markup, built from the corpus by `npm run golden` with `src/render/reference.ts`) must give the engine's expected order. This must hold in Chromium, Firefox and WebKit. A mismatch means one of these:
   - a bug in the engine or the probe;
   - a wrong expectation;
   - a browser bug.

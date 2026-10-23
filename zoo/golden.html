@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>bidi-text-bench golden page</title>
+<style>
+body { margin: 24px; font: 16px/1.6 "Noto Sans Arabic", "Noto Sans Hebrew", "Noto Sans", sans-serif; }
+.fx { max-width: 760px; margin-block: 0 24px; padding: 12px 16px; border: 1px solid #ccc; text-align: start; }
+.fx p, .fx ul, .fx ol, .fx blockquote, .fx table, .fx pre { margin-block: 0 8px; }
+.fx code, .fx kbd, .fx samp { direction: ltr; unicode-bidi: isolate; font-family: "Noto Sans Mono", monospace; }
+.fx pre { direction: ltr; unicode-bidi: isolate; text-align: left; padding: 8px; background: #f4f4f4; overflow-x: auto; }
+.fx a { unicode-bidi: plaintext; }
+.fx ul, .fx ol { padding-inline-start: 2em; }
+.fx blockquote { margin-inline: 0; padding-inline-start: 12px; border-inline-start: 3px solid #999; }
+.fx th, .fx td { text-align: start; padding: 4px 8px; border: 1px solid #ccc; }
+</style>
+</head>
+<body>
+<article class="fx" id="ar-bd-001" lang="ar" dir="rtl">
+<p>Python لغة برمجة مناسبة للمبتدئين، وتُستخدم كثيرًا في اختبار البرمجيات.</p>
+</article>
+<article class="fx" id="ar-iso-001" lang="ar" dir="rtl">
+<p>افتح المجلد <code>C:\Users\demo\reports\</code> ثم احذف النسخ القديمة.</p>
+</article>
+<article class="fx" id="ar-np-001" lang="ar" dir="rtl">
+<p>اسم المستخدم: lina_dev، والبريد الإلكتروني: lina@example.com.</p>
+</article>
+<article class="fx" id="ar-num-001" lang="ar" dir="rtl">
+<p>سعر الاشتراك 49.90 دولارًا شهريًا، مع خصم 20% حتى 31/12/2026.</p>
+</article>
+<article class="fx" id="ar-code-001" lang="ar" dir="rtl">
+<p>لتثبيت المكتبة نفّذ الأمرين التاليين:</p>
+<pre><code class="language-bash">$ npm install bidi-js --save-dev
+$ npm test
+</code></pre>
+<p>بعدها يجب أن تظهر رسالة <code>All tests passed</code>.</p>
+</article>
+<article class="fx" id="he-bd-001" lang="he" dir="rtl">
+<p>React היא ספרייה לבניית ממשקי משתמש, ומשתמשים בה בהרבה חברות.</p>
+</article>
+<article class="fx" id="he-iso-001" lang="he" dir="rtl">
+<p>שמרו את הדוחות בתיקייה <code>./reports/</code> והריצו שוב את הבדיקות.</p>
+</article>
+<article class="fx" id="he-np-001" lang="he" dir="rtl">
+<p>האם זה עובד גם ב-Windows?</p>
+</article>
+<article class="fx" id="he-np-002" lang="he" dir="rtl">
+<p>אני כותב קוד ב-C++ כבר חמש שנים.</p>
+</article>
+<article class="fx" id="he-num-001" lang="he" dir="rtl">
+<p>המחיר הוא 49.90 ₪ לחודש, וההנחה היא 20% עד 31.12.2026.</p>
+</article>
+<article class="fx" id="he-list-001" lang="he" dir="rtl">
+<p><strong>שלבי ההתקנה:</strong></p>
+<ol>
+<li>התקינו את Node.js (גרסה 22 ומעלה).</li>
+<li>הריצו <code>npm install</code>.</li>
+<li>הפעילו את הבדיקות עם <code>npm test</code>.</li>
+</ol>
+</article>
+</body>
+</html>
