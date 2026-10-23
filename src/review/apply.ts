@@ -1,8 +1,8 @@
 // Applies one review decision to a fixture file. Only the review tool calls this, on
 // Yousef's keypress (CLAUDE.md rule 1). It replaces just the `status` and `verification`
 // values in the source text, so the rest of the file stays byte-identical in the diff.
-import { isMap, isScalar, isSeq, parseDocument } from 'yaml';
-import { type Fixture, fixtureHash, validateFixtures } from '../corpus/validate.ts';
+import { isMap, isNode, isScalar, isSeq, parseDocument } from 'yaml';
+import { type Fixture, fixtureHash, isStale, validateFixtures } from '../corpus/validate.ts';
 
 export type Decision = 'approve' | 'needs-fix' | 'reject';
 
@@ -29,13 +29,17 @@ export function applyDecision(
 ): { yamlText: string; log: LogEntry } {
   const doc = parseDocument(yamlText);
   const fixtures = doc.toJS() as Fixture[];
-  const errors = validateFixtures([{ path, fixtures }]);
+  // A stale hash is exactly what re-review resolves, so it does not block a decision.
+  const errors = validateFixtures([{ path, fixtures }]).filter(
+    (e) => !e.includes('verification hash does not match'),
+  );
   if (errors.length) throw new Error(`fix the file first:\n${errors.join('\n')}`);
 
   const index = fixtures.findIndex((f) => f.id === id);
   const fx = fixtures[index];
   if (!fx) throw new Error(`${id} is not in ${path}`);
-  if (fx.status !== 'draft') throw new Error(`${id} is ${fx.status}, not a draft`);
+  if (fx.status !== 'draft' && !isStale(fx))
+    throw new Error(`${id} is ${fx.status} and unchanged since review, not a draft`);
   if (!by.trim()) throw new Error('reviewer name is empty: set git config user.name');
 
   const hash = fixtureHash(fx);
@@ -46,7 +50,7 @@ export function applyDecision(
   if (!isMap(map)) throw new Error(`${id}: unexpected YAML shape`);
   const range = (key: string) => {
     const value = map.items.find((p) => isScalar(p.key) && p.key.value === key)?.value;
-    if (!isScalar(value) || !value.range) throw new Error(`${id}: cannot locate ${key}`);
+    if (!isNode(value) || !value.range) throw new Error(`${id}: cannot locate ${key}`);
     return value.range;
   };
   const edits = [

@@ -91,7 +91,7 @@ function show() {
   $('position').textContent = drafts.length ? (index + 1) + ' / ' + drafts.length : '0 drafts';
   if (!drafts.length) return;
   const { fx, html, file } = drafts[index];
-  $('facts').textContent = fx.id + ' · ' + fx.category + ' · ' + fx.severity + ' · surfaces: ' + fx.surfaces.join(', ') + ' · ' + file + ' · ' + fx.title;
+  $('facts').textContent = (drafts[index].stale ? 'RE-VERIFY (changed since you verified it) · ' : '') + fx.id + ' · ' + fx.category + ' · ' + fx.severity + ' · surfaces: ' + fx.surfaces.join(', ') + ' · ' + file + ' · ' + fx.title;
   $('render').innerHTML = html;
   $('chips').innerHTML = [...fx.text].map((c) => {
     const cp = 'U+' + c.codePointAt(0).toString(16).toUpperCase().padStart(4, '0');

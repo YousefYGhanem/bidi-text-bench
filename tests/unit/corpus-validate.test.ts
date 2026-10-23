@@ -4,6 +4,8 @@ import {
   canonicalJson,
   type Fixture,
   fixtureHash,
+  isStale,
+  openQuestions,
   validateFixtures,
 } from '../../src/corpus/validate.ts';
 
@@ -92,6 +94,24 @@ describe('validateFixtures', () => {
     expect(check([ok])).toEqual([]);
     expect(check([{ ...ok, text: `${fx.text} ` }]).join()).toMatch(/hash does not match/);
     expect(check([{ ...fx, status: 'verified' }]).join()).toMatch(/needs a verification record/);
+  });
+});
+
+describe('isStale and openQuestions', () => {
+  it('flags verified fixtures whose content changed, and verified ones that still ask NEEDS-YOUSEF', () => {
+    const fx = base();
+    const verified = {
+      ...fx,
+      status: 'verified' as const,
+      verification: { by: 'Y', at: '2026-11-01', hash: fixtureHash(fx) },
+    };
+    expect(isStale(verified)).toBe(false);
+    expect(isStale({ ...verified, text: `${fx.text} ` })).toBe(true);
+    expect(isStale(fx)).toBe(false);
+    const asking = { ...verified, expected_notes: 'NEEDS-YOUSEF: ok?' };
+    expect(
+      openQuestions([verified, asking, { ...fx, expected_notes: 'NEEDS-YOUSEF: draft' }]),
+    ).toEqual([asking]);
   });
 });
 

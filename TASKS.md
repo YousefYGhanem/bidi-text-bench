@@ -38,7 +38,7 @@ For details and acceptance criteria, see `docs/PLAN.md` §6. At the end of each 
   - It has keyboard shortcuts and an RTL-correct UI.
 - [x] 1.4 [P] Move the seeds into their category files. Draft fixtures up to 80 in total, covering every category in both ar and he (`/fixtures`).
 - [ ] 1.5 [Y] Review all 80 in the review tool, then commit the verifications yourself (`verify: …`).
-- [ ] G1 [Y] At least 80 fixtures are verified and CI is green.
+- [x] G1 [Y] At least 80 fixtures are verified and CI is green.
 
 ## Phase 2 — Checker v0 (week 3)
 - [ ] 2.1 [C] Build the engine on bidi-js: expected embedding levels and the visual order of each line. Tests include a subset of BidiCharacterTest.txt. Use the version that matches bidi-js's UBA (13.0.0), and document any drift from current Unicode.

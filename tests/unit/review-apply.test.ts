@@ -49,8 +49,17 @@ describe('applyDecision', () => {
 
   it('refuses fixtures that are no longer drafts, and unknown ids', () => {
     const once = run('he-np-002', 'approve').yamlText;
-    expect(() => run('he-np-002', 'approve', once)).toThrow(/is verified, not a draft/);
+    expect(() => run('he-np-002', 'approve', once)).toThrow(/unchanged since review, not a draft/);
     expect(() => run('he-xxx-001', 'approve')).toThrow(/not in/);
+  });
+
+  it('re-verifies a verified fixture whose content changed, and only that', () => {
+    const verified = run('he-np-002', 'approve').yamlText;
+    const edited = verified.replace('UIs are not penalised', 'UIs are never penalised');
+    expect(edited).not.toBe(verified);
+    const { yamlText } = run('he-np-002', 'approve', edited);
+    expect(changedLines(edited, yamlText)).toHaveLength(1); // only the verification line
+    expect(validateFixtures([{ path, fixtures: parse(yamlText) }])).toEqual([]);
   });
 
   it('refuses an invalid file', () => {

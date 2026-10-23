@@ -5,7 +5,7 @@ import { appendFileSync, readFileSync, writeFileSync } from 'node:fs';
 import { createServer } from 'node:http';
 import type { AddressInfo } from 'node:net';
 import { allFixtures, loadFixtureFiles } from '../corpus/load.ts';
-import type { Fixture } from '../corpus/validate.ts';
+import { type Fixture, isStale } from '../corpus/validate.ts';
 import { renderFixture } from '../render/reference.ts';
 import { applyDecision, type Decision } from './apply.ts';
 import { reviewPage } from './page.ts';
@@ -31,11 +31,12 @@ export function startReviewServer(
   const drafts = () =>
     loadFixtureFiles(fixtureRoot).flatMap((file) =>
       allFixtures([file])
-        .filter((fx) => fx.status === 'draft')
+        .filter((fx) => fx.status === 'draft' || isStale(fx))
         .map((fx: Fixture) => ({
           path: file.path,
           file: file.path.slice(opts.root.length + 1),
           fx,
+          stale: isStale(fx),
           html: renderFixture(fx),
         })),
     );
