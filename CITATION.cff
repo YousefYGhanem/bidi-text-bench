@@ -18,4 +18,4 @@ keywords:
   - unicode
   - i18n
   - playwright
-# repository-code is added once the GitHub repo exists (task 0.9).
+repository-code: https://github.com/YousefYGhanem/bidi-text-bench
