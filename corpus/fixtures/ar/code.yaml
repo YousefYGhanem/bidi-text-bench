@@ -24,8 +24,8 @@
     each line starts with "$" at the left edge. If the block inherits RTL, the "$" jumps to the right
     end of each line. The inline code "All tests passed" is one left-to-right unit, and the final
     period is at the far left.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:42:54.373Z', hash: 'aa140b087f735043db908e6085fcff3cc93cc67c0bcd591ead09b09e598262e7' }
   source: original
   related_issues: []
 
@@ -53,8 +53,8 @@
     keep their order and indentation: "def total(prices):" then the indented return line. The trailing
     ";" stays directly after "sum(prices)". The Arabic comment follows "#" and reads right-to-left
     inside the left-to-right line, to the right of the ";".
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:42:58.521Z', hash: '8409cb5b6ebb7de426d6f35e886d6038f154c1b0eab685fecf12359a55b0ead9' }
   source: original
   related_issues: []
 
@@ -78,8 +78,8 @@
     The code line starts with "console.log(" at the left edge. The Arabic string sits between the
     quotes, and the closing quote, ")" and ";" follow it in left-to-right order. The "//" comment
     starts after the ";". The quotes and the bracket must pair correctly around the Arabic text.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:02.212Z', hash: '4e944161a7778a035d61ccc903202e334b00dcce7a87e19e4810f9c375c4d089' }
   source: original
   related_issues: []
 
@@ -98,7 +98,7 @@
     The paragraph is RTL even though it starts with code: print(name) is at the far right. Each code
     span reads left-to-right with its brackets paired and intact: print(name), not print)name(. The
     comma follows "الاسم", and the final period is at the far left.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:07.053Z', hash: '4537f065c541f9545d9bbe28c0383e70cbc4cd8428a45307b622bf0716d7a658' }
   source: original
   related_issues: []

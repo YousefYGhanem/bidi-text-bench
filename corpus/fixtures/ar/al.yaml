@@ -14,8 +14,8 @@
   expected_notes: >-
     The short line hugs the right edge of the message area (text-align: start in an RTL paragraph),
     with the period at its left end. A short line is where hard-coded text-align: left shows most.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:42:06.096Z', hash: '5355374aba992587148e3fa27b26dea2f657a03c3780b7be16d08d489ed43e04' }
   source: original
   related_issues: []
 
@@ -37,8 +37,8 @@
     The heading and the paragraph are both right-aligned and read right-to-left. The heading text
     starts at the right edge. Numbers 15 and 16 read left-to-right inside the sentence, and the final
     period is at the far left.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:42:22.472Z', hash: '0d92e10669edebc20486034d2b85d000c044365e19358b74e18b25d824003560' }
   source: original
   related_issues: []
 
@@ -61,7 +61,7 @@
     its far right; the Arabic comma and the final period stay on the left side of their clauses. A UI
     that sets direction per paragraph by first strong character (dir=auto or unicode-bidi:
     plaintext) left-aligns the second paragraph and lays it out LTR.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:42:31.514Z', hash: 'feab7b74868b0abb9a7e52d5fecca861ee5e30b363cd5f03793fc9b83788eb46' }
   source: original
   related_issues: []

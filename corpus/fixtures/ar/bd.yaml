@@ -15,8 +15,8 @@
     The whole paragraph runs right-to-left and is right-aligned. "Python" is the first word, at the
     far right. The Arabic comma follows "للمبتدئين" and the final period is at the far left.
     First-strong detection (dir="auto") gets this wrong, because the first strong character is Latin.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:42:34.501Z', hash: '434705a8cf67e5fa707dc9922e1175e5fc7301de4d08c86e726e63429cf9b17d' }
   source: original
   related_issues: []
 
@@ -36,8 +36,8 @@
     to its left by the Arabic words; "Flutter" reads left-to-right. The Arabic question mark sits
     right after "Flutter" (to its left) and the final period is at the far left. In the compose box
     the text must also be RTL while typing, even though the first word is Latin.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:42:38.350Z', hash: 'e52442c5ee1641a949db584441f3d8b7360ead34a5cdeef34f57e573d0217df6' }
   source: original
   related_issues: []
 
@@ -58,8 +58,8 @@
     "بالتطبيق" and the final period is at the far left. While streaming, the layout must not flip
     from LTR to RTL once Arabic words arrive. A leading digit is weak, so first-strong detection
     on the first chunk finds no direction.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:42:41.450Z', hash: '6b97d7804a7853687fba36176f8bfed82d1f04545949b745eedfa7588df41dbc' }
   source: original
   related_issues: []
 
@@ -79,7 +79,7 @@
     the far right, then the Arabic words go leftwards. The question mark is at the far left, after
     "الحل". NEEDS-YOUSEF: is "بتنطفي لحالها" natural Levantine for "turns itself off", and should
     the spelling be adjusted?
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:42:47.659Z', hash: '30fe4bd0a467fab4377a3e35ab0369ebdcb5241b2f24022a1671ee5f8c840ce4' }
   source: original
   related_issues: []

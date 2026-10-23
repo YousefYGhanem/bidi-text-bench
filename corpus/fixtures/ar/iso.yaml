@@ -15,8 +15,8 @@
     The path appears exactly as typed, as one left-to-right unit: C:\Users\demo\reports\ with the
     trailing backslash at its right end. If the code span is not isolated, the trailing backslash
     jumps to the left of "C:". That misleads anyone who reads or retypes the path.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:19.051Z', hash: 'acee1a0b4ad2b86de502bc1894d1ef7e40a7549095c299db5dc4ac18eb7c4b9b' }
   source: original
   related_issues: []
 
@@ -35,8 +35,8 @@
     The URL reads left-to-right as one unit. The parentheses surround it: the opening one at its
     right, the closing one at its left, and neither is pulled inside the URL. The final period is at
     the far left, after "التثبيت". Unisolated links let the ")" jump to the wrong side of the URL.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:20.455Z', hash: 'd77faaafcd4db3cb5a4448f1cc56dcbe18ab9262934052f836dc260c1ca61895' }
   source: original
   related_issues: []
 
@@ -54,8 +54,8 @@
   expected_notes: >-
     The email reads left-to-right as one unit. The Arabic comma is immediately to its left, not
     inside or on the right of the email. The final period is at the far left.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:21.627Z', hash: '742dfa9d3f9a7a3a9d29fa30eea4e234284e0b0a4d9678cee394a38b138a7c74' }
   source: original
   related_issues: []
 
@@ -75,8 +75,8 @@
     reads exactly /etc/nginx/nginx.conf, left-to-right, with the leading slash at its left. An
     unisolated path shows the leading slash jumping to the end, which makes it a different path.
     NEEDS-YOUSEF: not every UI renders @sami as a mention in plain Markdown. Keep it as a span?
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:23.856Z', hash: '00d9b1dd558dcb3efa42613562bdd519058caa83ae8c301f2ba97cb39ff2ce50' }
   source: original
   related_issues: []
 
@@ -95,7 +95,7 @@
     The command reads "dir D:\backup" left-to-right as one unit; "dir" is at its left end. The Arabic
     question mark is at the far left, after "المخفية". The backslash stays inside the code span and
     does not jump next to the Arabic words.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:24.971Z', hash: 'd902f31ec426068cb98c1b4e121b514072245066996832ef1ef33bb805bc9ff9' }
   source: original
   related_issues: []

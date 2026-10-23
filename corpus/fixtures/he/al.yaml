@@ -15,8 +15,8 @@
     The text is aligned to the right edge of its container (text-align: start in an RTL paragraph,
     not left). Reading right to left, the first sentence ends with a period and the question mark is
     at the far left of the last line.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:44:45.721Z', hash: 'b97b5a79b606bde63850c2513b2c2abf98ae01de28f450c4d25e837ff1bbccbd' }
   source: original
   related_issues: []
 
@@ -38,8 +38,8 @@
     Both paragraphs are right-to-left and right-aligned. The second begins at the right with
     "מופיעה", then the colon, and the English error is at its left end. It must not be left-aligned
     just because it ends in Latin.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:44:46.805Z', hash: 'b77fc27c20cd3a933520d846b923da403fa24f13228c6e3b2bb37a9e2173c5df' }
   source: original
   related_issues: []
 
@@ -60,7 +60,7 @@
   expected_notes: >-
     The heading and the paragraph are both right-aligned and right-to-left. The numbers 1042 and 3
     keep their digit order. The final period is at the far left of the paragraph.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:44:47.956Z', hash: 'fbd6c7277bc42a77be2372ecd2bb1ec2c8b318a213690c5b50ba5a3e20c71d41' }
   source: original
   related_issues: []

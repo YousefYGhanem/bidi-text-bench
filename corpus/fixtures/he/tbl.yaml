@@ -20,8 +20,8 @@
     leftmost. Cell text is right-aligned. Each price keeps its digits in order (49.90, 120).
     NEEDS-YOUSEF: should "49.90 ₪" show the shekel sign to the left of the number, as in a running
     sentence?
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:46:56.608Z', hash: '278d3d6117fe2cd6945d0e7c730b49b5d020f95f8cdd20c6a455d4f826e4d1e3' }
   source: original
   related_issues: []
 
@@ -43,8 +43,8 @@
   expected_notes: >-
     The first column "כלי" is on the right and "פקודה" is on the left. Each command is a single
     left-to-right unit that reads exactly as typed, including the dot in the file name.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:46:57.600Z', hash: '33826dd5fb7ab5d86f361482fd35feb85b2bd8c39685d86981068be2fa31243f' }
   source: original
   related_issues: []
 
@@ -68,7 +68,7 @@
     the first header is Latin. Versions keep their dots in order (v2.4.0, v2.3.1). Hebrew cells are
     right-aligned. NEEDS-YOUSEF: should the Latin-only "Version" column be left- or right-aligned
     inside an RTL table?
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:46:58.207Z', hash: '0a4fa0ac5079ba0b23818eee20b859afae2e6cdc2423ad4d5d6f8fe1999e6da9' }
   source: original
   related_issues: []

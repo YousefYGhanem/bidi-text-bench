@@ -15,8 +15,8 @@
     Reads right-to-left. Each colon sits immediately after (to the left of) its Arabic label.
     "lina_dev" and the email each read left-to-right. The Arabic comma is just left of "lina_dev",
     and the final period is at the far left, after the email.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:36.653Z', hash: '3018610d07c9bb40a8fe648b2ea6438c41704b89ad49f33ac77846d7df0037c4' }
   source: original
   related_issues: []
 
@@ -36,8 +36,8 @@
     and the question mark at the far left. Each pair of guillemets encloses its command: the opening
     mark on its right and the closing mark on its left. Mirroring of the quote glyphs is checked by
     eye. NEEDS-YOUSEF: do Arabic readers expect « » here, or straight double quotes?
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:38.537Z', hash: 'a0402426baa460b31560694582e7b827e815a8d6dadce444b835839166a943ba' }
   source: original
   related_issues: []
 
@@ -56,8 +56,8 @@
     Both pairs of parentheses enclose their Latin word: "(requests)" and "(JSON)" with the opening
     bracket on the right and the closing one on the left. The final period is at the far left,
     after "(JSON)", not inside the bracket.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:44.402Z', hash: '2816f08c422aeb474056faab002dbd35568d8283213e13f971f289494456bbf0' }
   source: original
   related_issues: []
 
@@ -76,7 +76,7 @@
     "S/M/L" reads left-to-right as written. In "أحمر/أزرق", "أحمر" is at the right and "أزرق" at its
     left, with the slash between them. The Arabic comma is after "أزرق", and the sentence ends at the
     far left. NEEDS-YOUSEF: is "خد مقاس" fine as colloquial Levantine/Egyptian for "take size"?
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:45.897Z', hash: '49c29fc093731de121409c24c4d213da4f1839d0c04be82c3748ffecd80c0acf' }
   source: original
   related_issues: []

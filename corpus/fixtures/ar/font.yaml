@@ -15,8 +15,8 @@
     Every "لا" (in "لا", "الاشتراك", "ولا") is drawn as the lam-alef ligature, and no box or separate
     isolated lam and alef appear. All letters in each word are joined. NEEDS-YOUSEF: the ligature
     shape depends on the font; is a different-looking fallback font acceptable?
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:13.826Z', hash: '64667df6b509ddfcd52bcb9b1eb39de5d28e1979970052040f590b0004173460' }
   source: original
   related_issues: []
 
@@ -35,8 +35,8 @@
     Letters inside each Arabic word are joined, including the words directly before and after
     "3.1" and "Notes". No Arabic word is split into isolated letters. The Latin and digit runs
     do not break the joining of the neighbouring words. No tofu boxes appear.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:15.265Z', hash: 'b3a727ad412a2dbb2bcbfd6718a072709c59f138a954fec1fe94e89e3501ecf7' }
   source: original
   related_issues: []
 
@@ -55,8 +55,8 @@
     Every tashkeel mark (fatha, sukun, tanwin) is visible above or below its letter and is not
     clipped by the line box. No mark floats between letters or sits on the wrong letter.
     NEEDS-YOUSEF: is the tashkeel on كَتَبَتْ and رسالةً قصيرةً correct for the intended sentence?
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:15.997Z', hash: '6a402d39ea460a259e03bd1da47f5539fb17acc07859d85544f31baa3ea3510f' }
   source: original
   related_issues: []
 
@@ -76,7 +76,7 @@
     fully visible and not cut off at the top or bottom, even with a tight line-height. The shadda
     and its vowel on "الفِعْلِيَّةُ" stack neatly. NEEDS-YOUSEF: is the tashkeel of this heading
     correct?
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:17.493Z', hash: 'e19f66515f0407ba42a24fa90deab96434ee4b9d87db2ed4d5144c505350fcf3' }
   source: original
   related_issues: []

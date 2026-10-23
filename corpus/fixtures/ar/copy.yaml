@@ -17,8 +17,8 @@
     file name, with the period at the end. No extra spaces, no reversed words, no invisible
     direction characters (check in an editor that shows them). Also select only the email: it must
     copy as sami@example.com.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:10.778Z', hash: 'eb60a2bf93d8c420b3cd3585eed1387cae353aaeaf2b05a030989911a449ed6f' }
   source: original
   related_issues: []
 
@@ -43,7 +43,7 @@
     a terminal or editor. The result must be exactly: git commit -m "إصلاح خطأ تسجيل الدخول", in this
     logical order, with no prompt text and no control characters. A reordered command would fail or
     commit the wrong message.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:11.762Z', hash: 'c0456d9a84da8d78225e73ad2a65ad98bbed12c168688be2a4b67e6a9f9f35cb' }
   source: original
   related_issues: []

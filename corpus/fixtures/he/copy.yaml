@@ -17,8 +17,8 @@
     controls (such as U+200E, U+200F or U+2066 to U+2069). Selecting across the command must not
     skip or duplicate characters. NEEDS-YOUSEF: should the pasted text keep the backticks, or only
     the command?
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:45:06.912Z', hash: '340fbf3e06c39a2af77b08e6f39113bfe28e0cd8594f91345521a46caa9b53f3' }
   source: original
   related_issues: []
 

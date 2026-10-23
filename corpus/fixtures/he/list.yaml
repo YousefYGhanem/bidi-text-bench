@@ -20,8 +20,8 @@
     The heading and items are right-to-left and right-aligned. The numbers 1. 2. 3. sit on the right
     side, with the indent on the right. The parentheses correctly enclose "גרסה 22 ומעלה". Each
     inline command is one left-to-right unit. Each item's final period is at its far left.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:45:56.285Z', hash: 'f2fbf0abba4d89909ccb371969c8abee240876b1b6c22f8885937dcce4b7f557' }
   source: original
   related_issues: []
 
@@ -45,8 +45,8 @@
     The bullets sit on the right side of every item and the list is indented from the right. The
     first item reads "Powerbank קטן" with "Powerbank" at the right, next to the bullet; the item is
     not treated as LTR just because it starts in Latin.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:45:57.270Z', hash: 'ee324a0053092767d4acfa3c283dcbe7c25afa74dbc29a92df41337a48a09d41' }
   source: original
   related_issues: []
 
@@ -70,7 +70,7 @@
     The quote bar is on the right edge of the quoted block and the quote text is right-to-left,
     indented from the right. The brackets enclose "לא טלפון" and the period is after the closing
     bracket, at the far left. The last paragraph is outside the quote and right-aligned.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:45:58.065Z', hash: '438f75f20573a7f816810e2ce83457f142d0e1bd2ee6d6772e88e0f098d1c779' }
   source: original
   related_issues: []

@@ -20,8 +20,8 @@
     The numbers 1 to 3 are at the right edge of each item, the text to their left, and the list is
     indented from the right. In item 2, "Wi-Fi" reads left-to-right and the hyphen stays inside it.
     The period of each item is at the left end.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:25.681Z', hash: '6a8fd2d1e79bf685ccd3b3c4fb68de52aa802d82ee2ec76cc3ae7679b57f7c83' }
   source: original
   related_issues: []
 
@@ -45,8 +45,8 @@
     Bullets are at the right edge. Each item reads right-to-left even though it starts with a Latin
     word: "Chrome" is at the right, next to the bullet. The nested bullet is indented from the right,
     not the left.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:31.994Z', hash: '5a3b92bccdbec54becdaf4fe1672519ca6ac155da6dd16e223ac9e24199ae9f7' }
   source: original
   related_issues: []
 
@@ -68,7 +68,7 @@
     The quote bar is at the right edge of the quote, and the quote text reads right-to-left with its
     padding on the right. "git stash" is one left-to-right unit. The following paragraph is
     right-aligned outside the quote.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:33.551Z', hash: 'b1ec8f6778d54a1076c83b346a783fbd4dfaf87b7a97c4ebd49f5ddf7cbe375c' }
   source: original
   related_issues: []

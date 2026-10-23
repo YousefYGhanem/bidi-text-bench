@@ -15,8 +15,8 @@
     The path appears exactly as typed, as one left-to-right unit: ./reports/, with "./" at its left
     end and "/" at its right end. If the code span is not isolated, the leading "./" and the trailing
     "/" jump to the opposite sides.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:45:52.734Z', hash: 'a04853fd9283c614944697b6a95012682929add8ee180c2d29e50cc898580ecd' }
   source: original
   related_issues: []
 
@@ -35,8 +35,8 @@
     The URL is one left-to-right unit that reads exactly https://example.com/docs/api?lang=he. The
     period after it is not part of the link; it sits visually to the left of the URL. The URL must
     not be reordered at its slashes or at the "?".
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:45:53.544Z', hash: '13a3b1de3b5860c6602997d9d08d5a85a17cb4d1de603d84d35dcd9f0ebb6b8d' }
   source: original
   related_issues: []
 
@@ -56,8 +56,8 @@
     לנו", the prefix "ל-", the address, then "ונחזור אליכם עד מחר.". The hyphen stays between the
     prefix and the address. NEEDS-YOUSEF: is "ל-" directly before an email natural, or would you
     write it differently?
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:45:54.034Z', hash: 'e310674103aebd1bc6ed6437f53854b2f9aa671c9ab58f576977637d1f12ff75' }
   source: original
   related_issues: []
 
@@ -76,8 +76,8 @@
     The mention is one left-to-right unit, "@noam-dev", with "@" at its left end. Reading right to
     left: "תודה", the mention, "על", "ה-PR", then "אפשר למזג אותו" with the period at the far left.
     The "@" must not jump to the right of "noam-dev".
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:45:55.543Z', hash: '6e3976fa3256b98084e32cf7affd2c132a57bfa954cefc19bc011ff2d11874f6' }
   source: original
   related_issues: []
 
@@ -95,7 +95,7 @@
   expected_notes: >-
     The flag reads "--help" with both dashes at its left end, as one left-to-right unit. If it is
     not isolated, the dashes can land after "help". The final period is at the far left.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:45:56.106Z', hash: '85c6c965b33ea8bcbbb490630291171ab6044f9277c37af6f5e6cb5b6bd7a1b7' }
   source: original
   related_issues: []

@@ -17,7 +17,7 @@
     chat bubbles and avatars (user side at the right). Check also that the text above is right-aligned.
     NEEDS-YOUSEF: which elements count as a fail when the product has no Arabic UI language and only
     the content is RTL?
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:34.240Z', hash: '5ba89b54ea17cc43a6eb5380880fd3ea7aec1fcbbac98ef31f727305bd112c0f' }
   source: original
   related_issues: []

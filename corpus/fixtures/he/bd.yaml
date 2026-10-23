@@ -15,8 +15,8 @@
     The whole paragraph runs right-to-left and is right-aligned. "React" is the first word, at the far
     right. The comma follows "משתמש" and the final period is at the far left. First-strong detection
     (dir="auto") gets this wrong.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:44:48.782Z', hash: '6d3e9dd0de937b31e2b03861b9c29c9d0b8be5d0df4d9072b73406346b2beb17' }
   source: original
   related_issues: []
 
@@ -35,8 +35,8 @@
     The sentence is right-to-left and right-aligned. "iPhone" is the rightmost word. The comma is
     after "ימים" and the question mark is at the far left. In the compose box the direction should
     flip to RTL as soon as Hebrew words are typed.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:44:50.318Z', hash: '0f2b74b581bbd6dc78b8e3fefef01714da87ad4f7fa7b9b980a9a8f9d3744121' }
   source: original
   related_issues: []
 
@@ -55,8 +55,8 @@
     The paragraph is right-to-left. The digit "3" is the rightmost token and "2" follows the prefix
     "ו-" (reading right to left). The final period is at the far left. A digit is not a strong
     character, so first-strong detection falls back to LTR here.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:44:50.996Z', hash: '2b426097858762717b0ef4eab81bfa767f82079f66076681cd874e5e0c19cc1c' }
   source: original
   related_issues: []
 
@@ -76,7 +76,7 @@
     right-to-left, right-aligned, with "GitHub" at the far right. The layout must not flip from LTR
     to RTL once the Hebrew words arrive. The colon is after "שוב" and the period is at the far left.
     NEEDS-YOUSEF: is a mid-stream flip major or only minor for you?
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:44:52.645Z', hash: 'b4222afd4c604b3990a6881cba0924fa1cdb38fd737af9fc525281e8a5eeb4aa' }
   source: original
   related_issues: []

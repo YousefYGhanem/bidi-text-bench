@@ -14,8 +14,8 @@
   expected_notes: >-
     Each word ends with its final form: ף in סוף, ם in שלום, ך in מלך, ן in אחרון and ץ in פרץ. No
     tofu boxes, and the final forms look like final forms.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:45:48.950Z', hash: 'cb5eab943ccb54b16368dd3ebbc1656b8066f9c21fdf814ecd40502c0323dffe' }
   source: original
   related_issues: []
 
@@ -35,8 +35,8 @@
     three render as Hebrew punctuation with no tofu. The maqaf joins "ה" to "API" at mid-height, and
     "API" reads left to right. NEEDS-YOUSEF: is the maqaf U+05BE before a Latin word what you would
     expect, or is the ASCII hyphen more natural for ה-API?
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:45:50.001Z', hash: '308aee1c210eb42ab355223b1093de8f3d373690dc3a5dcc67b08c1ff7edf2b1' }
   source: original
   related_issues: []
 
@@ -56,8 +56,8 @@
     and qamats on the first letter, the holam over the vav, the shva under the shin. The question
     mark is at the far left. NEEDS-YOUSEF: is the nikud in this sentence correct and in the usual
     style?
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:45:50.983Z', hash: 'd08b04292047dfe69fb3bbf978181be91cd4e5722000f6761402df1fe61d6126' }
   source: original
   related_issues: []
 
@@ -76,7 +76,7 @@
     Letters that carry both a dagesh and a vowel (יֶּ, בַּ, גַּ) show both marks without overlapping
     each other or being clipped by the line box. The period is at the far left. NEEDS-YOUSEF: is the
     nikud correct and does the dagesh-plus-vowel stacking look right?
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:45:51.580Z', hash: '64161cad20369755d465ae7547c310a14713955374930081cc2b7ba15808920c' }
   source: original
   related_issues: []

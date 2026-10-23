@@ -19,8 +19,8 @@
     The first column (المنتج) is at the right and the last (المخزون) at the left, so the table
     reads right-to-left. Cells are aligned to the right. Prices keep their digits in order: 49.90 and
     120.00. In "حذاء Nike", "حذاء" is at the right of "Nike".
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:44:37.458Z', hash: '58ba9da3ac14e668235655d801ba9b3827c22783ed79f2d7850ae6e3d37f7087' }
   source: original
   related_issues: []
 
@@ -42,8 +42,8 @@
   expected_notes: >-
     The column "الطالب" is at the far right, then "الرياضيات", then "العلوم" at the left. Each
     fraction reads as written (18/20, not 20/18). Text in the cells is right-aligned.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:44:38.091Z', hash: '10e81fb377182ce85f4646863ad9707b2527e90a92497665e9b1f70a57bf649a' }
   source: original
   related_issues: []
 
@@ -65,7 +65,7 @@
   expected_notes: >-
     "الأمر" is the right column and "الوصف" the left column. Each code cell reads left-to-right, with
     its quotes intact. The descriptions are right-aligned and read right-to-left.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:44:39.535Z', hash: '263aeaa722305f272fd88d78a1939e26ff22dd2e222f5ed3b3cb0e9244ad0f24' }
   source: original
   related_issues: []

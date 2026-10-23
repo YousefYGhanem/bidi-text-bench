@@ -16,8 +16,8 @@
     The final period is at the far left. Reordered digits or date parts change the meaning (blocker).
     NEEDS-YOUSEF: as typed, the % sits to the right of 20. Is that what Arabic readers expect here,
     or do they expect "%20"?
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:48.907Z', hash: '89cd6a25a078d6a9b5213b1603e73faa5c2cd58c9a3247938bd8a9d2c5b4ab90' }
   source: original
   related_issues: []
 
@@ -36,8 +36,8 @@
     "10-20" reads 10 then 20 from left to right, with the hyphen between; it must not display as
     "20-10". Times read 9:00 and 10:30 with the colon inside each. In reading order, 9:00 is
     to the right of 10:30. The final period is at the far left.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:49.542Z', hash: '8ec6f76194c07decd114de60cc99ec0e240a8f484bcb607987f1970f2a98fd7b' }
   source: original
   related_issues: []
 
@@ -57,8 +57,8 @@
     ٣١/١٢/٢٠٢٦ (day/month/year). The slashes stay between the date parts. The digits are not
     replaced by Western digits. NEEDS-YOUSEF: is Arabic-Indic the natural choice for a support
     message like this, and is the decimal separator ٫ (U+066B) right, or would you type a comma?
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:50.402Z', hash: '8cbfbd612544128e094b297122ab644d30633375ab8d63e798eddd89d2fe9199' }
   source: original
   related_issues: []
 

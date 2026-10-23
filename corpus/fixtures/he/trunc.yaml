@@ -15,8 +15,8 @@
     The title starts at the right edge and the end of the text (the left side) is cut off. The
     ellipsis is at the left end of the visible text. The beginning "איך מגדירים" stays visible at
     the right. The title is not cut from its start.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:46:59.026Z', hash: '117ceb0b4bdf007871736a1d9ed965107ffc420592ca91f6bef89cbd097dd826' }
   source: original
   related_issues: []
 
@@ -35,8 +35,8 @@
     The visible part begins at the right with "שאלה על ההזמנה" and the cut happens at the left end,
     where the English word "Express" is dropped first. The ellipsis is at the far left. The cut must
     not remove the beginning of the title.
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:46:59.444Z', hash: '7c1d2cdd83a922979ce22fc1795c788bb87344d1a559e84d03800e609437b128' }
   source: original
   related_issues: []
 
@@ -56,7 +56,7 @@
     visible; the end of the title is cut at the left and the ellipsis is at the far left. The title
     is not laid out LTR with the ellipsis at the right. NEEDS-YOUSEF: for a title that starts with
     Latin, which direction do you expect the sidebar to use?
-  status: draft
-  verification: null
+  status: verified
+  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:46:59.999Z', hash: 'e32fb3e39d0aaad27bbb6db587e2a581031b708b265deb517667cd2a5c61dea1' }
   source: original
   related_issues: []
