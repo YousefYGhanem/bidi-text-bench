@@ -30,17 +30,20 @@ A **fixture** is one short, realistic piece of mixed-direction text, plus a nati
 | CODE | Code | Fenced or inline code inherits RTL; lines are reversed or right-aligned | auto |
 | LIST | Lists & quotes | Markers, indents or the quote bar sit on the wrong side | auto |
 | TBL | Tables | Column order is not mirrored; cells are misaligned | auto |
-| INP | Input | The compose box stays LTR; the placeholder is misaligned; the caret jumps | auto (direction); caret manual |
-| STRM | Streaming | Direction is decided from the first chunk; layout flips while streaming | auto (sampled) |
-| FONT | Glyphs & shaping | Tofu boxes; Arabic letters don't join | partial |
-| DIAC | Diacritics | Tashkeel or nikud are clipped or misplaced | partial |
+| FONT | Glyphs, shaping & marks | Tofu boxes; Arabic letters don't join; tashkeel or nikud are clipped or misplaced | partial |
 | TRUNC | Truncation | The ellipsis is on the wrong end; titles are cut at the wrong end | auto |
-| MIR | UI mirroring | Arrows, back buttons and sidebars are not mirrored | manual |
-| COPY | Copy & selection | Copied text is reordered or carries stray controls | manual |
+| MIR | UI mirroring | Arrows, back buttons and sidebars are not mirrored | manual in v1 (automatable by an LTR vs forced-RTL comparison) |
+| COPY | Copy, selection & data integrity | Copied or stored text is reordered or carries stray controls | manual |
 
-The categories describe what a reader *sees*. One root cause, such as a wrong base direction, can produce symptoms in several categories. Triage groups failures by root cause. The rubric counts each fixture once, in its own category.
+The categories describe what a reader *sees*. One root cause, such as a wrong base direction, can produce symptoms in several categories. The rubric counts each fixture once, in its own category. At triage, each failure also gets a **cause**: `base-direction`, `isolation`, `code-direction`, `physical-css`, `font`, `input`, `streaming`, `author` or `other`. Published failures are grouped by cause.
 
-Gate G0 may change this table. Record any change in an ADR.
+**Surfaces.** Every fixture is checked on each surface in its `surfaces` list: `message`, `input`, `stream` and `title`. Two rules apply to surfaces, not categories:
+- **INP** applies on `input`: the compose box stays LTR, the placeholder is misaligned, or the caret jumps. Direction is checked automatically; the caret is checked by hand.
+- **STRM** applies on `stream`: direction is decided from the first chunk, or the layout flips while streaming. It is checked automatically by sampling.
+
+Scores are reported per category and per surface.
+
+This table is taxonomy v1, decided at Gate G0. See [ADR-0003](adr/0003-taxonomy-v1.md): INP and STRM became surfaces, DIAC merged into FONT, COPY was widened, and `cause` was added. Record any later change in a new ADR.
 
 ## 3. Severity
 - **blocker:** the meaning changes or the text is unusable. Examples: reversed ranges or numbers, scrambled commands or paths someone would retype wrongly, an unreadable paragraph.
@@ -90,8 +93,8 @@ The validator (`npm run corpus:validate`) enforces:
 ## 6. Coverage targets
 | Release | Total | Per auto category × language | Extras |
 |---|---|---|---|
-| v0 (G1) | 80 | ≥3 | FONT and DIAC ≥2 each |
-| v1 (G4) | ~200 | ≥6 | ≥20 dialect/code-switching · ≥10 streaming traps · ≥10 input traps |
+| v0 (G1) | 80 | ≥3 | FONT ≥4 (at least 2 glyph or shaping, at least 2 marks) |
+| v1 (G4) | ~200 | ≥6 | ≥20 dialect/code-switching · ≥10 written for the `stream` surface · ≥10 for the `input` surface |
 
 ## 7. Seed examples
 `corpus/fixtures/ar/_seed.yaml` and `corpus/fixtures/he/_seed.yaml` hold 11 drafts. They show the format and two hard cases:

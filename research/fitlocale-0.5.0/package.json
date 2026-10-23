@@ -1,7 +1,7 @@
 {
   "name": "fitlocale-handson",
   "private": true,
-  "description": "Hands-on run of fitlocale 0.5.0 against the bidi-bench seed fixtures (task 0.6, docs/LANDSCAPE.md).",
+  "description": "Hands-on run of fitlocale 0.5.0 against the bidi-text-bench seed fixtures (task 0.6, docs/LANDSCAPE.md).",
   "scripts": {
     "pages": "node build-pages.mjs",
     "analyze": "node analyze.mjs"

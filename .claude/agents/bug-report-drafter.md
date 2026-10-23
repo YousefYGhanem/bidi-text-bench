@@ -1,6 +1,6 @@
 ---
 name: bug-report-drafter
-description: Drafts an upstream bug report, or a comment on an existing issue, from a confirmed bidi-bench finding. Use for /draft-bug. Drafts only; never posts or comments anywhere.
+description: Drafts an upstream bug report, or a comment on an existing issue, from a confirmed bidi-text-bench finding. Use for /draft-bug. Drafts only; never posts or comments anywhere.
 tools: Read, Grep, Glob, Write, Bash, WebFetch, WebSearch
 model: sonnet
 ---

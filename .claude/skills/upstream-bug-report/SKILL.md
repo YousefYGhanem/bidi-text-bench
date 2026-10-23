@@ -1,6 +1,6 @@
 ---
 name: upstream-bug-report
-description: "Drafts a bug report or issue comment for another project from a confirmed bidi-bench finding: duplicate search, minimal reproduction, evidence and a courteous tone. Use whenever preparing anything that will be posted outside this repository. Produces drafts only and never posts."
+description: "Drafts a bug report or issue comment for another project from a confirmed bidi-text-bench finding: duplicate search, minimal reproduction, evidence and a courteous tone. Use whenever preparing anything that will be posted outside this repository. Produces drafts only and never posts."
 ---
 
 # Upstream bug report
@@ -21,7 +21,7 @@ description: "Drafts a bug report or issue comment for another project from a co
    - **Summary:** 1–2 sentences on the impact on users.
    - **Environment:** product version, OS, browser and date.
    - **Steps to reproduce:** numbered. Give the fixture text twice: in a fenced block (say it is in logical order) and as plain text.
-   - **Expected:** one sentence, plus the reference screenshot (the bidi-bench reference render).
+   - **Expected:** one sentence, plus the reference screenshot (the bidi-text-bench reference render).
    - **Actual:** one sentence, plus a screenshot.
    - **Possible fix:** optional, and only if you are confident. For example, `dir="auto"` on the message container, or `unicode-bidi: isolate` on inline code.
    - **Reference:** exactly one link, to the fixture's permalink. No other promotion.

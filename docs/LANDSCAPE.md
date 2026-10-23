@@ -33,7 +33,7 @@ Status: research for task 0.6, as of **2026-10-22**. Every claim links to its so
 - The mirroring rules (`rtl/not-mirrored`, `rtl/icon-not-mirrored`, `rtl/icon-mirrored`) compare an LTR page with the same page forced RTL. On a page that is RTL already, they are skipped ([README, Right-to-left checks](https://github.com/melliforge/fitlocale/blob/v0.5.0/README.md#right-to-left-checks)).
 
 ### 1.3 Experiment
-The 11 seed fixtures were rendered into one page each, in three variants. The run used Chromium, Firefox and WebKit in the bidi-bench Docker image at 1280×800. The method, the pages and the raw results are in [research/fitlocale-0.5.0/](../research/fitlocale-0.5.0/README.md) and [results/fitlocale-0.5.0.json](../research/fitlocale-0.5.0/results/fitlocale-0.5.0.json).
+The 11 seed fixtures were rendered into one page each, in three variants. The run used Chromium, Firefox and WebKit in the bidi-text-bench Docker image at 1280×800. The method, the pages and the raw results are in [research/fitlocale-0.5.0/](../research/fitlocale-0.5.0/README.md) and [results/fitlocale-0.5.0.json](../research/fitlocale-0.5.0/results/fitlocale-0.5.0.json).
 - **golden:** correct markup.
 - **nodir:** no `dir` anywhere.
 - **auto:** first-strong `dir="auto"`, with unisolated code.
@@ -104,7 +104,7 @@ Caveats:
 
 ## 3. Corpora and conformance suites
 
-| Suite | Tests | Licence | Relation to bidi-bench |
+| Suite | Tests | Licence | Relation to bidi-text-bench |
 |---|---|---|---|
 | Unicode `BidiTest.txt`, `BidiCharacterTest.txt` | Algorithm output only: one paragraph, one line, independent of rendering ([BidiCharacterTest](https://www.unicode.org/Public/UCD/latest/ucd/BidiCharacterTest.txt), [BidiTest](https://www.unicode.org/Public/UCD/latest/ucd/BidiTest.txt)). Latest is 18.0.0 (2026-02-03). UAX #9 is at revision 52 ([UAX #9](https://www.unicode.org/reports/tr9/)) | [Unicode License v3](https://www.unicode.org/license.txt) | Our engine test uses the [13.0.0 files](https://www.unicode.org/Public/13.0.0/ucd/BidiCharacterTest.txt), because bidi-js implements UBA 13.0.0 ([README](https://raw.githubusercontent.com/lojjic/bidi-js/main/README.md)). bidi-js 1.1.0 came out on 2026-09-06 after a 3-year gap ([npm](https://registry.npmjs.org/bidi-js)) |
 | Web Platform Tests | About 85 `bidi*` files in `css-writing-modes` ([listing](https://api.github.com/repos/web-platform-tests/wpt/contents/css/css-writing-modes)), `dir`/`dir=auto` tests ([global-attributes](https://api.github.com/repos/web-platform-tests/wpt/contents/html/dom/elements/global-attributes)), `<bdi>` reftests ([the-bdi-element](https://api.github.com/repos/web-platform-tests/wpt/contents/html/semantics/text-level-semantics/the-bdi-element)) and `:dir()` ([css/selectors](https://api.github.com/repos/web-platform-tests/wpt/contents/css/selectors)) | [BSD-3](https://raw.githubusercontent.com/web-platform-tests/wpt/master/LICENSE.md) | Browser engines, not apps. On 2026-10-22 the `dir-` subtests passed 104/104 in Chrome 156, 102/104 in Firefox 158 and 98/104 in Safari 27 ([wpt.fyi API](https://wpt.fyi/api/search)). Calibration has to watch those engine differences |
@@ -112,7 +112,7 @@ Caveats:
 | Firefox `layout/reftests/bidi` (327 files), WebKit `fast/text/international` (157 entries) | Engine reftests ([Firefox](https://api.github.com/repos/mozilla-firefox/firefox/contents/layout/reftests/bidi), [WebKit](https://api.github.com/repos/WebKit/WebKit/contents/LayoutTests/fast/text/international)) | not checked | Engine-level |
 | Hugging Face datasets | A search on 2026-10-23 found no bidi-rendering dataset ([search](https://huggingface.co/api/datasets?search=bidi&limit=30)). The Arabic–English and Hebrew–English code-switching sets are for NLP or ASR ([example](https://huggingface.co/api/datasets/MagedSaeed/arabic-english-code-switching-text)). ArabicMMLU and HeQ are QA benchmarks ([ArabicMMLU](https://huggingface.co/api/datasets/MBZUAI/ArabicMMLU), [HeQ](https://github.com/NNLP-IL/Hebrew-Question-Answering-Dataset)) | various | None tests rendering or formatting |
 
-Among the sources above, as of 2026-10-23, none tests real AI chat or coding UIs rendering realistic assistant output (Markdown, code spans, streaming) against native-verified expectations. That is the gap bidi-bench fills. The search was not exhaustive: we did not search papers.
+Among the sources above, as of 2026-10-23, none tests real AI chat or coding UIs rendering realistic assistant output (Markdown, code spans, streaming) against native-verified expectations. That is the gap bidi-text-bench fills. The search was not exhaustive: we did not search papers.
 
 ## 4. Fixes aimed at AI chat UIs
 - AI RTL Pro (a Firefox add-on, v1.1.2) switches direction on ChatGPT, Claude, Gemini, Copilot and DeepSeek, and keeps code and URLs LTR ([AMO API](https://addons.mozilla.org/api/v5/addons/addon/ai-rtl-pro/)).

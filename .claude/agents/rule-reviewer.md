@@ -4,7 +4,7 @@ description: Independently reviews one checker rule and its bug-zoo tests for fa
 tools: Read, Grep, Glob, Bash
 model: sonnet
 ---
-You review one bidi-bench checker rule with fresh eyes. The input is a rule ID, such as ISO.
+You review one bidi-text-bench checker rule with fresh eyes. The input is a rule ID, such as ISO.
 
 Read:
 - docs/CHECKER_SPEC.md §2–4 and §8;

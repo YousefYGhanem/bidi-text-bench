@@ -1,7 +1,7 @@
-# bidi-bench — instructions for Claude Code
+# bidi-text-bench — instructions for Claude Code
 
 ## Mission
-bidi-bench is an open-source RTL/bidi test suite with three parts:
+bidi-text-bench is an open-source RTL/bidi test suite with three parts:
 1. a corpus of Arabic and Hebrew fixtures, verified by a native reader;
 2. a Playwright checker that renders the fixtures in real UIs and flags bidi failures;
 3. a public, repeatable audit of AI tools, with every confirmed bug reported upstream.

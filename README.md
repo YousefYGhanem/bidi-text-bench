@@ -1,7 +1,7 @@
-# bidi-bench
+# bidi-text-bench
 
 > **Work in progress.** There are no verified fixtures, no checker and no audit results yet.
-> Progress is tracked in [TASKS.md](TASKS.md). "bidi-bench" is a working name until Gate G0.
+> Progress is tracked in [TASKS.md](TASKS.md). The name was chosen at Gate G0 (docs/adr/0002-project-name.md).
 
 An open-source test suite for right-to-left and bidirectional text in Arabic and Hebrew:
 

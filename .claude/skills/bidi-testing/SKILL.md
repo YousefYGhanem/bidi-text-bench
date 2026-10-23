@@ -1,6 +1,6 @@
 ---
 name: bidi-testing
-description: "Domain knowledge for testing right-to-left and bidirectional text (Arabic/Hebrew mixed with Latin, code, numbers, links): the Unicode Bidi Algorithm, isolation, CSS direction, Arabic/Hebrew typography and how bidi bugs look. Use when writing or reviewing fixtures, expected results, checker rules or bug reports in bidi-bench."
+description: "Domain knowledge for testing right-to-left and bidirectional text (Arabic/Hebrew mixed with Latin, code, numbers, links): the Unicode Bidi Algorithm, isolation, CSS direction, Arabic/Hebrew typography and how bidi bugs look. Use when writing or reviewing fixtures, expected results, checker rules or bug reports in bidi-text-bench."
 ---
 
 # Bidi testing knowledge

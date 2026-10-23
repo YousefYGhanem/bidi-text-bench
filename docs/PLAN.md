@@ -1,6 +1,6 @@
-# bidi-bench — Project Plan (v1, 10 weeks)
+# bidi-text-bench — Project Plan (v1, 10 weeks)
 
-> "bidi-bench" is a working name; the final name is decided at Gate G0.
+> Named **bidi-text-bench** at Gate G0 (ADR-0002); the working name was "bidi-bench".
 > Progress is tracked in `TASKS.md`. This file explains what each phase must deliver and how we know it's done.
 
 ## 1. Outcome

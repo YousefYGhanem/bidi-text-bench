@@ -42,7 +42,7 @@ Never mass-DM people, never tag companies to shame them, and keep politics out o
 Replace the placeholders with real numbers that anyone can check.
 
 **CV — Flagship project (top section):**
-- *bidi-bench — open-source RTL/BiDi test suite (Playwright, TypeScript, GitHub Actions, Docker).* Built a [200]-case Arabic/Hebrew fixture corpus verified by a native reader. Audited [20] AI chat and coding tools and filed [12] reproducible upstream reports ([N] acknowledged, [M] fixed), including [anthropics/claude-code, openai/codex].
+- *bidi-text-bench — open-source RTL/BiDi test suite (Playwright, TypeScript, GitHub Actions, Docker).* Built a [200]-case Arabic/Hebrew fixture corpus verified by a native reader. Audited [20] AI chat and coding tools and filed [12] reproducible upstream reports ([N] acknowledged, [M] fixed), including [anthropics/claude-code, openai/codex].
 - Designed a severity-weighted RTL quality rubric and validated the checker on a labelled bug zoo ([100]% recall, [0] false positives). Published the report and the dataset with a DOI ([cited by …]).
 - Extended the checks to LLM output ([50] prompts across Arabic, Hebrew and Levantine code-switching) and to Android on a physical device.
 

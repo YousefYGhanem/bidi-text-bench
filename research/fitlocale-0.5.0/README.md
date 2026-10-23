@@ -1,6 +1,6 @@
 # fitlocale 0.5.0, hands-on (task 0.6)
 
-This folder holds the evidence behind the fitlocale section of [docs/LANDSCAPE.md](../../docs/LANDSCAPE.md). The results are **observed in fitlocale 0.5.0 on 2026-10-22**, using @playwright/test 1.64.1 in the bidi-bench Docker image. That image is `mcr.microsoft.com/playwright:v1.64.1-noble@sha256:7852dc5a…`, plus Noto fonts.
+This folder holds the evidence behind the fitlocale section of [docs/LANDSCAPE.md](../../docs/LANDSCAPE.md). The results are **observed in fitlocale 0.5.0 on 2026-10-22**, using @playwright/test 1.64.1 in the bidi-text-bench Docker image. That image is `mcr.microsoft.com/playwright:v1.64.1-noble@sha256:7852dc5a…`, plus Noto fonts.
 
 ## What it does
 `build-pages.mjs` turns the 11 seed fixtures (`corpus/fixtures/*/_seed.yaml`, status **draft**, not yet verified) into 41 pages:
@@ -25,8 +25,8 @@ This folder holds the evidence behind the fitlocale section of [docs/LANDSCAPE.m
 cd research/fitlocale-0.5.0
 npm ci --ignore-scripts
 npm run pages
-docker build -t bidi-bench-test ../..          # or: npm run docker:test from the repo root
-docker run --rm --init --ipc=host -v "$PWD:/work" -w /work bidi-bench-test npx playwright test
+docker build -t bidi-text-bench-test ../..          # or: npm run docker:test from the repo root
+docker run --rm --init --ipc=host -v "$PWD:/work" -w /work bidi-text-bench-test npx playwright test
 npm run analyze
 ```
 On Windows Git Bash, prefix the `docker run` with `MSYS_NO_PATHCONV=1` and pass the absolute path to `-v`.

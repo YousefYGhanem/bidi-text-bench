@@ -39,7 +39,7 @@
   - hidden spans.
 
 ## 4. Rules (v0)
-Each rule returns `pass`, `fail` or `na`, with evidence. There is one rule per category ID.
+Each rule returns `pass`, `fail` or `na`, with evidence. There is one rule per category ID, plus INP and STRM, which run on the `input` and `stream` surfaces (taxonomy v1, ADR-0003).
 
 | Rule | Check | Main false-positive risk |
 |---|---|---|
@@ -55,7 +55,7 @@ Each rule returns `pass`, `fail` or `na`, with evidence. There is one rule per c
 | STRM | Direction is sampled every 100 ms while streaming. Fails as major if the final state is wrong, or minor if it flips mid-stream | A slow first chunk (widen the sampling window) |
 | TRUNC | A truncated element hides the *end* of the text and shows the ellipsis at the inline end | — |
 | FONT | A grapheme renders as the notdef/tofu glyph (detected by canvas comparison against a private-use character) | Colour emoji |
-| DIAC | (v1.5) Marks are clipped: compare screenshots taken with and without `overflow: visible` | — |
+| FONT (marks) | (v1.5) Marks are clipped: compare screenshots taken with and without `overflow: visible` | — |
 
 Result record:
 ```json
@@ -96,7 +96,7 @@ export interface Adapter {
   - viewports: desktop 1280×800 and mobile 390×844;
   - animations disabled, except for STRM.
 - Each run writes to `audit/runs/<date>-<target>/`:
-  - `env.json`: target version, commit or image digest, browser versions, bidi-bench commit;
+  - `env.json`: target version, commit or image digest, browser versions, bidi-text-bench commit;
   - `results.jsonl`;
   - `evidence/`: cropped PNGs of failures only.
 
@@ -105,5 +105,5 @@ export interface Adapter {
 ## 8. Quality gates for the checker itself
 - **Bug zoo** (`zoo/`): `golden.html` plus at least one labelled buggy page per rule. `npm run zoo` prints recall and false positives per rule; CI requires 100% recall and 0 false positives.
 - **Calibration** (§2) in all three engines.
-- **Dogfooding:** bidi-bench checks its own review tool and report site. CI also runs axe-core (WCAG 2.1 AA) on them.
+- **Dogfooding:** bidi-text-bench checks its own review tool and report site. CI also runs axe-core (WCAG 2.1 AA) on them.
 - **Performance budget:** at most 15 minutes per target for 200 fixtures on the dev PC. Run one target at a time (16 GB RAM).

@@ -4,7 +4,7 @@ description: Drafts candidate Arabic or Hebrew bidi test fixtures (status draft)
 tools: Read, Grep, Glob, Edit, Write, Bash
 model: sonnet
 ---
-You draft test fixtures for bidi-bench.
+You draft test fixtures for bidi-text-bench.
 
 1. Read docs/FIXTURE_SPEC.md (rules, taxonomy, format) and .claude/skills/bidi-testing/SKILL.md.
 2. Read corpus/fixtures/<lang>/<category>.yaml, creating it if it's missing. Avoid repeating ideas already there, and continue its ID numbering.

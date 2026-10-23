@@ -1,4 +1,4 @@
-# Tasks — bidi-bench v1
+# Tasks — bidi-text-bench v1
 
 Tags: **[C]** Claude Code · **[Y]** Yousef · **[P]** pair (Claude drafts, Yousef decides).
 Claude ticks `[x]` when a task is done. Claude never ticks a [Y] task or a gate; it asks Yousef.
@@ -76,7 +76,7 @@ For details and acceptance criteria, see `docs/PLAN.md` §6. At the end of each 
 ## Phase 6 — Report + dataset (week 7)
 - [ ] 6.1 [C] Build the report site (VitePress, deployed to GitHub Pages):
   - pages: scoreboard, one page per target, evidence, methodology, limitations, AI use, how to reproduce;
-  - CI runs axe-core and bidi-bench's own checks against the site.
+  - CI runs axe-core and bidi-text-bench's own checks against the site.
 - [ ] 6.2 [C] Prepare the release: CHANGELOG, v1.0.0 notes, Zenodo DOI steps and an optional Hugging Face dataset card.
 - [ ] 6.3 [C] Write ADRs for the key decisions (docs/adr/).
 - [ ] 6.4 [Y] Write the launch article in your own voice. Claude edits for clarity only.

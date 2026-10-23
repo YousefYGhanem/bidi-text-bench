@@ -16,7 +16,7 @@ Every run, automated or manual, records:
 - the target version, commit or Docker image digest;
 - the OS, browser and browser version;
 - the viewport and the app's UI language;
-- the bidi-bench commit.
+- the bidi-text-bench commit.
 
 Automated runs write these to `env.json`. For manual runs, you fill in the same fields in the helper.
 
@@ -35,7 +35,7 @@ Effort is capped at **30 fixtures per product**, stratified across categories (t
 The helper saves `audit/manual/<date>-<target>/results.jsonl` and the evidence, in the same format as automated runs.
 
 ## 5. Triage (you)
-`npm run triage` lists every failure with its expected and actual results and its evidence. Give each failure one label:
+`npm run triage` lists every failure with its expected and actual results and its evidence. Give each failure one label, and a **cause** from FIXTURE_SPEC §2:
 - **confirmed**;
 - **false positive**: log it in `docs/FALSE_POSITIVES.md`, then fix the rule or the adapter;
 - **duplicate of known issue**: link the existing issue;
@@ -47,9 +47,15 @@ Confirm or change the severity of each failure as you go. Nothing reaches the re
 For each category, compute a severity-weighted pass rate: *s = Σ(w·pass) / Σ(w·applicable)*. The weights are w = 3 for blocker, 2 for major and 1 for minor.
 The target's score is Σ (category weight × s) over the applicable categories, renormalised to 100.
 
-| Category | BD | ISO | NP | CODE | AL | NUM | INP | STRM | LIST | TBL | FONT | DIAC | TRUNC |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Weight v0 | 15 | 15 | 10 | 10 | 8 | 8 | 8 | 6 | 5 | 5 | 4 | 3 | 3 |
+| Category | BD | ISO | NP | CODE | AL | NUM | LIST | TBL | FONT | TRUNC |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Weight v0 | 15 | 15 | 10 | 10 | 8 | 8 | 5 | 5 | 7 | 3 |
+
+| Surface | message | input | stream | title |
+|---|---|---|---|---|
+| Weight v0 | to set at G4 | to set at G4 | to set at G4 | to set at G4 |
+
+Taxonomy v1 ([ADR-0003](adr/0003-taxonomy-v1.md)) moved INP (8) and STRM (6) from categories to surfaces and merged DIAC (3) into FONT (4 + 3 = 7). The surface weights are set at G4.
 
 In v1, MIR and COPY are reported as findings but not scored. Publish the per-category results next to the total, because a single number hides what matters.
 
