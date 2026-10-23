@@ -89,8 +89,20 @@ The validator (`npm run corpus:validate`) enforces:
 
 ## 5. Verification workflow
 1. Claude (or a contributor) adds fixtures with `status: draft`. Open questions go inside `expected_notes`, marked `NEEDS-YOUSEF: …`.
-2. You run `npm run review`. Read each fixture in the reference render, fix the wording, then choose Approve or Reject. The tool writes `status` and `verification`.
-3. You commit the verifications yourself, e.g. `git commit -m "verify: ar ISO 001–012"`. Leave out the AI co-author trailer: this commit is your signature.
+2. You run `npm run review` and open the URL it prints. The server listens on 127.0.0.1 only; add `-- --port <n>` to change the port. For each draft, read:
+   - the reference render;
+   - the **logical text**: every code point in typed order, with bidi controls in red;
+   - the spans and `expected_notes`, with `NEEDS-YOUSEF` highlighted.
+
+   To fix the wording, edit the YAML in your editor, then press **R** to reload. Then decide:
+   - **A** approves: `status: verified` plus `verification: {by, at, hash}`.
+   - **X** rejects: `status: rejected` plus the same record.
+   - **F** marks it as needing a fix: the file is unchanged, and the fixture stays in the queue.
+
+   Other keys: **N** writes a note, **J**/**K** move to the next or previous draft, and **?** lists the keys.
+
+   The tool changes only the `status` and `verification` lines, and only for drafts that pass the validator. `by` comes from `git config user.name`. Every decision and its note is appended to `corpus/review-log.jsonl`, which is committed as the audit trail.
+3. You commit the verifications and the log yourself, e.g. `git commit -m "verify: ar ISO 001–012"`. Leave out the AI co-author trailer: this commit is your signature.
 
 ## 6. Coverage targets
 | Release | Total | Per auto category × language | Extras |

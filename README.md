@@ -22,6 +22,7 @@ npm run check          # lint, typecheck, unit tests, corpus validation
 npm run test:e2e       # Playwright on this machine
 npm run docker:test    # Playwright in the reference image (Noto Arabic and Hebrew fonts)
 npm run golden         # rebuild zoo/golden.html (the reference render) after editing fixtures
+npm run review         # review draft fixtures in the browser (yours only; see FIXTURE_SPEC §5)
 ```
 
 Screenshots and audit evidence come from the Docker image, not from your machine's fonts.
