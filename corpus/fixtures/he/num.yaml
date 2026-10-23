@@ -69,13 +69,15 @@
   markdown: false
   base_direction: rtl
   isolate_spans: []
-  author_spans: []
+  author_spans: ['+972-50-000-0000']
   surfaces: [message]
   severity: blocker
   expected_notes: >-
-    The number reads +972-50-000-0000 as one left-to-right unit, with the plus sign at its left end.
-    The plus sign must not move to the right end of the number, and the groups must not be
-    reordered.
+    In plain text, UAX #9 draws the leading plus sign at the far (right) end of the number, because
+    "+" before digits is neutral and takes the RTL paragraph direction. Correct display needs author
+    markup (an LRM before "+", an LRI/PDI pair, or backticks), so the number is an author span: UIs
+    are not penalised for the plus sign. Still checked: the digit groups of +972-50-000-0000 keep
+    their order and are not reordered against each other, and the final period is at the far left.
   status: draft
   verification: null
   source: original

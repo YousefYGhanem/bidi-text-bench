@@ -70,13 +70,16 @@
   markdown: false
   base_direction: rtl
   isolate_spans: []
-  author_spans: []
+  author_spans: ['+1-555-000-0000']
   surfaces: [message]
   severity: blocker
   expected_notes: >-
-    The phone number reads +1-555-000-0000 left-to-right, with the plus sign at its left end, not at
-    the end. The version reads v2.4.1 left-to-right. The final period is at the far left. NEEDS-YOUSEF:
-    in plain text, is the plus sign of the phone number attached to the number in your experience?
+    In plain text, UAX #9 draws the phone number's leading plus sign at the far (right) end of the
+    number, because "+" before digits is neutral and takes the RTL paragraph direction. Correct
+    display needs author markup (an LRM before "+", an LRI/PDI pair, or backticks), so the phone
+    number is an author span: UIs are not penalised for it, and Track B checks whether models write it
+    safely. Still checked: the digit groups of +1-555-000-0000 keep their order, the version reads
+    v2.4.1 left-to-right, and the final period is at the far left.
   status: draft
   verification: null
   source: original
