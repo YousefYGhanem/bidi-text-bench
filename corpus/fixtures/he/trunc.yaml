@@ -1,0 +1,62 @@
+# he TRUNC fixtures (docs/FIXTURE_SPEC.md). Drafts are reviewed with npm run review.
+
+- id: he-trunc-001
+  lang: he
+  category: TRUNC
+  title: 'Long Hebrew conversation title truncated in the sidebar'
+  text: 'איך מגדירים סביבת פיתוח מקומית עם Docker ו-Node.js על מחשב חדש'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [title]
+  severity: major
+  expected_notes: >-
+    The title starts at the right edge and the end of the text (the left side) is cut off. The
+    ellipsis is at the left end of the visible text. The beginning "איך מגדירים" stays visible at
+    the right. The title is not cut from its start.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: he-trunc-002
+  lang: he
+  category: TRUNC
+  title: 'Long Hebrew title ending with an English word'
+  text: 'שאלה על ההזמנה שלי מהחנות של המכללה ועל מועד המשלוח Express'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [title]
+  severity: major
+  expected_notes: >-
+    The visible part begins at the right with "שאלה על ההזמנה" and the cut happens at the left end,
+    where the English word "Express" is dropped first. The ellipsis is at the far left. The cut must
+    not remove the beginning of the title.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: he-trunc-003
+  lang: he
+  category: TRUNC
+  title: 'Long Hebrew title that starts with an English word'
+  text: 'Python או JavaScript: מה כדאי ללמוד קודם כמתחילים בלי ניסיון בתכנות'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [title]
+  severity: major
+  expected_notes: >-
+    The title is RTL even though it starts with "Python". "Python" is at the far right and stays
+    visible; the end of the title is cut at the left and the ellipsis is at the far left. The title
+    is not laid out LTR with the ellipsis at the right. NEEDS-YOUSEF: for a title that starts with
+    Latin, which direction do you expect the sidebar to use?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []

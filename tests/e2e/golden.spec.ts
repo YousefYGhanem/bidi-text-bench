@@ -21,10 +21,12 @@ test('code blocks are LTR', async ({ page }) => {
 });
 
 // The property ISO and CODE rest on: inside an isolated LTR unit, characters run left to right.
+// Units that contain Arabic or Hebrew (a comment or a string in code) legitimately hold RTL runs.
 test('characters inside code and bdi are drawn left to right', async ({ page }) => {
   const backwards = await page.evaluate(() => {
     const bad: string[] = [];
     for (const el of document.querySelectorAll('.fx code, .fx bdi')) {
+      if (/[\p{Script=Arabic}\p{Script=Hebrew}]/u.test(el.textContent ?? '')) continue;
       const range = document.createRange();
       const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
       const chars: { x: number; top: number }[] = [];

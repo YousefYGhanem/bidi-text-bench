@@ -1,0 +1,74 @@
+# he TBL fixtures (docs/FIXTURE_SPEC.md). Drafts are reviewed with npm run review.
+
+- id: he-tbl-001
+  lang: he
+  category: TBL
+  title: 'Shopping table with prices in shekels'
+  text: |
+    | מוצר | מחיר | כמות |
+    |---|---|---|
+    | עכבר | 49.90 ₪ | 2 |
+    | מקלדת | 120 ₪ | 1 |
+  markdown: true
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    The table is mirrored: the first column "מוצר" is the rightmost, then "מחיר", and "כמות" is the
+    leftmost. Cell text is right-aligned. Each price keeps its digits in order (49.90, 120).
+    NEEDS-YOUSEF: should "49.90 ₪" show the shekel sign to the left of the number, as in a running
+    sentence?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: he-tbl-002
+  lang: he
+  category: TBL
+  title: 'Table of commands with inline code cells'
+  text: |
+    | כלי | פקודה |
+    |---|---|
+    | פייתון | `python app.py` |
+    | נוד | `node index.js` |
+  markdown: true
+  base_direction: rtl
+  isolate_spans: ['python app.py', 'node index.js']
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    The first column "כלי" is on the right and "פקודה" is on the left. Each command is a single
+    left-to-right unit that reads exactly as typed, including the dot in the file name.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: he-tbl-003
+  lang: he
+  category: TBL
+  title: 'Release table with a Latin header and version cells'
+  text: |
+    | Version | שינוי |
+    |---|---|
+    | v2.4.0 | תיקון באג בהתחברות |
+    | v2.3.1 | שיפור מהירות |
+  markdown: true
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    The table is RTL: the "Version" column is on the right and "שינוי" is on the left, even though
+    the first header is Latin. Versions keep their dots in order (v2.4.0, v2.3.1). Hebrew cells are
+    right-aligned. NEEDS-YOUSEF: should the Latin-only "Version" column be left- or right-aligned
+    inside an RTL table?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []

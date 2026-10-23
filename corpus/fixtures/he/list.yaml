@@ -1,0 +1,76 @@
+# he LIST fixtures (docs/FIXTURE_SPEC.md). Drafts are reviewed with npm run review.
+
+- id: he-list-001
+  lang: he
+  category: LIST
+  title: Numbered installation steps with inline code and a parenthesis
+  text: |
+    **שלבי ההתקנה:**
+
+    1. התקינו את Node.js (גרסה 22 ומעלה).
+    2. הריצו `npm install`.
+    3. הפעילו את הבדיקות עם `npm test`.
+  markdown: true
+  base_direction: rtl
+  isolate_spans: ['npm install', 'npm test']
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    The heading and items are right-to-left and right-aligned. The numbers 1. 2. 3. sit on the right
+    side, with the indent on the right. The parentheses correctly enclose "גרסה 22 ומעלה". Each
+    inline command is one left-to-right unit. Each item's final period is at its far left.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: he-list-002
+  lang: he
+  category: LIST
+  title: 'Bullet list whose first item starts with an English word'
+  text: |
+    **מה לקחת לטיול:**
+
+    - Powerbank קטן
+    - כרטיס SIM מקומי
+    - מתאם לשקע
+  markdown: true
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    The bullets sit on the right side of every item and the list is indented from the right. The
+    first item reads "Powerbank קטן" with "Powerbank" at the right, next to the bullet; the item is
+    not treated as LTR just because it starts in Latin.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: he-list-003
+  lang: he
+  category: LIST
+  title: 'Blockquote with a bracketed remark'
+  text: |
+    המורה כתבה בהודעה:
+
+    > המבחן יתקיים ביום ראשון, תביאו מחשבון (לא טלפון).
+
+    אפשר להתכונן עם התרגילים מעמוד 12.
+  markdown: true
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    The quote bar is on the right edge of the quoted block and the quote text is right-to-left,
+    indented from the right. The brackets enclose "לא טלפון" and the period is after the closing
+    bracket, at the far left. The last paragraph is outside the quote and right-aligned.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []

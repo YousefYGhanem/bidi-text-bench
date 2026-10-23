@@ -1,0 +1,66 @@
+# he AL fixtures (docs/FIXTURE_SPEC.md). Drafts are reviewed with npm run review.
+
+- id: he-al-001
+  lang: he
+  category: AL
+  title: 'Two-sentence Hebrew travel question must be right-aligned'
+  text: 'שלום, אני מחפש מלון קטן ליד הים לסוף השבוע. יש לכם המלצה?'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message, input]
+  severity: minor
+  expected_notes: >-
+    The text is aligned to the right edge of its container (text-align: start in an RTL paragraph,
+    not left). Reading right to left, the first sentence ends with a period and the question mark is
+    at the far left of the last line.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: he-al-002
+  lang: he
+  category: AL
+  title: 'Second paragraph ends with an English error message'
+  text: |
+    התקנתי את התוכנה אבל היא לא נפתחת, מה עושים?
+
+    מופיעה השגיאה: Segmentation fault
+  markdown: true
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: minor
+  expected_notes: >-
+    Both paragraphs are right-to-left and right-aligned. The second begins at the right with
+    "מופיעה", then the colon, and the English error is at its left end. It must not be left-aligned
+    just because it ends in Latin.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: he-al-003
+  lang: he
+  category: AL
+  title: 'Heading and paragraph in an order summary'
+  text: |
+    ## סיכום ההזמנה
+
+    הזמנה מספר 1042 תגיע תוך 3 ימי עסקים.
+  markdown: true
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: minor
+  expected_notes: >-
+    The heading and the paragraph are both right-aligned and right-to-left. The numbers 1042 and 3
+    keep their digit order. The final period is at the far left of the paragraph.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []

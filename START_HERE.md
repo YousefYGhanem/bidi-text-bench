@@ -22,7 +22,7 @@ Claude Code writes the code itself, phase by phase. It stops at every decision t
 | `.claude/commands/` | `/next` `/phase` `/fixtures` `/audit` `/draft-bug` `/weekly` |
 | `.claude/skills/` | `bidi-testing` (domain knowledge) and `upstream-bug-report` (drafting reports for other projects) |
 | `.claude/settings.json` | Permissions. Routine commands run without asking. Pushes, installs and repo creation ask you first. Posting to other repos, `npm publish` and reading `.env` are blocked |
-| `corpus/fixtures/*/_seed.yaml` | 11 example fixtures: drafts for you to verify |
+| `corpus/fixtures/<lang>/<category>.yaml` | The fixtures: drafts for you to verify with `npm run review` |
 | `audit/targets.yaml` | 17 candidate audit targets |
 
 ## One-time setup (Windows 11, about 45 minutes)

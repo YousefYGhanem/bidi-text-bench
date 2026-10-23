@@ -1,0 +1,23 @@
+# ar MIR fixtures (docs/FIXTURE_SPEC.md). Drafts are reviewed with npm run review.
+
+- id: ar-mir-001
+  lang: ar
+  category: MIR
+  title: Greeting in a chat UI, used to check mirrored layout by hand
+  text: 'مرحبًا! كيف أقدر أساعدك اليوم؟'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message, input]
+  severity: minor
+  expected_notes: >-
+    Manual check with the UI in Arabic or forced RTL. Look at: the sidebar (should be at the right),
+    the back button arrow (should point right), the send button icon (should point left), and the
+    chat bubbles and avatars (user side at the right). Check also that the text above is right-aligned.
+    NEEDS-YOUSEF: which elements count as a fail when the product has no Arabic UI language and only
+    the content is RTL?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []

@@ -27,8 +27,32 @@ function plainText(fx: Fixture): string {
   return `<p>${html.replaceAll('\n', '<br>')}</p>`;
 }
 
+/**
+ * In rendered Markdown, isolate each listed span that is not already inside code or a link
+ * (mentions, for example). Only text between tags is touched, never attributes.
+ */
+function isolateLooseSpans(html: string, spans: string[]): string {
+  let inside = 0;
+  return html
+    .split(/(<[^>]+>)/)
+    .map((part) => {
+      if (part.startsWith('<')) {
+        if (/^<(code|a|pre)\b/i.test(part)) inside++;
+        else if (/^<\/(code|a|pre)>/i.test(part)) inside--;
+        return part;
+      }
+      if (inside > 0) return part;
+      return spans.reduce((text, s) => text.replaceAll(s, `<bdi>${s}</bdi>`), part);
+    })
+    .join('');
+}
+
 export function renderFixture(fx: Fixture): string {
-  const body = fx.markdown ? (markdown.parse(fx.text, { async: false }) as string) : plainText(fx);
+  // Spans with HTML-special characters are left alone here; in practice those are code or links.
+  const loose = fx.isolate_spans.filter((s) => s === escapeHtml(s));
+  const body = fx.markdown
+    ? isolateLooseSpans(markdown.parse(fx.text, { async: false }) as string, loose)
+    : plainText(fx);
   return `<article class="fx" id="${escapeHtml(fx.id)}" lang="${fx.lang}" dir="${fx.base_direction}">\n${body.trim()}\n</article>`;
 }
 

@@ -1,0 +1,82 @@
+# he BD fixtures (docs/FIXTURE_SPEC.md). Drafts are reviewed with npm run review.
+
+- id: he-bd-001
+  lang: he
+  category: BD
+  title: Hebrew sentence that starts with an English library name
+  text: 'React היא ספרייה לבניית ממשקי משתמש, ומשתמשים בה בהרבה חברות.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message, input, stream]
+  severity: major
+  expected_notes: >-
+    The whole paragraph runs right-to-left and is right-aligned. "React" is the first word, at the far
+    right. The comma follows "משתמש" and the final period is at the far left. First-strong detection
+    (dir="auto") gets this wrong.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: he-bd-002
+  lang: he
+  category: BD
+  title: 'Hebrew support question that starts with a Latin product name'
+  text: 'iPhone שלי לא נטען כבר שלושה ימים, מה אפשר לעשות?'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message, input, stream]
+  severity: major
+  expected_notes: >-
+    The sentence is right-to-left and right-aligned. "iPhone" is the rightmost word. The comma is
+    after "ימים" and the question mark is at the far left. In the compose box the direction should
+    flip to RTL as soon as Hebrew words are typed.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: he-bd-003
+  lang: he
+  category: BD
+  title: 'Hebrew sentence that starts with a digit'
+  text: '3 מהתלמידים בכיתה שלי כבר סיימו את המטלה, ו-2 עוד לא התחילו.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    The paragraph is right-to-left. The digit "3" is the rightmost token and "2" follows the prefix
+    "ו-" (reading right to left). The final period is at the far left. A digit is not a strong
+    character, so first-strong detection falls back to LTR here.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: he-bd-004
+  lang: he
+  category: BD
+  title: 'CI failure message whose first streamed chunk is Latin only'
+  text: 'GitHub Actions נכשל שוב: הבדיקות לא עברו בגלל timeout של חמש דקות.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [stream]
+  severity: major
+  expected_notes: >-
+    While streaming, the first chunk is only "GitHub Actions", which looks LTR. The final message is
+    right-to-left, right-aligned, with "GitHub" at the far right. The layout must not flip from LTR
+    to RTL once the Hebrew words arrive. The colon is after "שוב" and the period is at the far left.
+    NEEDS-YOUSEF: is a mid-stream flip major or only minor for you?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []

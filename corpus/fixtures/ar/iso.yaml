@@ -1,0 +1,101 @@
+# ar ISO fixtures (docs/FIXTURE_SPEC.md). Drafts are reviewed with npm run review.
+
+- id: ar-iso-001
+  lang: ar
+  category: ISO
+  title: Windows folder path ending in a backslash, inside inline code
+  text: 'افتح المجلد `C:\Users\demo\reports\` ثم احذف النسخ القديمة.'
+  markdown: true
+  base_direction: rtl
+  isolate_spans: ['C:\Users\demo\reports\']
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    The path appears exactly as typed, as one left-to-right unit: C:\Users\demo\reports\ with the
+    trailing backslash at its right end. If the code span is not isolated, the trailing backslash
+    jumps to the left of "C:". That misleads anyone who reads or retypes the path.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-iso-002
+  lang: ar
+  category: ISO
+  title: Auto-linked URL inside parentheses
+  text: 'راجع الدليل (https://example.com/docs/setup) قبل التثبيت.'
+  markdown: true
+  base_direction: rtl
+  isolate_spans: ['https://example.com/docs/setup']
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    The URL reads left-to-right as one unit. The parentheses surround it: the opening one at its
+    right, the closing one at its left, and neither is pulled inside the URL. The final period is at
+    the far left, after "التثبيت". Unisolated links let the ")" jump to the wrong side of the URL.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-iso-003
+  lang: ar
+  category: ISO
+  title: Email address followed by an Arabic comma
+  text: 'يمكنك مراسلتنا على support@example.com، وسنرد عليك قريبًا.'
+  markdown: true
+  base_direction: rtl
+  isolate_spans: ['support@example.com']
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    The email reads left-to-right as one unit. The Arabic comma is immediately to its left, not
+    inside or on the right of the email. The final period is at the far left.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-iso-004
+  lang: ar
+  category: ISO
+  title: Mention and absolute file path in inline code
+  text: 'شكرًا @sami، عدّلت الملف `/etc/nginx/nginx.conf` وأعدت تشغيل الخدمة.'
+  markdown: true
+  base_direction: rtl
+  isolate_spans: ['@sami', '/etc/nginx/nginx.conf']
+  author_spans: []
+  surfaces: [message]
+  severity: blocker
+  expected_notes: >-
+    "@sami" reads as one unit with "@" at its left end, and the Arabic comma is to its left. The path
+    reads exactly /etc/nginx/nginx.conf, left-to-right, with the leading slash at its left. An
+    unisolated path shows the leading slash jumping to the end, which makes it a different path.
+    NEEDS-YOUSEF: not every UI renders @sami as a mention in plain Markdown. Keep it as a span?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-iso-005
+  lang: ar
+  category: ISO
+  title: Inline code with a Windows drive letter before an Arabic question mark
+  text: 'هل الأمر `dir D:\backup` يعرض الملفات المخفية؟'
+  markdown: true
+  base_direction: rtl
+  isolate_spans: ['dir D:\backup']
+  author_spans: []
+  surfaces: [message, stream]
+  severity: major
+  expected_notes: >-
+    The command reads "dir D:\backup" left-to-right as one unit; "dir" is at its left end. The Arabic
+    question mark is at the far left, after "المخفية". The backslash stays inside the code span and
+    does not jump next to the Arabic words.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []

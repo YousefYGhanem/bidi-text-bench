@@ -1,0 +1,49 @@
+# ar COPY fixtures (docs/FIXTURE_SPEC.md). Drafts are reviewed with npm run review.
+
+- id: ar-copy-001
+  lang: ar
+  category: COPY
+  title: Copy a mixed sentence with a name, email and file name
+  text: 'تواصل مع Sami على sami@example.com ثم أرسل الملف report.pdf.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    Manual check. Select the whole sentence and copy it, then paste it into a plain-text editor. The
+    pasted text must equal the typed order exactly: Arabic words, then Sami, then the email, then the
+    file name, with the period at the end. No extra spaces, no reversed words, no invisible
+    direction characters (check in an editor that shows them). Also select only the email: it must
+    copy as sami@example.com.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-copy-002
+  lang: ar
+  category: COPY
+  title: Copy a shell command with an Arabic commit message
+  text: |
+    احفظ التغييرات بهذا الأمر:
+
+    ```bash
+    git commit -m "إصلاح خطأ تسجيل الدخول"
+    ```
+  markdown: true
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: blocker
+  expected_notes: >-
+    Manual check. Use the copy button of the code block (and also select by hand) and paste it into
+    a terminal or editor. The result must be exactly: git commit -m "إصلاح خطأ تسجيل الدخول", in this
+    logical order, with no prompt text and no control characters. A reordered command would fail or
+    commit the wrong message.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []

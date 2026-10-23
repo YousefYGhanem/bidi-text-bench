@@ -1,0 +1,82 @@
+# he NUM fixtures (docs/FIXTURE_SPEC.md). Drafts are reviewed with npm run review.
+
+- id: he-num-001
+  lang: he
+  category: NUM
+  title: Price in shekels, percentage and date
+  text: 'המחיר הוא 49.90 ₪ לחודש, וההנחה היא 20% עד 31.12.2026.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: blocker
+  expected_notes: >-
+    Every number keeps its internal left-to-right order: 49.90, 20%, 31.12.2026. Reading right-to-left,
+    the shekel sign comes after the amount, so it sits visually to the left of 49.90. The final
+    period is at the far left. NEEDS-YOUSEF: confirm the expected ₪ position for this writing style.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: he-num-002
+  lang: he
+  category: NUM
+  title: 'Time range and page range with hyphens'
+  text: 'השיעור מתקיים בין 10:00-11:30, ויש לקרוא עמודים 10-20.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: blocker
+  expected_notes: >-
+    Both ranges keep their left-to-right order, 10:00-11:30 and 10-20, so the smaller number is on
+    the left. They must not appear as 11:30-10:00 or 20-10. The final period is at the far left.
+    NEEDS-YOUSEF: is the ASCII hyphen right for ranges here, or should the fixture use an en dash or
+    maqaf?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: he-num-003
+  lang: he
+  category: NUM
+  title: 'Version numbers after the prefixes מ- and ל-'
+  text: 'עדכנו מ-v2.3.1 ל-v2.4.0 לפני שמריצים את הסקריפט.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: blocker
+  expected_notes: >-
+    Each version reads v2.3.1 and v2.4.0 left to right, with the dots in place. Reading right to
+    left: "עדכנו", "מ-", v2.3.1, "ל-", v2.4.0, then the rest. The hyphens stay between each prefix
+    and its version.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: he-num-004
+  lang: he
+  category: NUM
+  title: 'Phone number with plus sign and hyphens'
+  text: 'התקשרו למספר +972-50-000-0000 והזכירו את מספר ההזמנה.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: blocker
+  expected_notes: >-
+    The number reads +972-50-000-0000 as one left-to-right unit, with the plus sign at its left end.
+    The plus sign must not move to the right end of the number, and the groups must not be
+    reordered.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []

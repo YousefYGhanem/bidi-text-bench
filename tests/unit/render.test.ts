@@ -35,6 +35,21 @@ describe('renderFixture', () => {
     expect(html).toContain('&#60;b&#62;');
   });
 
+  it('isolates Markdown spans that are not code or links, such as mentions', () => {
+    const html = renderFixture(
+      fx({
+        markdown: true,
+        text: 'תודה @noam-dev, ראו `@noam-dev` ו-https://example.com/@noam-dev',
+        isolate_spans: ['@noam-dev'],
+      }),
+    );
+    expect(html).toContain('תודה <bdi>@noam-dev</bdi>,');
+    expect(html).toContain('<code>@noam-dev</code>');
+    expect(html).toMatch(
+      /href="https:\/\/example\.com\/@noam-dev">https:\/\/example\.com\/@noam-dev</,
+    );
+  });
+
   it('renders Markdown code as <code> and neutralises raw HTML', () => {
     const html = renderFixture(
       fx({ markdown: true, text: 'הריצו `npm test` <script>alert(1)</script>' }),

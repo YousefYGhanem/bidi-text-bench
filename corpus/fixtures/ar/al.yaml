@@ -1,0 +1,67 @@
+# ar AL fixtures (docs/FIXTURE_SPEC.md). Drafts are reviewed with npm run review.
+
+- id: ar-al-001
+  lang: ar
+  category: AL
+  title: Very short Arabic reply must be right-aligned
+  text: 'تم استلام طلبك.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message, input]
+  severity: minor
+  expected_notes: >-
+    The short line hugs the right edge of the message area (text-align: start in an RTL paragraph),
+    with the period at its left end. A short line is where hard-coded text-align: left shows most.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-al-002
+  lang: ar
+  category: AL
+  title: Markdown heading and paragraph in Arabic
+  text: |
+    ## ملخص الطلب
+
+    اخترت لابتوب بشاشة 15 بوصة وذاكرة 16 جيجابايت، وسيصل إلى بيتك خلال يومين.
+  markdown: true
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: minor
+  expected_notes: >-
+    The heading and the paragraph are both right-aligned and read right-to-left. The heading text
+    starts at the right edge. Numbers 15 and 16 read left-to-right inside the sentence, and the final
+    period is at the far left.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-al-003
+  lang: ar
+  category: AL
+  title: Second Arabic paragraph starts with a Latin word (WiFi)
+  text: |
+    تم تأكيد حجزك في الفندق لليلتين.
+
+    WiFi مجاني في الغرفة، وكلمة السر مكتوبة على البطاقة عند الاستقبال.
+  markdown: true
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message, stream]
+  severity: minor
+  expected_notes: >-
+    Both paragraphs are RTL and right-aligned. The second paragraph starts with WiFi, which sits at
+    its far right; the Arabic comma and the final period stay on the left side of their clauses. A UI
+    that sets direction per paragraph by first strong character (dir=auto or unicode-bidi:
+    plaintext) left-aligns the second paragraph and lays it out LTR.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []

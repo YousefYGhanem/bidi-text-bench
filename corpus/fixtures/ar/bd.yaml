@@ -1,0 +1,85 @@
+# ar BD fixtures (docs/FIXTURE_SPEC.md). Drafts are reviewed with npm run review.
+
+- id: ar-bd-001
+  lang: ar
+  category: BD
+  title: Arabic sentence that starts with an English product name
+  text: 'Python لغة برمجة مناسبة للمبتدئين، وتُستخدم كثيرًا في اختبار البرمجيات.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message, input, stream]
+  severity: major
+  expected_notes: >-
+    The whole paragraph runs right-to-left and is right-aligned. "Python" is the first word, at the
+    far right. The Arabic comma follows "للمبتدئين" and the final period is at the far left.
+    First-strong detection (dir="auto") gets this wrong, because the first strong character is Latin.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-bd-002
+  lang: ar
+  category: BD
+  title: Colloquial question that starts with two English framework names
+  text: 'React Native أسهل من Flutter؟ أحتاج رأيك قبل ما أبدأ المشروع.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message, input]
+  severity: major
+  expected_notes: >-
+    The paragraph is right-to-left and right-aligned. "React Native" is at the far right, followed
+    to its left by the Arabic words; "Flutter" reads left-to-right. The Arabic question mark sits
+    right after "Flutter" (to its left) and the final period is at the far left. In the compose box
+    the text must also be RTL while typing, even though the first word is Latin.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-bd-003
+  lang: ar
+  category: BD
+  title: Streamed Arabic answer whose first chunk is a digit
+  text: '3 أشياء لازم تعرفها عن الـ API قبل ما تربطه بالتطبيق: المفتاح، والحد الأقصى للطلبات، ورقم النسخة.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message, stream]
+  severity: major
+  expected_notes: >-
+    The paragraph is right-to-left from the first chunk to the last: "3" at the far right, then the
+    Arabic words leftwards. "API" reads left-to-right inside the sentence. The colon follows
+    "بالتطبيق" and the final period is at the far left. While streaming, the layout must not flip
+    from LTR to RTL once Arabic words arrive. A leading digit is weak, so first-strong detection
+    on the first chunk finds no direction.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-bd-004
+  lang: ar
+  category: BD
+  title: Levantine support question starting with a device name and a number
+  text: 'iPhone 15 Pro شاشته بتنطفي لحالها، شو الحل؟'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message, input, stream]
+  severity: major
+  expected_notes: >-
+    The sentence is right-to-left and right-aligned: "iPhone 15 Pro" is one left-to-right group at
+    the far right, then the Arabic words go leftwards. The question mark is at the far left, after
+    "الحل". NEEDS-YOUSEF: is "بتنطفي لحالها" natural Levantine for "turns itself off", and should
+    the spelling be adjusted?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []

@@ -3,7 +3,7 @@
 This folder holds the evidence behind the fitlocale section of [docs/LANDSCAPE.md](../../docs/LANDSCAPE.md). The results are **observed in fitlocale 0.5.0 on 2026-10-22**, using @playwright/test 1.64.1 in the bidi-text-bench Docker image. That image is `mcr.microsoft.com/playwright:v1.64.1-noble@sha256:7852dc5a…`, plus Noto fonts.
 
 ## What it does
-`build-pages.mjs` turns the 11 seed fixtures (`corpus/fixtures/*/_seed.yaml`, status **draft**, not yet verified) into 41 pages:
+`build-pages.mjs` turns the 11 seed fixtures (the seed fixtures (now in `corpus/fixtures/<lang>/<category>.yaml`), status **draft**, not yet verified) into 41 pages:
 
 | Pages | Markup |
 |---|---|

@@ -111,8 +111,8 @@ The validator (`npm run corpus:validate`) enforces:
 | v1 (G4) | ~200 | ≥6 | ≥20 dialect/code-switching · ≥10 written for the `stream` surface · ≥10 for the `input` surface |
 
 ## 7. Seed examples
-`corpus/fixtures/ar/_seed.yaml` and `corpus/fixtures/he/_seed.yaml` hold 11 drafts. They show the format and two hard cases:
+The first 11 drafts were the seeds. They moved into their category files in task 1.4. They show the format and two hard cases:
 - a `NEEDS-YOUSEF` judgement call (`ar-num-001`, `he-num-001`);
 - an author-owned span (`he-np-002`).
 
-Move them into their category files during task 1.4.
+Files whose names start with `_` are exempt from the one-category-per-file rule. Use them only for temporary mixed sets.

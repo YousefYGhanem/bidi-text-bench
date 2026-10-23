@@ -4,7 +4,7 @@ import { parse } from 'yaml';
 import { type Fixture, fixtureHash, validateFixtures } from '../../src/corpus/validate.ts';
 import { applyDecision } from '../../src/review/apply.ts';
 
-const path = 'corpus/fixtures/he/_seed.yaml';
+const path = 'corpus/fixtures/he/np.yaml';
 const source = readFileSync(path, 'utf8');
 const AT = '2026-11-01T10:00:00.000Z';
 const run = (id: string, decision: 'approve' | 'reject' | 'needs-fix', text = source) =>
@@ -16,14 +16,14 @@ const changedLines = (a: string, b: string) => {
 
 describe('applyDecision', () => {
   it('approve changes only the status and verification lines, with the content hash', () => {
-    const { yamlText, log } = run('he-iso-001', 'approve');
-    const fx = (parse(yamlText) as Fixture[]).find((f) => f.id === 'he-iso-001') as Fixture;
+    const { yamlText, log } = run('he-np-002', 'approve');
+    const fx = (parse(yamlText) as Fixture[]).find((f) => f.id === 'he-np-002') as Fixture;
     expect(fx.status).toBe('verified');
     expect(fx.verification).toEqual({ by: "Yousef O'Test", at: AT, hash: fixtureHash(fx) });
     expect(changedLines(source, yamlText)).toHaveLength(2);
     expect(validateFixtures([{ path, fixtures: parse(yamlText) }])).toEqual([]);
     expect(log).toMatchObject({
-      id: 'he-iso-001',
+      id: 'he-np-002',
       decision: 'approve',
       note: 'note',
       hash: fixtureHash(fx),
@@ -45,13 +45,13 @@ describe('applyDecision', () => {
   });
 
   it('refuses fixtures that are no longer drafts, and unknown ids', () => {
-    const once = run('he-iso-001', 'approve').yamlText;
-    expect(() => run('he-iso-001', 'approve', once)).toThrow(/is verified, not a draft/);
+    const once = run('he-np-002', 'approve').yamlText;
+    expect(() => run('he-np-002', 'approve', once)).toThrow(/is verified, not a draft/);
     expect(() => run('he-xxx-001', 'approve')).toThrow(/not in/);
   });
 
   it('refuses an invalid file', () => {
-    expect(() => run('he-iso-001', 'approve', source.replace('lang: he', 'lang: xx'))).toThrow(
+    expect(() => run('he-np-002', 'approve', source.replace('lang: he', 'lang: xx'))).toThrow(
       /fix the file first/,
     );
   });

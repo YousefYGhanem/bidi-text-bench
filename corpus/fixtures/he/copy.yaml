@@ -1,0 +1,44 @@
+# he COPY fixtures (docs/FIXTURE_SPEC.md). Drafts are reviewed with npm run review.
+
+- id: he-copy-001
+  lang: he
+  category: COPY
+  title: 'Copy a sentence with an inline command and a digit'
+  text: 'הריצו `npm test` על 3 מכונות שונות.'
+  markdown: true
+  base_direction: rtl
+  isolate_spans: ['npm test']
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    Manual check. Select the whole sentence, copy it and paste it into a plain-text editor. The
+    pasted text must equal the logical text: same word order, no reversed words, and no added bidi
+    controls (such as U+200E, U+200F or U+2066 to U+2069). Selecting across the command must not
+    skip or duplicate characters. NEEDS-YOUSEF: should the pasted text keep the backticks, or only
+    the command?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: he-copy-002
+  lang: he
+  category: COPY
+  title: 'Copy an order number and a phone number from a Hebrew sentence'
+  text: 'מספר ההזמנה שלי הוא AB-1042 והטלפון שלי +972-50-000-0000.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: blocker
+  expected_notes: >-
+    Manual check. Double-click or drag-select only "AB-1042", copy, and paste into a plain-text
+    editor: the result is exactly AB-1042. Do the same for +972-50-000-0000. Neither value may come
+    out reversed or with a stray control character, and the selection highlight should cover the
+    same characters you see selected.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []

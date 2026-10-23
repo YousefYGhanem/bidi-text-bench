@@ -1,0 +1,104 @@
+# ar CODE fixtures (docs/FIXTURE_SPEC.md). Drafts are reviewed with npm run review.
+
+- id: ar-code-001
+  lang: ar
+  category: CODE
+  title: Shell prompt lines in a fenced code block between Arabic paragraphs
+  text: |
+    لتثبيت المكتبة نفّذ الأمرين التاليين:
+
+    ```bash
+    $ npm install bidi-js --save-dev
+    $ npm test
+    ```
+
+    بعدها يجب أن تظهر رسالة `All tests passed`.
+  markdown: true
+  base_direction: rtl
+  isolate_spans: ['All tests passed']
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    The two Arabic paragraphs are right-to-left and right-aligned. The code block is left-to-right:
+    each line starts with "$" at the left edge. If the block inherits RTL, the "$" jumps to the right
+    end of each line. The inline code "All tests passed" is one left-to-right unit, and the final
+    period is at the far left.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-code-002
+  lang: ar
+  category: CODE
+  title: Python block with a trailing semicolon and an Arabic comment
+  text: |
+    الدالة التالية تحسب مجموع الأسعار:
+
+    ```python
+    def total(prices):
+        return sum(prices);  # مجموع الأسعار
+    ```
+
+    جرّبها مع قائمة فيها ثلاثة أرقام.
+  markdown: true
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    The two Arabic paragraphs are RTL and right-aligned. The code block is left-aligned and its lines
+    keep their order and indentation: "def total(prices):" then the indented return line. The trailing
+    ";" stays directly after "sum(prices)". The Arabic comment follows "#" and reads right-to-left
+    inside the left-to-right line, to the right of the ";".
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-code-003
+  lang: ar
+  category: CODE
+  title: JavaScript block with an Arabic string and comment
+  text: |
+    اطبع رسالة ترحيب بهذا السطر:
+
+    ```js
+    console.log('مرحبا بك'); // طباعة رسالة
+    ```
+  markdown: true
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message, stream]
+  severity: major
+  expected_notes: >-
+    The code line starts with "console.log(" at the left edge. The Arabic string sits between the
+    quotes, and the closing quote, ")" and ";" follow it in left-to-right order. The "//" comment
+    starts after the ";". The quotes and the bracket must pair correctly around the Arabic text.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-code-004
+  lang: ar
+  category: CODE
+  title: Two inline code calls with brackets in an Arabic sentence
+  text: '`print(name)` تطبع الاسم، بينما `len(name)` ترجع الطول.'
+  markdown: true
+  base_direction: rtl
+  isolate_spans: ['print(name)', 'len(name)']
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    The paragraph is RTL even though it starts with code: print(name) is at the far right. Each code
+    span reads left-to-right with its brackets paired and intact: print(name), not print)name(. The
+    comma follows "الاسم", and the final period is at the far left.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []

@@ -1,6 +1,5 @@
-import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { parse } from 'yaml';
+import { allFixtures, loadFixtureFiles } from '../../src/corpus/load.ts';
 import {
   canonicalJson,
   type Fixture,
@@ -8,21 +7,14 @@ import {
   validateFixtures,
 } from '../../src/corpus/validate.ts';
 
-const seeds = (lang: 'ar' | 'he'): Fixture[] =>
-  parse(readFileSync(`corpus/fixtures/${lang}/_seed.yaml`, 'utf8'));
 const base = (): Fixture =>
-  structuredClone(seeds('ar').find((f) => f.id === 'ar-iso-001') as Fixture);
+  structuredClone(allFixtures(loadFixtureFiles()).find((f) => f.id === 'ar-iso-001') as Fixture);
 const check = (fixtures: unknown[], path = 'corpus/fixtures/ar/iso.yaml') =>
   validateFixtures([{ path, fixtures }]);
 
 describe('validateFixtures', () => {
-  it('accepts the seed fixtures', () => {
-    expect(
-      validateFixtures([
-        { path: 'corpus/fixtures/ar/_seed.yaml', fixtures: seeds('ar') },
-        { path: 'corpus/fixtures/he/_seed.yaml', fixtures: seeds('he') },
-      ]),
-    ).toEqual([]);
+  it('accepts the committed corpus', () => {
+    expect(validateFixtures(loadFixtureFiles())).toEqual([]);
   });
 
   it('accepts a well-formed fixture in its category file', () => {

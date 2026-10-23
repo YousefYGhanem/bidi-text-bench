@@ -1,0 +1,74 @@
+# ar LIST fixtures (docs/FIXTURE_SPEC.md). Drafts are reviewed with npm run review.
+
+- id: ar-list-001
+  lang: ar
+  category: LIST
+  title: Ordered list of setup steps with a Latin term
+  text: |
+    خطوات الاتصال بالشبكة:
+
+    1. افتح الإعدادات.
+    2. اختر Wi-Fi من القائمة.
+    3. أدخل كلمة المرور.
+  markdown: true
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    The numbers 1 to 3 are at the right edge of each item, the text to their left, and the list is
+    indented from the right. In item 2, "Wi-Fi" reads left-to-right and the hyphen stays inside it.
+    The period of each item is at the left end.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-list-002
+  lang: ar
+  category: LIST
+  title: Bulleted list whose items start with Latin words, with a nested item
+  text: |
+    المتصفحات المدعومة:
+
+    - Chrome أحدث إصدار
+    - Firefox 120 أو أحدث
+      - Edge بعد تفعيل الوضع القديم
+  markdown: true
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    Bullets are at the right edge. Each item reads right-to-left even though it starts with a Latin
+    word: "Chrome" is at the right, next to the bullet. The nested bullet is indented from the right,
+    not the left.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-list-003
+  lang: ar
+  category: LIST
+  title: Blockquote with a git command in inline code
+  text: |
+    > نصيحة: استخدم `git stash` قبل تبديل الفرع.
+
+    بعدها يمكنك العودة لعملك بأمان.
+  markdown: true
+  base_direction: rtl
+  isolate_spans: ['git stash']
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    The quote bar is at the right edge of the quote, and the quote text reads right-to-left with its
+    padding on the right. "git stash" is one left-to-right unit. The following paragraph is
+    right-aligned outside the quote.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []

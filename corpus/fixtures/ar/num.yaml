@@ -1,0 +1,83 @@
+# ar NUM fixtures (docs/FIXTURE_SPEC.md). Drafts are reviewed with npm run review.
+
+- id: ar-num-001
+  lang: ar
+  category: NUM
+  title: Price, percentage and date in one sentence
+  text: 'سعر الاشتراك 49.90 دولارًا شهريًا، مع خصم 20% حتى 31/12/2026.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: blocker
+  expected_notes: >-
+    Every number keeps its internal left-to-right order: 49.90, 20%, 31/12/2026 (day/month/year).
+    The final period is at the far left. Reordered digits or date parts change the meaning (blocker).
+    NEEDS-YOUSEF: as typed, the % sits to the right of 20. Is that what Arabic readers expect here,
+    or do they expect "%20"?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-num-002
+  lang: ar
+  category: NUM
+  title: Numeric range and a time range in a school notice
+  text: 'الصفوف 10-20 مفتوحة للتسجيل، والمحاضرة من 9:00 إلى 10:30.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: blocker
+  expected_notes: >-
+    "10-20" reads 10 then 20 from left to right, with the hyphen between; it must not display as
+    "20-10". Times read 9:00 and 10:30 with the colon inside each. In reading order, 9:00 is
+    to the right of 10:30. The final period is at the far left.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-num-003
+  lang: ar
+  category: NUM
+  title: Arabic-Indic digits for order number, amount and date
+  text: 'رقم الطلب ١٢٣٤، والمبلغ ٤٩٫٩٠ دولارًا، والتاريخ ٣١/١٢/٢٠٢٦.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: blocker
+  expected_notes: >-
+    Every number keeps its digit order: ١٢٣٤, ٤٩٫٩٠ (with the Arabic decimal separator) and the date
+    ٣١/١٢/٢٠٢٦ (day/month/year). The slashes stay between the date parts. The digits are not
+    replaced by Western digits. NEEDS-YOUSEF: is Arabic-Indic the natural choice for a support
+    message like this, and is the decimal separator ٫ (U+066B) right, or would you type a comma?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-num-004
+  lang: ar
+  category: NUM
+  title: International phone number and a version number
+  text: 'اتصل بنا على +1-555-000-0000 بعد التحديث إلى الإصدار v2.4.1.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: blocker
+  expected_notes: >-
+    The phone number reads +1-555-000-0000 left-to-right, with the plus sign at its left end, not at
+    the end. The version reads v2.4.1 left-to-right. The final period is at the far left. NEEDS-YOUSEF:
+    in plain text, is the plus sign of the phone number attached to the number in your experience?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []

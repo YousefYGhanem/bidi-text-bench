@@ -6,9 +6,25 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { marked } from 'marked';
 import YAML from 'yaml';
 
-const seeds = ['ar', 'he'].flatMap((lang) =>
-  YAML.parse(readFileSync(`../../corpus/fixtures/${lang}/_seed.yaml`, 'utf8')),
-);
+// The 11 seeds run on 2026-10-22. Task 1.4 moved them from _seed.yaml into category files.
+const SEED_IDS = [
+  'ar-bd-001',
+  'ar-iso-001',
+  'ar-np-001',
+  'ar-num-001',
+  'ar-code-001',
+  'he-bd-001',
+  'he-iso-001',
+  'he-np-001',
+  'he-np-002',
+  'he-num-001',
+  'he-list-001',
+];
+const seeds = SEED_IDS.map((id) => {
+  const [lang, category] = id.split('-');
+  const file = `../../corpus/fixtures/${lang}/${category}.yaml`;
+  return YAML.parse(readFileSync(file, 'utf8')).find((f) => f.id === id);
+});
 const esc = (s) => s.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
 const body = (fx) => (fx.markdown ? marked.parse(fx.text) : `<p>${esc(fx.text)}</p>`);
 const base = 'body{font:16px/1.5 sans-serif;margin:24px}.msg{max-width:900px}';

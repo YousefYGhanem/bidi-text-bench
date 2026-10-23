@@ -1,0 +1,71 @@
+# ar TBL fixtures (docs/FIXTURE_SPEC.md). Drafts are reviewed with npm run review.
+
+- id: ar-tbl-001
+  lang: ar
+  category: TBL
+  title: Product table with Arabic headers and a Latin product name
+  text: |
+    | المنتج | السعر | المخزون |
+    | --- | --- | --- |
+    | قميص | 49.90 | متوفر |
+    | حذاء Nike | 120.00 | غير متوفر |
+  markdown: true
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    The first column (المنتج) is at the right and the last (المخزون) at the left, so the table
+    reads right-to-left. Cells are aligned to the right. Prices keep their digits in order: 49.90 and
+    120.00. In "حذاء Nike", "حذاء" is at the right of "Nike".
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-tbl-002
+  lang: ar
+  category: TBL
+  title: School grades table with fractions
+  text: |
+    | الطالب | الرياضيات | العلوم |
+    | --- | --- | --- |
+    | لينا | 18/20 | 17/20 |
+    | سامي | 15/20 | 19/20 |
+  markdown: true
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    The column "الطالب" is at the far right, then "الرياضيات", then "العلوم" at the left. Each
+    fraction reads as written (18/20, not 20/18). Text in the cells is right-aligned.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-tbl-003
+  lang: ar
+  category: TBL
+  title: Table of git commands in code cells with Arabic descriptions
+  text: |
+    | الأمر | الوصف |
+    | --- | --- |
+    | `git status` | عرض حالة الملفات |
+    | `git commit -m "msg"` | حفظ التغييرات |
+  markdown: true
+  base_direction: rtl
+  isolate_spans: ['git status', 'git commit -m "msg"']
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    "الأمر" is the right column and "الوصف" the left column. Each code cell reads left-to-right, with
+    its quotes intact. The descriptions are right-aligned and read right-to-left.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []

@@ -1,0 +1,82 @@
+# ar NP fixtures (docs/FIXTURE_SPEC.md). Drafts are reviewed with npm run review.
+
+- id: ar-np-001
+  lang: ar
+  category: NP
+  title: Colons and comma next to a Latin username and an email
+  text: 'اسم المستخدم: lina_dev، والبريد الإلكتروني: lina@example.com.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message, input]
+  severity: major
+  expected_notes: >-
+    Reads right-to-left. Each colon sits immediately after (to the left of) its Arabic label.
+    "lina_dev" and the email each read left-to-right. The Arabic comma is just left of "lina_dev",
+    and the final period is at the far left, after the email.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-np-002
+  lang: ar
+  category: NP
+  title: Guillemets around Latin commands and an Arabic question mark
+  text: 'هل تقصد «git rebase» أم «git merge»؟'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message, input]
+  severity: major
+  expected_notes: >-
+    Reads right-to-left: "هل تقصد", then «git rebase» as a left-to-right unit, "أم", then «git merge»,
+    and the question mark at the far left. Each pair of guillemets encloses its command: the opening
+    mark on its right and the closing mark on its left. Mirroring of the quote glyphs is checked by
+    eye. NEEDS-YOUSEF: do Arabic readers expect « » here, or straight double quotes?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-np-003
+  lang: ar
+  category: NP
+  title: Parentheses ending on Latin words
+  text: 'استخدم المكتبة الرسمية (requests) لإرسال الطلبات، ثم احفظ النتيجة (JSON).'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message, stream]
+  severity: major
+  expected_notes: >-
+    Both pairs of parentheses enclose their Latin word: "(requests)" and "(JSON)" with the opening
+    bracket on the right and the closing one on the left. The final period is at the far left,
+    after "(JSON)", not inside the bracket.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-np-004
+  lang: ar
+  category: NP
+  title: Colloquial shopping tip with slashes between sizes and colours
+  text: 'خد مقاس S/M/L أو لون أحمر/أزرق، وكلهم متوفرين.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    "S/M/L" reads left-to-right as written. In "أحمر/أزرق", "أحمر" is at the right and "أزرق" at its
+    left, with the slash between them. The Arabic comma is after "أزرق", and the sentence ends at the
+    far left. NEEDS-YOUSEF: is "خد مقاس" fine as colloquial Levantine/Egyptian for "take size"?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []

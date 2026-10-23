@@ -1,0 +1,62 @@
+# ar TRUNC fixtures (docs/FIXTURE_SPEC.md). Drafts are reviewed with npm run review.
+
+- id: ar-trunc-001
+  lang: ar
+  category: TRUNC
+  title: Long Arabic conversation title with an English error name
+  text: 'كيف أصلح خطأ ModuleNotFoundError عند تشغيل مشروع Django على ويندوز بعد تحديث بايثون'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [title]
+  severity: major
+  expected_notes: >-
+    In a narrow title area the beginning of the title ("كيف أصلح خطأ") stays visible at the right.
+    The end of the sentence is cut, and the ellipsis is at the left end of the visible text. The
+    title is not cut at its right side.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-trunc-002
+  lang: ar
+  category: TRUNC
+  title: Long title that starts with Latin words
+  text: 'React hooks: شرح مفصل لاستخدام useEffect مع أمثلة عملية وأخطاء شائعة في المشاريع الكبيرة'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [title]
+  severity: major
+  expected_notes: >-
+    The title is RTL: "React hooks:" is at the far right. The cut is at the logical end, so the
+    ellipsis is at the left end. The start of the title is not hidden. NEEDS-YOUSEF: base_direction
+    is rtl because the title is mostly Arabic. Do you agree?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-trunc-003
+  lang: ar
+  category: TRUNC
+  title: Long travel-plan title ending in a Latin word
+  text: 'خطة رحلة إلى اسطنبول لمدة خمسة أيام مع الفنادق والمواصلات وجدول الزيارات PDF'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [title]
+  severity: major
+  expected_notes: >-
+    "خطة رحلة" stays visible at the right. The logical end ("PDF" and the words before it) is cut
+    first, and the ellipsis is at the left end. The ellipsis is not placed at the right of the
+    title, and "PDF" is not shown at the start. NEEDS-YOUSEF: is the ellipsis at the left end
+    what you expect for Arabic UIs?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []

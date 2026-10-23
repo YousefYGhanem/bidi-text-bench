@@ -30,7 +30,8 @@ const fixtures = () => {
 
 test('keyboard decisions are written to the YAML and the review log', async ({ page }) => {
   await page.goto(url);
-  await expect(page.locator('#position')).toHaveText('1 / 11');
+  const total = fixtures().filter((f) => f.status === 'draft').length;
+  await expect(page.locator('#position')).toHaveText(`1 / ${total}`);
   await expect(page.locator('#render .fx')).toHaveAttribute('dir', 'rtl');
   const first = await page.locator('#render .fx').getAttribute('id');
 
@@ -39,7 +40,7 @@ test('keyboard decisions are written to the YAML and the review log', async ({ p
   await page.keyboard.press('Escape');
   await page.keyboard.press('a');
   await expect(page.locator('#status')).toHaveText(`${first}: approve recorded.`);
-  await expect(page.locator('#position')).toHaveText('1 / 10');
+  await expect(page.locator('#position')).toHaveText(`1 / ${total - 1}`);
 
   const second = await page.locator('#render .fx').getAttribute('id');
   await page.keyboard.press('f');

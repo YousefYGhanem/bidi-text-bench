@@ -1,0 +1,22 @@
+# he MIR fixtures (docs/FIXTURE_SPEC.md). Drafts are reviewed with npm run review.
+
+- id: he-mir-001
+  lang: he
+  category: MIR
+  title: 'Hebrew message that points to the back button'
+  text: 'לחצו על כפתור החזרה בפינה כדי לחזור למסך הקודם.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: minor
+  expected_notes: >-
+    Manual check, with the UI in Hebrew. The back arrow points to the right, the back button is at
+    the top right, and the sidebar is on the right edge. The sentence itself is right-aligned.
+    Compare with the English UI, where all of these are on the opposite side. NEEDS-YOUSEF: should
+    the UI be set to Hebrew explicitly for this check, or is the browser locale enough?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []

@@ -1,0 +1,82 @@
+# he FONT fixtures (docs/FIXTURE_SPEC.md). Drafts are reviewed with npm run review.
+
+- id: he-font-001
+  lang: he
+  category: FONT
+  title: 'All five final letters in one sentence'
+  text: 'המילים סוף, שלום, מלך, אחרון ופרץ נגמרות באותיות סופיות.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    Each word ends with its final form: ף in סוף, ם in שלום, ך in מלך, ן in אחרון and ץ in פרץ. No
+    tofu boxes, and the final forms look like final forms.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: he-font-002
+  lang: he
+  category: FONT
+  title: 'Geresh, gershayim and maqaf next to Latin text'
+  text: 'הפגישה בת״א ביום ב׳ היא על ה־API החדש.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: minor
+  expected_notes: >-
+    The text uses gershayim U+05F4 in "ת״א", geresh U+05F3 in "ב׳" and maqaf U+05BE in "ה־API". All
+    three render as Hebrew punctuation with no tofu. The maqaf joins "ה" to "API" at mid-height, and
+    "API" reads left to right. NEEDS-YOUSEF: is the maqaf U+05BE before a Latin word what you would
+    expect, or is the ASCII hyphen more natural for ה-API?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: he-font-003
+  lang: he
+  category: FONT
+  title: 'Fully pointed greeting with nikud'
+  text: 'שָׁלוֹם, מַה שְׁלוֹמֵךְ הַיּוֹם?'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    Every vowel mark sits under or over its letter, and none are clipped or detached: the shin dot
+    and qamats on the first letter, the holam over the vav, the shva under the shin. The question
+    mark is at the far left. NEEDS-YOUSEF: is the nikud in this sentence correct and in the usual
+    style?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: he-font-004
+  lang: he
+  category: FONT
+  title: 'Stacked dagesh and vowel marks in a school sentence'
+  text: 'הַיֶּלֶד קוֹרֵא סֵפֶר בַּגַּן.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    Letters that carry both a dagesh and a vowel (יֶּ, בַּ, גַּ) show both marks without overlapping
+    each other or being clipped by the line box. The period is at the far left. NEEDS-YOUSEF: is the
+    nikud correct and does the dagesh-plus-vowel stacking look right?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []

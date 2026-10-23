@@ -1,0 +1,100 @@
+# he CODE fixtures (docs/FIXTURE_SPEC.md). Drafts are reviewed with npm run review.
+
+- id: he-code-001
+  lang: he
+  category: CODE
+  title: 'Fenced JavaScript block with trailing semicolons and an English comment'
+  text: |
+    הנה דוגמה קצרה:
+
+    ```js
+    const total = price * 2; // total with tax
+    console.log(total);
+    ```
+  markdown: true
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    The intro line is right-to-left. The code block is left-to-right and left-aligned, each line
+    reading exactly as typed. Each semicolon is at the right end of its statement and the comment
+    follows on the same line. The block is not mirrored or right-aligned.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: he-code-002
+  lang: he
+  category: CODE
+  title: 'Python block with a Hebrew comment and a Hebrew string'
+  text: |
+    זה הקוד שכתבתי:
+
+    ```python
+    # בדיקת כניסה
+    name = input('מה השם שלך? ')
+    print(name)
+    ```
+  markdown: true
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    The block is left-to-right and left-aligned. The first line starts with "#" at the left,
+    followed by the Hebrew comment, which reads right to left internally. In the second line "name =
+    input(" is at the left, then the quoted Hebrew string, with the closing quote and parenthesis to
+    its right. The statements must not be mirrored. NEEDS-YOUSEF: where exactly should the quotes
+    and the "?" sit around the Hebrew string inside the code line?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: he-code-003
+  lang: he
+  category: CODE
+  title: 'Sentence with two inline git commands'
+  text: 'כדי לעבור לענף חדש הריצו `git checkout -b fix/login` ואז `git push -u origin fix/login`, ובסוף פתחו PR.'
+  markdown: true
+  base_direction: rtl
+  isolate_spans: ['git checkout -b fix/login', 'git push -u origin fix/login']
+  author_spans: []
+  surfaces: [message]
+  severity: blocker
+  expected_notes: >-
+    Each command is one left-to-right unit that reads exactly as typed. Reading right to left: "כדי
+    לעבור לענף חדש הריצו", the first command, "ואז", the second command, then the comma and "ובסוף
+    פתחו PR." with the period at the far left. The flags "-b" and "-u" must not move.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: he-code-004
+  lang: he
+  category: CODE
+  title: 'Shell block starting with a dollar prompt'
+  text: |
+    בנו את הפרויקט כך:
+
+    ```bash
+    $ npm run build
+    ```
+  markdown: true
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    The block is left-to-right and left-aligned, and the line reads "$ npm run build" with the
+    dollar sign at the far left. If the block inherits RTL, the dollar sign jumps to the right end.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []

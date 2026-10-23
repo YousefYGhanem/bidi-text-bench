@@ -1,0 +1,82 @@
+# ar FONT fixtures (docs/FIXTURE_SPEC.md). Drafts are reviewed with npm run review.
+
+- id: ar-font-001
+  lang: ar
+  category: FONT
+  title: Lam-alef ligature in several words
+  text: 'لا تنس الاشتراك قبل نهاية الشهر، ولا تؤجل الدفع.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    Every "لا" (in "لا", "الاشتراك", "ولا") is drawn as the lam-alef ligature, and no box or separate
+    isolated lam and alef appear. All letters in each word are joined. NEEDS-YOUSEF: the ligature
+    shape depends on the font; is a different-looking fallback font acceptable?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-font-002
+  lang: ar
+  category: FONT
+  title: Arabic words next to a version number and a Latin app name
+  text: 'الإصدار 3.1 من تطبيق Notes يدعم الخطوط العربية المتصلة بشكل أفضل.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    Letters inside each Arabic word are joined, including the words directly before and after
+    "3.1" and "Notes". No Arabic word is split into isolated letters. The Latin and digit runs
+    do not break the joining of the neighbouring words. No tofu boxes appear.
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-font-003
+  lang: ar
+  category: FONT
+  title: Fully voweled short sentence
+  text: 'كَتَبَتْ لينا رسالةً قصيرةً إلى سامي.'
+  markdown: false
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    Every tashkeel mark (fatha, sukun, tanwin) is visible above or below its letter and is not
+    clipped by the line box. No mark floats between letters or sits on the wrong letter.
+    NEEDS-YOUSEF: is the tashkeel on كَتَبَتْ and رسالةً قصيرةً correct for the intended sentence?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []
+
+- id: ar-font-004
+  lang: ar
+  category: FONT
+  title: Heading with shadda and kasra marks
+  text: '## الجُمَلُ الفِعْلِيَّةُ'
+  markdown: true
+  base_direction: rtl
+  isolate_spans: []
+  author_spans: []
+  surfaces: [message]
+  severity: major
+  expected_notes: >-
+    In the large heading, marks above the letters (damma, fatha, shadda) and below (kasra) are
+    fully visible and not cut off at the top or bottom, even with a tight line-height. The shadda
+    and its vowel on "الفِعْلِيَّةُ" stack neatly. NEEDS-YOUSEF: is the tashkeel of this heading
+    correct?
+  status: draft
+  verification: null
+  source: original
+  related_issues: []

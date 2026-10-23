@@ -36,7 +36,7 @@ For details and acceptance criteria, see `docs/PLAN.md` §6. At the end of each 
   - It offers Approve / Needs fix / Reject, plus a note.
   - It writes `status` and `verification` {by, at, hash}.
   - It has keyboard shortcuts and an RTL-correct UI.
-- [ ] 1.4 [P] Move the seeds into their category files. Draft fixtures up to 80 in total, covering every category in both ar and he (`/fixtures`).
+- [x] 1.4 [P] Move the seeds into their category files. Draft fixtures up to 80 in total, covering every category in both ar and he (`/fixtures`).
 - [ ] 1.5 [Y] Review all 80 in the review tool, then commit the verifications yourself (`verify: …`).
 - [ ] G1 [Y] At least 80 fixtures are verified and CI is green.
 
