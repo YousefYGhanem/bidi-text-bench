@@ -12,7 +12,7 @@ For details and acceptance criteria, see `docs/PLAN.md` §6. At the end of each 
   - Add `fonts-noto-core` and `fonts-noto-mono`; the official image ships no Arabic- or Hebrew-specific fonts.
   - The build must assert `fc-list :lang=ar` and `:lang=he`.
   - Add `npm run docker:test`.
-- [ ] 0.4 [C] Add GitHub Actions that run `npm run check` and the Playwright tests in the Docker image.
+- [x] 0.4 [C] Add GitHub Actions that run `npm run check` and the Playwright tests in the Docker image.
 - [ ] 0.5 [C] Add these files:
   - LICENSE (Apache-2.0)
   - LICENSE-DATA (CC BY 4.0, for corpus/ and audit/)
