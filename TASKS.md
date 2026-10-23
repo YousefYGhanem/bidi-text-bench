@@ -26,7 +26,7 @@ For details and acceptance criteria, see `docs/PLAN.md` §6. At the end of each 
 - [x] 0.7 [P] Name check. Look at npm and GitHub availability and the risk of confusion with WebDriver BiDi. Propose 2–3 options with evidence.
 - [x] 0.8 [P] Taxonomy review. Propose changes to docs/FIXTURE_SPEC.md §2 — for example, should the symptom categories NP and NUM be folded into the cause categories BD and ISO?
 - [x] 0.9 [Y] Create the GitHub repo. Claude prepares the `gh repo create` command; you run it. Recommended: public with a WIP banner. Alternative: private until Phase 6.
-- [ ] G0 [Y] Decide the fitlocale strategy, the name and the taxonomy. Claude then writes ADR-0001…0003.
+- [x] G0 [Y] Decide the fitlocale strategy, the name and the taxonomy. Claude then writes ADR-0001…0003.
 
 ## Phase 1 — Corpus v0 + review tool (week 2)
 - [ ] 1.1 [C] Write corpus/schema/fixture.schema.json and `npm run corpus:validate`. It checks the schema, unique IDs, that every span is inside the text, NFC normalisation, stray bidi controls and the verification hash.
