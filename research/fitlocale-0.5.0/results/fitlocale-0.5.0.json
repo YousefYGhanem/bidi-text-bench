@@ -1,0 +1,1339 @@
+{
+ "fitlocale": "0.5.0",
+ "playwright": "1.64.1",
+ "date": "2026-10-22",
+ "pages": [
+  {
+   "file": "ar-bd-001.auto.html",
+   "kind": "message",
+   "fixture": "ar-bd-001",
+   "category": "BD",
+   "lang": "ar",
+   "variant": "auto",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "firefox": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "webkit": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    }
+   }
+  },
+  {
+   "file": "ar-bd-001.golden.html",
+   "kind": "message",
+   "fixture": "ar-bd-001",
+   "category": "BD",
+   "lang": "ar",
+   "variant": "golden",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": null,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "ar-bd-001.nodir.html",
+   "kind": "message",
+   "fixture": "ar-bd-001",
+   "category": "BD",
+   "lang": "ar",
+   "variant": "nodir",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "firefox": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "webkit": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    }
+   }
+  },
+  {
+   "file": "ar-code-001.auto.html",
+   "kind": "message",
+   "fixture": "ar-code-001",
+   "category": "CODE",
+   "lang": "ar",
+   "variant": "auto",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": true,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": true,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": true,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "ar-code-001.golden.html",
+   "kind": "message",
+   "fixture": "ar-code-001",
+   "category": "CODE",
+   "lang": "ar",
+   "variant": "golden",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": null,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "ar-code-001.nodir.html",
+   "kind": "message",
+   "fixture": "ar-code-001",
+   "category": "CODE",
+   "lang": "ar",
+   "variant": "nodir",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "firefox": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "webkit": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    }
+   }
+  },
+  {
+   "file": "ar-iso-001.auto.html",
+   "kind": "message",
+   "fixture": "ar-iso-001",
+   "category": "ISO",
+   "lang": "ar",
+   "variant": "auto",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": true,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": true,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": true,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "ar-iso-001.golden.html",
+   "kind": "message",
+   "fixture": "ar-iso-001",
+   "category": "ISO",
+   "lang": "ar",
+   "variant": "golden",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": null,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "ar-iso-001.nodir.html",
+   "kind": "message",
+   "fixture": "ar-iso-001",
+   "category": "ISO",
+   "lang": "ar",
+   "variant": "nodir",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "firefox": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "webkit": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    }
+   }
+  },
+  {
+   "file": "ar-np-001.auto.html",
+   "kind": "message",
+   "fixture": "ar-np-001",
+   "category": "NP",
+   "lang": "ar",
+   "variant": "auto",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": false,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": false,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": false,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "ar-np-001.golden.html",
+   "kind": "message",
+   "fixture": "ar-np-001",
+   "category": "NP",
+   "lang": "ar",
+   "variant": "golden",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": null,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "ar-np-001.nodir.html",
+   "kind": "message",
+   "fixture": "ar-np-001",
+   "category": "NP",
+   "lang": "ar",
+   "variant": "nodir",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "firefox": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "webkit": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    }
+   }
+  },
+  {
+   "file": "ar-num-001.auto.html",
+   "kind": "message",
+   "fixture": "ar-num-001",
+   "category": "NUM",
+   "lang": "ar",
+   "variant": "auto",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": false,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": false,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": false,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "ar-num-001.golden.html",
+   "kind": "message",
+   "fixture": "ar-num-001",
+   "category": "NUM",
+   "lang": "ar",
+   "variant": "golden",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": null,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "ar-num-001.nodir.html",
+   "kind": "message",
+   "fixture": "ar-num-001",
+   "category": "NUM",
+   "lang": "ar",
+   "variant": "nodir",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "firefox": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "webkit": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    }
+   }
+  },
+  {
+   "file": "ctl-ar-usd.html",
+   "kind": "control",
+   "lang": "ar",
+   "variant": "ctl-ar-usd",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": null,
+     "issues": [
+      {
+       "rule": "rtl/bidi-order",
+       "severity": "warning",
+       "mode": "source",
+       "text": "$220",
+       "visual": "220$"
+      }
+     ]
+    },
+    "firefox": {
+     "differsFromGolden": null,
+     "issues": [
+      {
+       "rule": "rtl/bidi-order",
+       "severity": "warning",
+       "mode": "source",
+       "text": "$220",
+       "visual": "220$"
+      }
+     ]
+    },
+    "webkit": {
+     "differsFromGolden": null,
+     "issues": [
+      {
+       "rule": "rtl/bidi-order",
+       "severity": "warning",
+       "mode": "source",
+       "text": "$220",
+       "visual": "220$"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "file": "ctl-he-cpp-noprefix.html",
+   "kind": "control",
+   "lang": "he",
+   "variant": "ctl-he-cpp-noprefix",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": null,
+     "issues": [
+      {
+       "rule": "rtl/bidi-order",
+       "severity": "warning",
+       "mode": "source",
+       "text": "C++",
+       "visual": "++C"
+      }
+     ]
+    },
+    "firefox": {
+     "differsFromGolden": null,
+     "issues": [
+      {
+       "rule": "rtl/bidi-order",
+       "severity": "warning",
+       "mode": "source",
+       "text": "C++",
+       "visual": "++C"
+      }
+     ]
+    },
+    "webkit": {
+     "differsFromGolden": null,
+     "issues": [
+      {
+       "rule": "rtl/bidi-order",
+       "severity": "warning",
+       "mode": "source",
+       "text": "C++",
+       "visual": "++C"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "file": "ctl-he-cpp-prefix.html",
+   "kind": "control",
+   "lang": "he",
+   "variant": "ctl-he-cpp-prefix",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": null,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "ctl-he-usd.html",
+   "kind": "control",
+   "lang": "he",
+   "variant": "ctl-he-usd",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": null,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "he-bd-001.auto.html",
+   "kind": "message",
+   "fixture": "he-bd-001",
+   "category": "BD",
+   "lang": "he",
+   "variant": "auto",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "firefox": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "webkit": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    }
+   }
+  },
+  {
+   "file": "he-bd-001.golden.html",
+   "kind": "message",
+   "fixture": "he-bd-001",
+   "category": "BD",
+   "lang": "he",
+   "variant": "golden",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": null,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "he-bd-001.nodir.html",
+   "kind": "message",
+   "fixture": "he-bd-001",
+   "category": "BD",
+   "lang": "he",
+   "variant": "nodir",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "firefox": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "webkit": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    }
+   }
+  },
+  {
+   "file": "he-iso-001.auto.html",
+   "kind": "message",
+   "fixture": "he-iso-001",
+   "category": "ISO",
+   "lang": "he",
+   "variant": "auto",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": true,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": true,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": true,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "he-iso-001.golden.html",
+   "kind": "message",
+   "fixture": "he-iso-001",
+   "category": "ISO",
+   "lang": "he",
+   "variant": "golden",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": null,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "he-iso-001.nodir.html",
+   "kind": "message",
+   "fixture": "he-iso-001",
+   "category": "ISO",
+   "lang": "he",
+   "variant": "nodir",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "firefox": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "webkit": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    }
+   }
+  },
+  {
+   "file": "he-list-001.auto.html",
+   "kind": "message",
+   "fixture": "he-list-001",
+   "category": "LIST",
+   "lang": "he",
+   "variant": "auto",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": false,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": false,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": false,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "he-list-001.golden.html",
+   "kind": "message",
+   "fixture": "he-list-001",
+   "category": "LIST",
+   "lang": "he",
+   "variant": "golden",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": null,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "he-list-001.nodir.html",
+   "kind": "message",
+   "fixture": "he-list-001",
+   "category": "LIST",
+   "lang": "he",
+   "variant": "nodir",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "firefox": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "webkit": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    }
+   }
+  },
+  {
+   "file": "he-np-001.auto.html",
+   "kind": "message",
+   "fixture": "he-np-001",
+   "category": "NP",
+   "lang": "he",
+   "variant": "auto",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": false,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": false,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": false,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "he-np-001.golden.html",
+   "kind": "message",
+   "fixture": "he-np-001",
+   "category": "NP",
+   "lang": "he",
+   "variant": "golden",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": null,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "he-np-001.nodir.html",
+   "kind": "message",
+   "fixture": "he-np-001",
+   "category": "NP",
+   "lang": "he",
+   "variant": "nodir",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "firefox": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "webkit": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    }
+   }
+  },
+  {
+   "file": "he-np-002.auto.html",
+   "kind": "message",
+   "fixture": "he-np-002",
+   "category": "NP",
+   "lang": "he",
+   "variant": "auto",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": false,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": false,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": false,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "he-np-002.golden.html",
+   "kind": "message",
+   "fixture": "he-np-002",
+   "category": "NP",
+   "lang": "he",
+   "variant": "golden",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": null,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "he-np-002.nodir.html",
+   "kind": "message",
+   "fixture": "he-np-002",
+   "category": "NP",
+   "lang": "he",
+   "variant": "nodir",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "firefox": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "webkit": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    }
+   }
+  },
+  {
+   "file": "he-num-001.auto.html",
+   "kind": "message",
+   "fixture": "he-num-001",
+   "category": "NUM",
+   "lang": "he",
+   "variant": "auto",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": false,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": false,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": false,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "he-num-001.golden.html",
+   "kind": "message",
+   "fixture": "he-num-001",
+   "category": "NUM",
+   "lang": "he",
+   "variant": "golden",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": null,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "he-num-001.nodir.html",
+   "kind": "message",
+   "fixture": "he-num-001",
+   "category": "NUM",
+   "lang": "he",
+   "variant": "nodir",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "firefox": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    },
+    "webkit": {
+     "differsFromGolden": true,
+     "issues": [
+      {
+       "rule": "rtl/missing-dir",
+       "severity": "error",
+       "mode": "source",
+       "text": ""
+      }
+     ]
+    }
+   }
+  },
+  {
+   "file": "shell-ar-tight.html",
+   "kind": "shell-rtl",
+   "lang": "ar",
+   "variant": "tight-fallback",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": null,
+     "issues": [
+      {
+       "rule": "rtl/clipped-marks",
+       "severity": "warning",
+       "mode": "source",
+       "text": "Python لغة برمجة مناسبة للمبتدئين، وتُستخدم كثيرًا في اختبار البرمجيات."
+      },
+      {
+       "rule": "rtl/font-fallback",
+       "severity": "warning",
+       "mode": "source",
+       "text": "Python لغة برمجة مناسبة للمبتدئين، وتُستخدم كثيرًا في اختبار البرمجيات."
+      }
+     ]
+    },
+    "firefox": {
+     "differsFromGolden": null,
+     "issues": [
+      {
+       "rule": "rtl/clipped-marks",
+       "severity": "warning",
+       "mode": "source",
+       "text": "Python لغة برمجة مناسبة للمبتدئين، وتُستخدم كثيرًا في اختبار البرمجيات."
+      }
+     ]
+    },
+    "webkit": {
+     "differsFromGolden": null,
+     "issues": [
+      {
+       "rule": "rtl/clipped-marks",
+       "severity": "warning",
+       "mode": "source",
+       "text": "Python لغة برمجة مناسبة للمبتدئين، وتُستخدم كثيرًا في اختبار البرمجيات."
+      }
+     ]
+    }
+   }
+  },
+  {
+   "file": "shell-en-logical.html",
+   "kind": "shell-en",
+   "variant": "logical",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": null,
+     "issues": []
+    }
+   }
+  },
+  {
+   "file": "shell-en-physical.html",
+   "kind": "shell-en",
+   "variant": "physical",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": null,
+     "issues": [
+      {
+       "rule": "rtl/not-mirrored",
+       "severity": "warning",
+       "mode": "pseudo-rtl",
+       "text": "Chats"
+      },
+      {
+       "rule": "rtl/not-mirrored",
+       "severity": "warning",
+       "mode": "pseudo-rtl",
+       "text": ""
+      },
+      {
+       "rule": "rtl/not-mirrored",
+       "severity": "warning",
+       "mode": "pseudo-rtl",
+       "text": "Settings"
+      },
+      {
+       "rule": "rtl/not-mirrored",
+       "severity": "warning",
+       "mode": "pseudo-rtl",
+       "text": "Language and region"
+      },
+      {
+       "rule": "rtl/icon-not-mirrored",
+       "severity": "warning",
+       "mode": "pseudo-rtl",
+       "text": "icon chevron left"
+      }
+     ]
+    },
+    "firefox": {
+     "differsFromGolden": null,
+     "issues": [
+      {
+       "rule": "rtl/not-mirrored",
+       "severity": "warning",
+       "mode": "pseudo-rtl",
+       "text": "Chats"
+      },
+      {
+       "rule": "rtl/not-mirrored",
+       "severity": "warning",
+       "mode": "pseudo-rtl",
+       "text": ""
+      },
+      {
+       "rule": "rtl/not-mirrored",
+       "severity": "warning",
+       "mode": "pseudo-rtl",
+       "text": "Settings"
+      },
+      {
+       "rule": "rtl/not-mirrored",
+       "severity": "warning",
+       "mode": "pseudo-rtl",
+       "text": "Language and region"
+      },
+      {
+       "rule": "rtl/icon-not-mirrored",
+       "severity": "warning",
+       "mode": "pseudo-rtl",
+       "text": "icon chevron left"
+      }
+     ]
+    },
+    "webkit": {
+     "differsFromGolden": null,
+     "issues": [
+      {
+       "rule": "rtl/not-mirrored",
+       "severity": "warning",
+       "mode": "pseudo-rtl",
+       "text": "Chats"
+      },
+      {
+       "rule": "rtl/not-mirrored",
+       "severity": "warning",
+       "mode": "pseudo-rtl",
+       "text": ""
+      },
+      {
+       "rule": "rtl/not-mirrored",
+       "severity": "warning",
+       "mode": "pseudo-rtl",
+       "text": "Settings"
+      },
+      {
+       "rule": "rtl/not-mirrored",
+       "severity": "warning",
+       "mode": "pseudo-rtl",
+       "text": "Language and region"
+      },
+      {
+       "rule": "rtl/icon-not-mirrored",
+       "severity": "warning",
+       "mode": "pseudo-rtl",
+       "text": "icon chevron left"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "file": "shell-he-tight.html",
+   "kind": "shell-rtl",
+   "lang": "he",
+   "variant": "tight-fallback",
+   "perBrowser": {
+    "chromium": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "firefox": {
+     "differsFromGolden": null,
+     "issues": []
+    },
+    "webkit": {
+     "differsFromGolden": null,
+     "issues": [
+      {
+       "rule": "rtl/clipped-marks",
+       "severity": "warning",
+       "mode": "source",
+       "text": "React היא ספרייה לבניית ממשקי משתמש, ומשתמשים בה בהרבה חברות."
+      }
+     ]
+    }
+   }
+  }
+ ]
+}
