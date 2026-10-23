@@ -16,12 +16,12 @@
 - id: librechat
   name: LibreChat
   mode: auto-chat
-  repo: https://github.com/danny-avila/LibreChat
+  repo: https://github.com/LibreChat-AI/LibreChat  # renamed from danny-avila/LibreChat
   notes: custom OpenAI-compatible endpoint via librechat.yaml; needs a MongoDB container
 - id: lobechat
   name: LobeChat
   mode: auto-chat
-  repo: https://github.com/lobehub/lobe-chat
+  repo: https://github.com/lobehub/lobehub  # renamed from lobehub/lobe-chat
 - id: nextchat
   name: NextChat
   mode: auto-chat
@@ -75,4 +75,4 @@
   name: OpenAI Codex CLI (terminal)
   mode: manual
   repo: https://github.com/openai/codex
-  notes: open source, so a PR is possible; issue openai/codex#31903 asks for an RTL fixture suite
+  notes: open source, so a PR is possible; openai/codex#31903 (a desktop-app bug report) lists an RTL regression fixture suite among its suggested fixes

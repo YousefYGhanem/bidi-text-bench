@@ -19,7 +19,7 @@ For details and acceptance criteria, see `docs/PLAN.md` §6. At the end of each 
   - a README stub with a WIP banner and an AI-use note
   - CONTRIBUTING.md and CITATION.cff
   - issue templates: new fixture, false positive, bug
-- [ ] 0.6 [C] Write docs/LANDSCAPE.md:
+- [x] 0.6 [C] Write docs/LANDSCAPE.md:
   - Try fitlocale hands-on against the seed fixtures (MIT; v0.4.3 on 21 Oct 2026; 22 rules). Map its rules to our taxonomy as overlaps and gaps. Relevant rules: rtl/bidi-order, rtl/missing-dir, rtl/font-fallback, rtl/clipped-marks, rtl/not-mirrored, rtl/icon-not-mirrored, overflow/*.
   - Cover Android pseudo-locales, rtlcss and existing RTL corpora.
   - Catalogue the open RTL issues in AI-tool repos, with links and status.
