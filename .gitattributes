@@ -1,0 +1,2 @@
+# LF everywhere, so files copied into the Linux Docker image match the repo byte for byte.
+* text=auto eol=lf

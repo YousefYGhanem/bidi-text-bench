@@ -1,0 +1,34 @@
+{
+  "name": "bidi-bench",
+  "version": "0.0.0",
+  "private": true,
+  "description": "RTL/bidi test suite: native-verified Arabic and Hebrew fixtures, a Playwright checker and a public audit of AI tools.",
+  "license": "Apache-2.0",
+  "author": "Yousef Ghanem",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "check": "npm run lint && npm run typecheck && npm test && npm run corpus:validate",
+    "lint": "biome check .",
+    "typecheck": "tsc",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "corpus:validate": "node scripts/todo.mjs corpus:validate 1.1 --skip",
+    "review": "node scripts/todo.mjs review 1.3",
+    "zoo": "node scripts/todo.mjs zoo 2.4",
+    "mock-llm": "node scripts/todo.mjs mock-llm 3.1",
+    "audit": "node scripts/todo.mjs audit 3.3",
+    "manual": "node scripts/todo.mjs manual 3.4",
+    "triage": "node scripts/todo.mjs triage 3.4",
+    "report": "node scripts/todo.mjs report 6.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.2",
+    "@playwright/test": "1.64.1",
+    "@types/node": "24.19.2",
+    "typescript": "7.0.2",
+    "vitest": "5.0.5"
+  }
+}

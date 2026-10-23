@@ -6,7 +6,7 @@ For details and acceptance criteria, see `docs/PLAN.md` §6. At the end of each 
 
 ## Phase 0 — Foundation (week 1)
 - [ ] 0.1 [Y] Install the prerequisites and the Playwright CLI skill, then run `gh auth login`. Open the repo in Claude Code and accept the trust prompt (see START_HERE.md).
-- [ ] 0.2 [C] Run `git init`. Scaffold package.json with the scripts listed in CLAUDE.md, strict TypeScript, Biome, Vitest and a Playwright config (chromium, firefox, webkit). Keep `.gitignore` and `.env.example`.
+- [x] 0.2 [C] Run `git init`. Scaffold package.json with the scripts listed in CLAUDE.md, strict TypeScript, Biome, Vitest and a Playwright config (chromium, firefox, webkit). Keep `.gitignore` and `.env.example`.
 - [ ] 0.3 [C] Write a Dockerfile:
   - Base it on `mcr.microsoft.com/playwright:v<same version as @playwright/test>-noble`.
   - Add `fonts-noto-core` and `fonts-noto-mono`; the official image ships no Arabic- or Hebrew-specific fonts.
