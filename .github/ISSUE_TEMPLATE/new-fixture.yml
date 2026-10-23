@@ -1,0 +1,67 @@
+name: New fixture
+description: Propose an Arabic or Hebrew mixed-direction test case
+labels: [fixture]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Read [docs/FIXTURE_SPEC.md](../blob/main/docs/FIXTURE_SPEC.md) first. Type the text in **logical order** (the way you type it), and keep the content neutral: no politics, religion, conflict, real people or private data.
+  - type: dropdown
+    id: lang
+    attributes:
+      label: Language
+      options: [ar, he]
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category (FIXTURE_SPEC §2)
+      options:
+        - BD (base direction)
+        - AL (alignment)
+        - ISO (isolation)
+        - NP (neutrals and punctuation)
+        - NUM (numbers and formats)
+        - CODE (code)
+        - LIST (lists and quotes)
+        - TBL (tables)
+        - INP (input)
+        - STRM (streaming)
+        - FONT (glyphs and shaping)
+        - DIAC (diacritics)
+        - TRUNC (truncation)
+        - MIR (UI mirroring)
+        - COPY (copy and selection)
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: text
+    attributes:
+      label: Text
+      description: Paste the text exactly as typed. Mention any Markdown it relies on (inline code, lists, tables).
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What a native reader must see
+      description: In English. Describe the reading order first, e.g. "the path is one left-to-right unit; the period is at the far left".
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: "original, or the URL of the issue or page it is adapted from"
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Checks
+      options:
+        - label: The text is in logical order and contains no invisible bidi controls, unless the fixture is about them.
+          required: true
+        - label: The content is neutral and has no real people or private data.
+          required: true

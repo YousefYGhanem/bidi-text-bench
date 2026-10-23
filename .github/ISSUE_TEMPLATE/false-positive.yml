@@ -1,0 +1,46 @@
+name: False positive
+description: The checker flagged something that renders correctly
+labels: [false positive]
+body:
+  - type: input
+    id: fixture
+    attributes:
+      label: Fixture ID
+      placeholder: ar-iso-001
+    validations:
+      required: true
+  - type: input
+    id: rule
+    attributes:
+      label: Rule
+      placeholder: ISO
+    validations:
+      required: true
+  - type: input
+    id: target
+    attributes:
+      label: Target and version
+      placeholder: open-webui v0.0.0
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and version
+      placeholder: chromium 156
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why the result is wrong
+      description: What the page actually shows, and why that is correct.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: The results.jsonl line and a screenshot of the rendered fixture.
+    validations:
+      required: true

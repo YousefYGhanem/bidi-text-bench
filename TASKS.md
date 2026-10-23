@@ -13,7 +13,7 @@ For details and acceptance criteria, see `docs/PLAN.md` §6. At the end of each 
   - The build must assert `fc-list :lang=ar` and `:lang=he`.
   - Add `npm run docker:test`.
 - [x] 0.4 [C] Add GitHub Actions that run `npm run check` and the Playwright tests in the Docker image.
-- [ ] 0.5 [C] Add these files:
+- [x] 0.5 [C] Add these files:
   - LICENSE (Apache-2.0)
   - LICENSE-DATA (CC BY 4.0, for corpus/ and audit/)
   - a README stub with a WIP banner and an AI-use note

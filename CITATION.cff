@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: If you use this software or its corpus, please cite it as below.
+title: bidi-bench
+abstract: >-
+  An open-source RTL/bidi test suite: native-verified Arabic and Hebrew fixtures, a Playwright
+  checker that flags bidi failures in real UIs, and a public audit of AI tools.
+type: software
+authors:
+  - given-names: Yousef
+    family-names: Ghanem
+license: Apache-2.0
+version: 0.0.0
+keywords:
+  - bidi
+  - rtl
+  - arabic
+  - hebrew
+  - unicode
+  - i18n
+  - playwright
+# repository-code is added once the GitHub repo exists (task 0.9).
