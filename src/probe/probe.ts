@@ -110,24 +110,45 @@ export function probeInPage(root: Element, exclude: string[]): ProbeResult {
     const code = el.closest('code, pre');
     return code && (root.contains(code) || code === root) ? getComputedStyle(code).direction : null;
   };
-  // Tofu check: a grapheme drawn exactly like U+E000 (private use; no font covers it) is the
-  // missing-glyph box. Canvas text uses the same font fallback as the page.
-  const canvas = document.createElement('canvas');
-  canvas.width = 64;
-  canvas.height = 64;
-  const ctx = canvas.getContext('2d', { willReadFrequently: true });
-  const pixels = (font: string, s: string) => {
+  // Tofu check, method chosen by what the engine does (measured in Chromium, WebKit, Firefox):
+  // - one notdef glyph for every missing character (U+E000 and U+E001 draw alike, as in Chromium
+  //   and WebKit): missing means pixel-identical to U+E000 (private use; no font covers it);
+  // - a box with the code point in hex (Firefox): missing means the same advance and ink box as a
+  //   private-use reference with as many hex digits. (WebKit reports no ink box, so metrics are
+  //   only used here.) Canvas text uses the same font fallback as the page.
+  const ctx = document.createElement('canvas').getContext('2d', { willReadFrequently: true });
+  const draw = (font: string, s: string) => {
     if (!ctx) return '';
-    ctx.clearRect(0, 0, 64, 64);
+    ctx.canvas.width = 96;
+    ctx.canvas.height = 96;
     ctx.font = font;
-    ctx.fillText(s, 8, 44);
-    return ctx.getImageData(0, 0, 64, 64).data.join(',');
+    ctx.fillText(s, 8, 64);
+    return ctx.getImageData(0, 0, 96, 96).data.join(',');
   };
+  const metrics = (font: string, s: string) => {
+    if (!ctx) return '';
+    ctx.font = font;
+    const m = ctx.measureText(s);
+    const box = [m.width, m.actualBoundingBoxLeft, m.actualBoundingBoxRight];
+    return [...box, m.actualBoundingBoxAscent, m.actualBoundingBoxDescent]
+      .map((v) => v.toFixed(2))
+      .join();
+  };
+  const REFERENCES = ['\uE000', '\u{F0000}', '\u{100000}'];
+  const singleNotdef = new Map<string, boolean>();
   const notdefCache = new Map<string, boolean>();
   const isNotdef = (font: string, s: string) => {
     if (/^\s+$/u.test(s) || /\p{Extended_Pictographic}/u.test(s)) return false;
+    if (!singleNotdef.has(font))
+      singleNotdef.set(font, draw(font, '\uE000') === draw(font, '\uE001'));
     const key = `${font}|${s}`;
-    if (!notdefCache.has(key)) notdefCache.set(key, pixels(font, s) === pixels(font, '\uE000'));
+    if (!notdefCache.has(key))
+      notdefCache.set(
+        key,
+        singleNotdef.get(font)
+          ? draw(font, s) === draw(font, '\uE000')
+          : REFERENCES.some((ref) => metrics(font, ref) === metrics(font, s)),
+      );
     return notdefCache.get(key) as boolean;
   };
 
