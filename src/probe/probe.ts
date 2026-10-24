@@ -37,6 +37,15 @@ export interface ProbeBlock {
   box: { left: number; right: number };
   /** Inside a blockquote: the side its quote bar (border) is drawn on, or null. */
   quoteBar: 'left' | 'right' | null;
+  /**
+   * Nearest structural container inside the root (the block itself counts): li, td, th, pre or
+   * blockquote. Rules use this, not `tag`, so wrappers such as li > p or td > div don't hide it.
+   */
+  container: 'li' | 'td' | 'th' | 'pre' | 'blockquote' | null;
+  /** For td/th containers: table index in the root, row index in the table, column index. */
+  cell: { table: number; row: number; col: number } | null;
+  /** For li containers: the side of the list's indent (larger horizontal padding), or null. */
+  listIndent: 'left' | 'right' | null;
   lines: ProbeLine[];
 }
 
@@ -56,13 +65,17 @@ export interface ProbeResult {
     box: { left: number; right: number; top: number; bottom: number };
     /** Content is wider or taller than the root's box. */
     clipped: boolean;
+    /** Content is wider than the root's box and overflow-x hides it (truncation, TRUNC). */
+    clippedX: boolean;
     /** Inputs and textareas: no per-character boxes, only direction and alignment (INP). */
     controls: { tag: string; dir: string | null; direction: string; textAlign: string }[];
   };
 }
 
 /** Runs inside the page, so it must not reference anything outside its own body. */
-export function probeInPage(root: Element, exclude: string[]): ProbeResult {
+export async function probeInPage(root: Element, exclude: string[]): Promise<ProbeResult> {
+  // Web fonts change both glyph boxes and the tofu check, so measure only once they are loaded.
+  await document.fonts.ready;
   const ROLES = 'p, li, pre, code, a, td, textarea, [contenteditable=""], [contenteditable="true"]';
   // checkVisibility() is false for display: contents (slots included): it has no box of its own.
   const skip = (el: Element) =>
@@ -138,7 +151,8 @@ export function probeInPage(root: Element, exclude: string[]): ProbeResult {
   const singleNotdef = new Map<string, boolean>();
   const notdefCache = new Map<string, boolean>();
   const isNotdef = (font: string, s: string) => {
-    if (/^\s+$/u.test(s) || /\p{Extended_Pictographic}/u.test(s)) return false;
+    // Emoji drawn in colour are skipped; text-style symbols such as © ® ™ are still checked.
+    if (/^\s+$/u.test(s) || /\p{Emoji_Presentation}|️/u.test(s)) return false;
     if (!singleNotdef.has(font))
       singleNotdef.set(font, draw(font, '\uE000') === draw(font, '\uE001'));
     const key = `${font}|${s}`;
@@ -188,6 +202,30 @@ export function probeInPage(root: Element, exclude: string[]): ProbeResult {
     text += value;
   }
 
+  const inRoot = (el: Element | null) => (el && (el === root || root.contains(el)) ? el : null);
+  const sideOf = (left: string, right: string): 'left' | 'right' | null => {
+    const [l, r] = [Number.parseFloat(left), Number.parseFloat(right)];
+    return l > r ? 'left' : r > l ? 'right' : null;
+  };
+  const tables = [...root.querySelectorAll('table')];
+  const structure = (el: Element) => {
+    const c = inRoot(el.closest('li, td, th, pre, blockquote'));
+    const container = (c?.tagName.toLowerCase() ?? null) as ProbeBlock['container'];
+    const row = c?.closest('tr');
+    const table = c?.closest('table');
+    const cell =
+      (container === 'td' || container === 'th') && row && table
+        ? {
+            table: tables.indexOf(table),
+            row: [...table.rows].indexOf(row as HTMLTableRowElement),
+            col: [...(row as HTMLTableRowElement).cells].indexOf(c as HTMLTableCellElement),
+          }
+        : null;
+    const list = container === 'li' ? c?.closest('ol, ul') : null;
+    const ls = list ? getComputedStyle(list) : null;
+    return { container, cell, listIndent: ls ? sideOf(ls.paddingLeft, ls.paddingRight) : null };
+  };
+
   const blocks: ProbeBlock[] = blockEls.map((el, b) => {
     const style = getComputedStyle(el);
     // Lines: graphemes whose vertical centres are within half a glyph height of each other.
@@ -215,6 +253,7 @@ export function probeInPage(root: Element, exclude: string[]): ProbeResult {
         ];
         return l > r ? 'left' : r > l ? 'right' : null;
       })(),
+      ...structure(el),
       lines: lines.map((l) => {
         const gs = l.members.map((i) => graphemes[i] as ProbeGrapheme);
         return {
@@ -263,6 +302,7 @@ export function probeInPage(root: Element, exclude: string[]): ProbeResult {
       textOverflow: rootStyle.textOverflow,
       box: { left: rootBox.left, right: rootBox.right, top: rootBox.top, bottom: rootBox.bottom },
       clipped: root.scrollWidth > root.clientWidth + 1 || root.scrollHeight > root.clientHeight + 1,
+      clippedX: root.scrollWidth > root.clientWidth + 1 && rootStyle.overflowX !== 'visible',
       controls,
     },
   };

@@ -78,13 +78,13 @@ export function expectedLines(
 
   return probe.blocks.flatMap((block, b) => {
     const ranges = block.lines.map((l) => l.range);
-    const base = block.tag === 'pre' ? 'ltr' : fx.base_direction;
+    const base = block.container === 'pre' ? 'ltr' : fx.base_direction;
     const run = (dir: 'ltr' | 'rtl') =>
       expectedOrder(probe.text, dir, { isolate, ltrIsolate, lines: ranges }).lines.map((l) =>
         toGraphemeOrder(l, of).filter((g) => probe.graphemes[g]?.block === b),
       );
     const expected = run(base);
-    const flipped = block.tag === 'pre' ? expected : run(opposite);
+    const flipped = block.container === 'pre' ? expected : run(opposite);
     return block.lines.map((l, i) => ({
       block: b,
       line: i,

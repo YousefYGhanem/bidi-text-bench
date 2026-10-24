@@ -51,7 +51,7 @@ Each rule returns `pass`, `fail` or `na`, with evidence. There is one rule per c
 
 | Rule | Check | Main false-positive risk |
 |---|---|---|
-| BD | The resolved paragraph direction (the computed direction plus the side where the first logical grapheme lands) equals `base_direction` | Apps that use `unicode-bidi: plaintext` per line |
+| BD | The block's computed direction equals `base_direction`, and no line matches the engine's order for the opposite base direction | Apps that use `unicode-bidi: plaintext` per line |
 | AL | RTL blocks align to the inline end (right); `text-align` resolves to start or right | Messages centred by design (the adapter declares `align: center`) |
 | ISO | Each `isolate_spans` item is contiguous in visual order and internally LTR, and the neutrals at its edges stay inside it | Spans split across lines (skip if the span wraps) |
 | NP | Neutral characters (punctuation, brackets) sit where the expected order puts them | Font fallback changing widths (positions are compared relatively, not absolutely) |
@@ -75,6 +75,31 @@ Each rule returns `pass`, `fail` or `na`, with evidence. There is one rule per c
 - **TRUNC** applies only when the root is clipped horizontally. The cut must be on the inline-end side: in RTL, hidden graphemes lie past the left edge and none past the right edge (mirrored for LTR). This is defined visually, because an embedded LTR word in an RTL title legitimately loses its logical start.
 - **FONT** (notdef): the method depends on how the engine draws a missing glyph, which the probe tests per font. If U+E000 and U+E001 (private use; no font covers them) draw identically, as in Chromium and WebKit, a grapheme counts as missing when it is pixel-identical to U+E000. Otherwise (Firefox draws a box with the code point in hex), it counts as missing when its advance and ink box equal a private-use reference with as many hex digits. Metrics alone gave false positives on Windows code fonts, and WebKit reports no ink box. Emoji and whitespace are skipped. A system "last resort" font that draws different boxes per block would still hide missing glyphs (false negatives).
 - A rule with nothing to check returns `na`. On the golden page, BD, AL and FONT evaluate all 80 fixtures, NP 74, NUM 19, CODE 19, ISO 18, LIST 6 and TBL 6. TRUNC needs a truncated title surface.
+
+**Rule review (task 2.6, 2026-10-24).** An independent rule-reviewer agent reviewed each rule. Every claimed miss or false alarm was first added to the zoo and run *before* any fix, so only confirmed defects were changed.
+- **Confirmed and fixed:**
+  - AL stopped at the first centred block (AL-3).
+  - AL failed correct `text-align: -webkit-right` (OK-AL-webkit). Prefixed values are now normalised.
+  - CODE, LIST and TBL checked the probe block's own tag, so wrappers escaped: highlighter `pre > code{display:block}` (CODE-3), loose lists `li > p` (LIST-4), and cells `td > div` (TBL-2). The probe now records each block's **container** (`li`, `td`/`th` with table, row and column, `pre`, `blockquote`), and the rules and the expected order use it.
+  - LIST did not check the indent side (LIST-3). The probe now records the list's padding side.
+- **Also fixed, from code reading:**
+  - NUM compared an empty slice when a number sits at a line edge.
+  - NUM ignored author-span neighbours inconsistently with NP.
+  - NUM was missing the Arabic percent sign ٪.
+  - ISO and NUM reported pass while silently skipping spans or numbers; the skips are now in the evidence, and all-skipped returns `na`.
+  - TRUNC now needs *horizontal* clipping (`clippedX`).
+  - TBL groups cells by table row instead of y, and a table with no multi-cell row is `na`.
+  - The probe waits for `document.fonts.ready`, and the tofu check skips only real emoji, so © ® ™ are checked.
+- **New pages that were already caught** (kept as regression tests): ISO on a mention and on `--help`; NP with punctuation trapped in an LTR span; NUM with date parts isolated separately; controls for vertical clipping and 160 px Arabic.
+- **Known limits, not fixed in v0.** Each is a documented false negative unless marked.
+  - BD fires only when a line matches the opposite direction's order. Other wrong layouts, such as `bidi-override` on an RTL paragraph, are left to NP and NUM.
+  - Renderer-injected LRM/RLM are part of the rendered text, so the expected order agrees with them. Comparing the rendered text with the fixture text belongs to COPY (manual).
+  - Bracket mirroring (NP) is manual.
+  - TRUNC sees only CSS overflow, not titles truncated in JavaScript with a literal "…", and it does not check that an ellipsis is drawn.
+  - Tables and lists drawn with `div`s or custom bullets are `na`.
+  - FONT checks missing glyphs only, not joining or clipped marks (DIAC was merged into FONT, so this is v1.5 work).
+  - Numbers inside author spans, such as phone numbers, are not checked.
+  - Possible false alarm: legitimately RTL content inside `code` (`<code dir="rtl">`) fails CODE. None exists in the corpus; triage decides.
 
 Result record:
 ```json

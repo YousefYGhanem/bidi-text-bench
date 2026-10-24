@@ -149,11 +149,103 @@ export const BUGS: Bug[] = [
     rule: 'FONT',
     fixture: 'he-font-001',
     why: 'a character no font covers (U+E001) is drawn as tofu',
-    html: (h) => h.replace('</p>', ' </p>'),
+    html: (h) => h.replace('</p>', ' \uE001</p>'),
+  },
+  // Added in task 2.6 from the rule-reviewer findings.
+  {
+    id: 'AL-3',
+    rule: 'AL',
+    fixture: 'ar-al-002',
+    why: 'centred heading, then a left-aligned paragraph',
+    css: '.fx h2 { text-align: center; } .fx p { text-align: left; }',
+  },
+  {
+    id: 'ISO-3',
+    rule: 'ISO',
+    fixture: 'he-iso-004',
+    why: 'mention not isolated: the @ jumps',
+    html: (h) => h.replace('<bdi>@noam-dev</bdi>', '@noam-dev'),
+  },
+  {
+    id: 'ISO-4',
+    rule: 'ISO',
+    fixture: 'he-iso-005',
+    why: 'inline code with leading dashes not isolated',
+    css: unisolatedCode,
+  },
+  {
+    id: 'NP-2',
+    rule: 'NP',
+    fixture: 'he-np-001',
+    why: 'the question mark is trapped inside an LTR span around the English word',
+    html: (h) => h.replace('Windows?', '<span dir="ltr">Windows?</span>'),
+  },
+  {
+    id: 'NP-3',
+    rule: 'NP',
+    fixture: 'ar-np-001',
+    why: 'the final period is trapped inside an LTR span around the email',
+    html: (h) => h.replace('lina@example.com.', '<span dir="ltr">lina@example.com.</span>'),
+  },
+  {
+    id: 'NUM-3',
+    rule: 'NUM',
+    fixture: 'he-num-001',
+    why: 'date parts isolated one by one, so they run right to left',
+    html: (h) => h.replace('31.12.2026', '<bdi>31</bdi>.<bdi>12</bdi>.<bdi>2026</bdi>'),
+  },
+  {
+    id: 'CODE-3',
+    rule: 'CODE',
+    fixture: 'ar-code-001',
+    why: 'highlighter-style block (code display:block) right-aligned inside an RTL pre',
+    css: '.fx pre { direction: rtl; text-align: right; } .fx pre code { display: block; }',
+  },
+  {
+    id: 'LIST-3',
+    rule: 'LIST',
+    fixture: 'ar-list-001',
+    why: 'list indent on the left (physical padding) in an RTL list',
+    css: '.fx ol { padding-inline-start: 0; padding-left: 2em; }',
+  },
+  {
+    id: 'LIST-4',
+    rule: 'LIST',
+    fixture: 'ar-list-001',
+    why: 'loose list: each item is a paragraph inside the li, laid out LTR',
+    html: (h) => h.replace(/<li>(.*?)<\/li>/g, '<li><p dir="ltr">$1</p></li>'),
+  },
+  {
+    id: 'TBL-2',
+    rule: 'TBL',
+    fixture: 'ar-tbl-001',
+    why: 'cells wrap their text in a div, table keeps LTR column order',
+    html: (h) =>
+      h
+        .replace('<table>', '<table dir="ltr">')
+        .replace(/<(td|th)>(.*?)<\/(td|th)>/g, '<$1><div>$2</div></$3>'),
   },
 ];
 
 export const CONTROLS: ZooPage[] = [
   { id: 'OK-TRUNC-he', fixture: 'he-trunc-001', why: 'RTL title truncated correctly', css: title },
   { id: 'OK-TRUNC-ar', fixture: 'ar-trunc-001', why: 'RTL title truncated correctly', css: title },
+  {
+    id: 'OK-CLIP-code',
+    fixture: 'ar-code-001',
+    why: 'message clipped vertically (max-height) with a wide code line: not a truncation',
+    css: '.fx { max-height: 4.5em; overflow: hidden; } .fx pre { white-space: pre; }',
+  },
+  {
+    id: 'OK-AL-webkit',
+    fixture: 'he-al-001',
+    why: 'text-align: -webkit-right is right-aligned',
+    css: '.fx { text-align: -webkit-right; }',
+  },
+  {
+    id: 'OK-FONT-large',
+    fixture: 'ar-font-001',
+    why: 'very large Arabic text is drawn, not tofu',
+    css: '.fx { font-size: 160px; }',
+  },
 ];

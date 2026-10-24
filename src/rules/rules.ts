@@ -74,16 +74,18 @@ const lineFail = (c: Ctx, l: LinePair, detail: string, diffAt: number[]): Outcom
 /** The side a block's text is aligned to, from its computed text-align and direction. */
 const alignedSide = (b: { textAlign: string; direction: string }) => {
   const rtl = b.direction === 'rtl';
-  if (b.textAlign === 'start' || b.textAlign === 'justify') return rtl ? 'right' : 'left';
-  if (b.textAlign === 'end') return rtl ? 'left' : 'right';
-  return b.textAlign; // left, right, center
+  // Chromium keeps legacy -webkit-right/-webkit-left/-webkit-center as computed values.
+  const align = b.textAlign.replace(/^-(webkit|moz)-/, '');
+  if (align === 'start' || align === 'justify') return rtl ? 'right' : 'left';
+  if (align === 'end') return rtl ? 'left' : 'right';
+  return align; // left, right, center
 };
 const textBlocks = (c: Ctx) =>
   c.probe.blocks
     .map((b, i) => ({ b, i }))
     .filter(
       ({ b, i }) =>
-        b.tag !== 'pre' && c.probe.graphemes.some((g) => g.block === i && !g.codeDirection),
+        b.container !== 'pre' && c.probe.graphemes.some((g) => g.block === i && !g.codeDirection),
     );
 /** Neighbours of grapheme g in an order, as [left, right] (undefined at the edges). */
 const neighbours = (order: number[], g: number) => {
@@ -123,9 +125,11 @@ const check: Record<RuleId, (c: Ctx) => Outcome> = {
     const want = c.fx.base_direction === 'rtl' ? 'right' : 'left';
     const blocks = textBlocks(c);
     if (!blocks.length) return na('no text blocks');
-    for (const { b, i } of blocks) {
+    // Centred blocks (by design) are skipped, not decisive: a later block can still be wrong.
+    const judged = blocks.filter(({ b }) => alignedSide(b) !== 'center');
+    if (!judged.length) return na('every block is centred by design');
+    for (const { b, i } of judged) {
       const side = alignedSide(b);
-      if (side === 'center') return na(`block ${i} is centred by design`);
       if (side !== want)
         return {
           status: 'fail',
@@ -144,14 +148,21 @@ const check: Record<RuleId, (c: Ctx) => Outcome> = {
     );
     if (!spans.length) return na('no isolate spans');
     let checked = 0;
+    const skipped: string[] = [];
     for (const span of spans) {
       const at = c.probe.text.indexOf(span);
-      if (at === -1) continue;
+      if (at === -1) {
+        skipped.push(`"${span}" not in the rendered text`);
+        continue;
+      }
       const members = c.probe.graphemes.flatMap((g, i) =>
         g.start >= at && g.end <= at + span.length ? [i] : [],
       );
       const line = c.lines.find((l) => members.every((m) => l.actual.includes(m)));
-      if (!line || !members.length) continue; // wraps across lines
+      if (!line || !members.length) {
+        skipped.push(`"${span}" wraps across lines`);
+        continue;
+      }
       checked++;
       const pos = members.map((m) => line.actual.indexOf(m));
       const contiguous = Math.max(...pos) - Math.min(...pos) === members.length - 1;
@@ -159,7 +170,8 @@ const check: Record<RuleId, (c: Ctx) => Outcome> = {
       if (!contiguous || !ascending)
         return lineFail(c, line, `span "${span}" is not one left-to-right unit`, members);
     }
-    return checked ? pass(`${checked} span(s) isolated`) : na('spans missing or wrapped');
+    const note = skipped.length ? `; skipped ${skipped.join(', ')}` : '';
+    return checked ? pass(`${checked} span(s) isolated${note}`) : na(`nothing to check${note}`);
   },
 
   NP: (c) => {
@@ -180,7 +192,7 @@ const check: Record<RuleId, (c: Ctx) => Outcome> = {
   },
 
   NUM: (c) => {
-    const groups = [...c.probe.text.matchAll(/[+$€£₪]?\p{Nd}(?:[\p{Nd}.,:/\-٫٬]*\p{Nd})?%?/gu)]
+    const groups = [...c.probe.text.matchAll(/[+$€£₪]?\p{Nd}(?:[\p{Nd}.,:/\-٫٬]*\p{Nd})?[%٪]?/gu)]
       .map((m) =>
         c.probe.graphemes.flatMap((g, i) =>
           g.start >= (m.index ?? 0) && g.end <= (m.index ?? 0) + m[0].length ? [i] : [],
@@ -188,17 +200,26 @@ const check: Record<RuleId, (c: Ctx) => Outcome> = {
       )
       .filter((gs) => gs.length > 1 && !gs.some((g) => c.author.has(g)));
     if (!groups.length) return na('no multi-character numbers');
+    let checked = 0;
     for (const gs of groups) {
       const l = c.lines.find((x) => gs.every((g) => x.actual.includes(g)));
       if (!l) continue; // wraps across lines
+      checked++;
+      // The number plus one neighbour on each side (none at a line edge).
       const slice = (order: number[]) => {
         const pos = gs.map((g) => order.indexOf(g));
-        return order.slice(Math.min(...pos) - 1, Math.max(...pos) + 2);
+        return order.slice(Math.max(0, Math.min(...pos) - 1), Math.max(...pos) + 2);
       };
-      if (!same(slice(l.actual), slice(l.expected)))
-        return lineFail(c, l, 'a number is reordered or split', gs);
+      const [a, e] = [slice(l.actual), slice(l.expected)];
+      const wild = (x: number | undefined) => x !== undefined && c.author.has(x);
+      const ok = a.length === e.length && a.every((x, k) => x === e[k] || wild(x) || wild(e[k]));
+      if (!ok) return lineFail(c, l, 'a number is reordered or split', gs);
     }
-    return pass(`${groups.length} number(s) intact`);
+    return checked
+      ? pass(
+          `${checked} number(s) intact${checked < groups.length ? `; ${groups.length - checked} wrap across lines` : ''}`,
+        )
+      : na('every number wraps across lines');
   },
 
   CODE: (c) => {
@@ -211,7 +232,7 @@ const check: Record<RuleId, (c: Ctx) => Outcome> = {
         evidence: { detail: `code "${rtl.text}…" resolves to ${rtl.codeDirection}` },
       };
     for (const [i, b] of c.probe.blocks.entries()) {
-      if (b.tag !== 'pre') continue;
+      if (b.container !== 'pre') continue; // includes pre > code { display: block } and line spans
       if (alignedSide(b) === 'right')
         return {
           status: 'fail',
@@ -227,45 +248,40 @@ const check: Record<RuleId, (c: Ctx) => Outcome> = {
   LIST: (c) => {
     const items = c.probe.blocks
       .map((b, i) => ({ b, i }))
-      .filter(({ b }) => b.tag === 'li' || b.quoteBar !== null);
+      .filter(({ b }) => b.container === 'li' || b.quoteBar !== null);
     if (!items.length) return na('no list items or quotes');
     const want = c.fx.base_direction === 'rtl' ? 'right' : 'left';
-    for (const { b, i } of items)
+    const fail = (i: number, b: ProbeResult['blocks'][number], detail: string): Outcome => ({
+      status: 'fail',
+      evidence: { detail: `block ${i}: ${detail}`, styles: styles(b) },
+    });
+    for (const { b, i } of items) {
       if (b.quoteBar !== null && b.quoteBar !== want)
-        return {
-          status: 'fail',
-          evidence: {
-            detail: `quote bar of block ${i} is on the ${b.quoteBar}`,
-            styles: styles(b),
-          },
-        };
-      else if (b.direction !== c.fx.base_direction || alignedSide(b) !== want)
-        return {
-          status: 'fail',
-          evidence: {
-            detail: `list item ${i} is ${b.direction}, aligned ${alignedSide(b)}`,
-            styles: styles(b),
-          },
-        };
+        return fail(i, b, `quote bar on the ${b.quoteBar}`);
+      if (b.listIndent !== null && b.listIndent !== want)
+        return fail(i, b, `list indent on the ${b.listIndent}`);
+      if (b.direction !== c.fx.base_direction) return fail(i, b, `item is ${b.direction}`);
+      const side = alignedSide(b);
+      if (side !== 'center' && side !== want) return fail(i, b, `item is aligned ${side}`);
+    }
     return pass(`${items.length} item(s) ${c.fx.base_direction}`);
   },
 
   TBL: (c) => {
-    const cells = c.probe.blocks
-      .map((b, i) => ({
-        b,
-        i,
-        y: Math.round(c.probe.graphemes.find((g) => g.block === i)?.y ?? Number.NaN),
-      }))
-      .filter(({ b, y }) => (b.tag === 'td' || b.tag === 'th') && !Number.isNaN(y));
-    if (cells.length < 2) return na('no table');
-    const rows = new Map<number, typeof cells>();
-    for (const cell of cells) {
-      const key = [...rows.keys()].find((k) => Math.abs(k - cell.y) < 8) ?? cell.y;
-      rows.set(key, [...(rows.get(key) ?? []), cell]);
+    // Cells grouped by their table row (not by y, which wrapping and vertical-align move), one
+    // block per column (a cell can hold several blocks), in logical column order.
+    const rows = new Map<string, Map<number, number>>();
+    for (const b of c.probe.blocks) {
+      if (!b.cell) continue;
+      const key = `${b.cell.table}:${b.cell.row}`;
+      const row = rows.get(key) ?? new Map<number, number>();
+      if (!row.has(b.cell.col)) row.set(b.cell.col, (b.box.left + b.box.right) / 2);
+      rows.set(key, row);
     }
-    for (const row of rows.values()) {
-      const xs = row.map(({ b }) => (b.box.left + b.box.right) / 2);
+    const multi = [...rows.values()].filter((r) => r.size > 1);
+    if (!multi.length) return na('no table row with two or more cells');
+    for (const row of multi) {
+      const xs = [...row.entries()].sort(([a], [b]) => a - b).map(([, x]) => x);
       const ok = xs.every(
         (x, k) =>
           k === 0 ||
@@ -279,12 +295,12 @@ const check: Record<RuleId, (c: Ctx) => Outcome> = {
           },
         };
     }
-    return pass(`${rows.size} row(s) mirrored correctly`);
+    return pass(`${multi.length} row(s) mirrored correctly`);
   },
 
   TRUNC: (c) => {
-    const { clipped, box } = c.probe.context;
-    if (!clipped) return na('not truncated');
+    const { clippedX, box } = c.probe.context;
+    if (!clippedX) return na('not truncated horizontally');
     // Cut at the inline end: in RTL, everything hidden is past the left edge and nothing is cut on
     // the right (and the mirror image in LTR). Visual, not logical: an embedded LTR word in an RTL
     // title legitimately loses its logical start when the line is cut on the left.
