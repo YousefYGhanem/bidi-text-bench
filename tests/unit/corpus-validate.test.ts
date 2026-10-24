@@ -5,7 +5,6 @@ import {
   type Fixture,
   fixtureHash,
   isStale,
-  openQuestions,
   validateFixtures,
 } from '../../src/corpus/validate.ts';
 
@@ -97,8 +96,8 @@ describe('validateFixtures', () => {
   });
 });
 
-describe('isStale and openQuestions', () => {
-  it('flags verified fixtures whose content changed, and verified ones that still ask NEEDS-YOUSEF', () => {
+describe('isStale and open questions', () => {
+  it('flags verified fixtures whose content changed, and rejects verified ones that still ask NEEDS-YOUSEF', () => {
     const fx = base();
     const verified = {
       ...fx,
@@ -108,10 +107,15 @@ describe('isStale and openQuestions', () => {
     expect(isStale(verified)).toBe(false);
     expect(isStale({ ...verified, text: `${fx.text} ` })).toBe(true);
     expect(isStale(fx)).toBe(false);
-    const asking = { ...verified, expected_notes: 'NEEDS-YOUSEF: ok?' };
-    expect(
-      openQuestions([verified, asking, { ...fx, expected_notes: 'NEEDS-YOUSEF: draft' }]),
-    ).toEqual([asking]);
+    const notes = 'NEEDS-YOUSEF: ok?';
+    const asking = { ...fx, expected_notes: notes };
+    const signed = {
+      ...asking,
+      status: 'verified' as const,
+      verification: { ...verified.verification, hash: fixtureHash(asking) },
+    };
+    expect(check([signed]).join()).toMatch(/must not still ask NEEDS-YOUSEF/);
+    expect(check([asking])).toEqual([]); // drafts may ask
   });
 });
 

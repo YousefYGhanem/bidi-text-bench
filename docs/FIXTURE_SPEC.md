@@ -105,7 +105,7 @@ The validator (`npm run corpus:validate`) enforces:
    The tool changes only the `status` and `verification` lines, and only for drafts that pass the validator. `by` comes from `git config user.name`. Every decision and its note is appended to `corpus/review-log.jsonl`, which is committed as the audit trail.
 3. You commit the verifications and the log yourself, e.g. `git commit -m "verify: ar ISO 001–012"`. Leave out the AI co-author trailer: this commit is your signature.
 4. **Changing a verified fixture.** Edit the YAML, for example to answer a `NEEDS-YOUSEF` question in `expected_notes`. Its hash then no longer matches, so `corpus:validate` and CI fail until you re-verify it. `npm run review` lists it again, marked **RE-VERIFY**. Approving it writes a fresh `verification`; nothing else changes. Commit the edit and the re-verification together.
-5. **Open questions.** A verified fixture should not still ask `NEEDS-YOUSEF`. For now `corpus:validate` prints a warning listing them (Gate G1 cleanup). Once they are answered, the warning becomes an error.
+5. **Open questions.** A verified fixture must not still ask `NEEDS-YOUSEF`; `corpus:validate` fails if one does. Answer the question in `expected_notes`, then re-verify.
 
 ## 6. Coverage targets
 | Release | Total | Per auto category × language | Extras |

@@ -122,6 +122,8 @@ export function validateFixtures(files: FixtureFile[]): string[] {
           err(
             'verification hash does not match the current content: re-verify with npm run review',
           );
+        if (fx.expected_notes.includes('NEEDS-YOUSEF'))
+          err('a verified fixture must not still ask NEEDS-YOUSEF: answer it, then re-verify');
       }
     });
   }
@@ -131,10 +133,3 @@ export function validateFixtures(files: FixtureFile[]): string[] {
 /** A verified fixture whose content changed since it was verified: the review tool re-queues it. */
 export const isStale = (fx: Fixture) =>
   fx.status === 'verified' && fx.verification !== null && fx.verification.hash !== fixtureHash(fx);
-
-/**
- * Verified fixtures whose expected_notes still ask a NEEDS-YOUSEF question (Gate G1 cleanup).
- * A warning for now; it becomes a validation error once the open questions are answered.
- */
-export const openQuestions = (fixtures: Fixture[]) =>
-  fixtures.filter((f) => f.status === 'verified' && f.expected_notes.includes('NEEDS-YOUSEF'));
