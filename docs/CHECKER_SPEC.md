@@ -63,6 +63,17 @@ Each rule returns `pass`, `fail` or `na`, with evidence. There is one rule per c
 | FONT | A grapheme renders as the notdef/tofu glyph (detected by canvas comparison against a private-use character) | Colour emoji |
 | FONT (marks) | (v1.5) Marks are clipped: compare screenshots taken with and without `overflow: visible` | — |
 
+**Implementation** (`runRules(fixture, probe)` in `src/rules/rules.ts`; expected orders from `src/rules/expected.ts`):
+- **Expected order:** the engine runs on the *rendered* text from the probe, per probe block and line, with the fixture's `base_direction`. Code blocks (`pre`) are always LTR.
+  - Isolation follows FIXTURE_SPEC §1.7: listed `isolate_spans` and links are isolated with FSI, inline `code` as LTR.
+  - Graphemes inside `author_spans` are not isolated and count as wildcards, so either order passes there.
+- **BD** fails if a block's computed direction differs from `base_direction`, *or* if a line matches the engine's order for the opposite base direction and not the expected one. The second test catches `dir="auto"` and `unicode-bidi: plaintext` without position heuristics.
+- **NP** compares the left and right neighbours of each punctuation or symbol grapheme. **NUM** compares each number group plus one neighbour on each side. Both ignore author-span graphemes.
+- **LIST** also covers blockquotes: the quote bar (the larger of the left and right borders) must be on the inline-start side.
+- **TRUNC** applies only when the root is clipped horizontally. The visible graphemes must be a logical prefix, i.e. the end of the text is cut.
+- **FONT** (notdef): a grapheme counts as missing when it draws pixel-identical, on a canvas in the element's font, to U+E000 (private use; no font covers it). Emoji and whitespace are skipped. A system "last resort" font that draws different boxes per block would hide missing glyphs (false negatives).
+- A rule with nothing to check returns `na`. On the golden page, BD, AL and FONT evaluate all 80 fixtures, NP 74, NUM 19, CODE 19, ISO 18, LIST 6 and TBL 6. TRUNC needs a truncated title surface.
+
 Result record:
 ```json
 {"fixture":"ar-iso-001","target":"open-webui","surface":"message","browser":"chromium","rule":"ISO",

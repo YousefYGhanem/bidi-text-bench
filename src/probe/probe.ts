@@ -15,6 +15,10 @@ export interface ProbeGrapheme {
   block: number;
   /** Nearest p, li, pre, code, a, td, textarea or contenteditable element, or null. */
   role: string | null;
+  /** Computed direction of the nearest code or pre ancestor, or null outside code. */
+  codeDirection: string | null;
+  /** Drawn as the missing-glyph box (tofu): no font on this machine has it. */
+  notdef: boolean;
 }
 
 export interface ProbeLine {
@@ -29,6 +33,10 @@ export interface ProbeBlock {
   direction: string;
   unicodeBidi: string;
   textAlign: string;
+  /** The block element's own box, in CSS px. */
+  box: { left: number; right: number };
+  /** Inside a blockquote: the side its quote bar (border) is drawn on, or null. */
+  quoteBar: 'left' | 'right' | null;
   lines: ProbeLine[];
 }
 
@@ -44,6 +52,8 @@ export interface ProbeResult {
     dirChain: { tag: string; dir: string | null; lang: string | null }[];
     overflowX: string;
     textOverflow: string;
+    /** The root's box, in CSS px. */
+    box: { left: number; right: number; top: number; bottom: number };
     /** Content is wider or taller than the root's box. */
     clipped: boolean;
     /** Inputs and textareas: no per-character boxes, only direction and alignment (INP). */
@@ -96,6 +106,31 @@ export function probeInPage(root: Element, exclude: string[]): ProbeResult {
     return hit && (root.contains(hit) || hit === root) ? hit.tagName.toLowerCase() : null;
   };
 
+  const codeDirectionOf = (el: Element) => {
+    const code = el.closest('code, pre');
+    return code && (root.contains(code) || code === root) ? getComputedStyle(code).direction : null;
+  };
+  // Tofu check: a grapheme drawn exactly like U+E000 (private use; no font covers it) is the
+  // missing-glyph box. Canvas text uses the same font fallback as the page.
+  const canvas = document.createElement('canvas');
+  canvas.width = 64;
+  canvas.height = 64;
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
+  const pixels = (font: string, s: string) => {
+    if (!ctx) return '';
+    ctx.clearRect(0, 0, 64, 64);
+    ctx.font = font;
+    ctx.fillText(s, 8, 44);
+    return ctx.getImageData(0, 0, 64, 64).data.join(',');
+  };
+  const notdefCache = new Map<string, boolean>();
+  const isNotdef = (font: string, s: string) => {
+    if (/^\s+$/u.test(s) || /\p{Extended_Pictographic}/u.test(s)) return false;
+    const key = `${font}|${s}`;
+    if (!notdefCache.has(key)) notdefCache.set(key, pixels(font, s) === pixels(font, '\uE000'));
+    return notdefCache.get(key) as boolean;
+  };
+
   const segmenter = new Intl.Segmenter('und', { granularity: 'grapheme' });
   const range = document.createRange();
   const blockEls: Element[] = [];
@@ -108,6 +143,8 @@ export function probeInPage(root: Element, exclude: string[]): ProbeResult {
     let block = blockEls.indexOf(blockEl);
     if (block === -1) block = blockEls.push(blockEl) - 1;
     const role = roleOf(parent);
+    const codeDirection = codeDirectionOf(parent);
+    const font = getComputedStyle(parent).font;
     for (const { segment, index } of segmenter.segment(value)) {
       range.setStart(node, index);
       range.setEnd(node, index + segment.length);
@@ -123,6 +160,8 @@ export function probeInPage(root: Element, exclude: string[]): ProbeResult {
           height: r.height,
           block,
           role,
+          codeDirection,
+          notdef: isNotdef(font, segment),
         });
     }
     text += value;
@@ -144,6 +183,17 @@ export function probeInPage(root: Element, exclude: string[]): ProbeResult {
       direction: style.direction,
       unicodeBidi: style.unicodeBidi,
       textAlign: style.textAlign,
+      box: { left: el.getBoundingClientRect().left, right: el.getBoundingClientRect().right },
+      quoteBar: (() => {
+        const q = el.closest('blockquote');
+        if (!q) return null;
+        const s = getComputedStyle(q);
+        const [l, r] = [
+          Number.parseFloat(s.borderLeftWidth),
+          Number.parseFloat(s.borderRightWidth),
+        ];
+        return l > r ? 'left' : r > l ? 'right' : null;
+      })(),
       lines: lines.map((l) => {
         const gs = l.members.map((i) => graphemes[i] as ProbeGrapheme);
         return {
@@ -158,6 +208,7 @@ export function probeInPage(root: Element, exclude: string[]): ProbeResult {
   });
 
   const rootStyle = getComputedStyle(root);
+  const rootBox = root.getBoundingClientRect();
   const dirChain: ProbeResult['context']['dirChain'] = [];
   for (let el: Element | null = root; el; el = el.parentElement)
     dirChain.push({
@@ -189,6 +240,7 @@ export function probeInPage(root: Element, exclude: string[]): ProbeResult {
       dirChain,
       overflowX: rootStyle.overflowX,
       textOverflow: rootStyle.textOverflow,
+      box: { left: rootBox.left, right: rootBox.right, top: rootBox.top, bottom: rootBox.bottom },
       clipped: root.scrollWidth > root.clientWidth + 1 || root.scrollHeight > root.clientHeight + 1,
       controls,
     },
