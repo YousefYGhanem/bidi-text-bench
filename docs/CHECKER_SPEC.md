@@ -14,7 +14,8 @@
 - **Version drift:** bidi-js 1.1 implements UBA 13.0, while Unicode is at 18.0 and browsers use newer ICU.
   - Unit-test the engine against `https://www.unicode.org/Public/13.0.0/ucd/BidiCharacterTest.txt`.
   - Rely on calibration (below) to catch differences from real browsers.
-  - Log known deltas in an ADR.
+  - Log known deltas in an ADR: [ADR-0004](adr/0004-engine-uba-version.md). The algorithm passes the full 13.0.0 and 18.0.0 conformance files; 1,352 code points have different Bidi_Class data, none used by a fixture (a unit test guards this).
+- The engine is `expectedOrder(text, base, { isolate, ltrIsolate, lines })` in `src/engine/bidi.ts`. It works in UTF-16 code units and returns each line's visual order.
 - API note: `bidiFactory()` → `getEmbeddingLevels(text, dir)` and `getReorderSegments(text, levels, lineStart, lineEnd)`. All ranges are **inclusive**.
 - For the computation only, each `isolate_spans` entry is wrapped in FSI (U+2068) … PDI (U+2069). The indices are then mapped back to the original text. For the golden page (calibration), each `author_spans` entry is also wrapped, in LRI (U+2066) … PDI, matching how the reference render shows it as correctly authored. For real targets, author spans are excluded from scoring instead.
 - Line breaks come from the probe, which records which graphemes landed on which line. Each line is reordered with the paragraph's embedding levels (UAX #9 rule L2).

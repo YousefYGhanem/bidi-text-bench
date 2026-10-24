@@ -41,7 +41,7 @@ For details and acceptance criteria, see `docs/PLAN.md` §6. At the end of each 
 - [x] G1 [Y] At least 80 fixtures are verified and CI is green.
 
 ## Phase 2 — Checker v0 (week 3)
-- [ ] 2.1 [C] Build the engine on bidi-js: expected embedding levels and the visual order of each line. Tests include a subset of BidiCharacterTest.txt. Use the version that matches bidi-js's UBA (13.0.0), and document any drift from current Unicode.
+- [x] 2.1 [C] Build the engine on bidi-js: expected embedding levels and the visual order of each line. Tests include a subset of BidiCharacterTest.txt. Use the version that matches bidi-js's UBA (13.0.0), and document any drift from current Unicode.
 - [ ] 2.2 [C] Build the DOM probe (graphemes, rects, lines, styles, overflow), with tests on hand-made pages.
 - [ ] 2.3 [C] Write rules v0: BD, AL, ISO, NP, NUM, CODE, LIST, TBL, TRUNC and FONT (notdef).
 - [ ] 2.4 [C] Build the bug zoo and `npm run zoo`, which prints a recall / false-positive table. CI requires 100% recall and 0 false positives.
