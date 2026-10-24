@@ -5,7 +5,7 @@ Claude ticks `[x]` when a task is done. Claude never ticks a [Y] task or a gate;
 For details and acceptance criteria, see `docs/PLAN.md` §6. At the end of each work week, run `/weekly`.
 
 ## Phase 0 — Foundation (week 1)
-- [ ] 0.1 [Y] Install the prerequisites and the Playwright CLI skill, then run `gh auth login`. Open the repo in Claude Code and accept the trust prompt (see START_HERE.md).
+- [x] 0.1 [Y] Install the prerequisites and the Playwright CLI skill, then run `gh auth login`. Open the repo in Claude Code and accept the trust prompt (see START_HERE.md).
 - [x] 0.2 [C] Run `git init`. Scaffold package.json with the scripts listed in CLAUDE.md, strict TypeScript, Biome, Vitest and a Playwright config (chromium, firefox, webkit). Keep `.gitignore` and `.env.example`.
 - [x] 0.3 [C] Write a Dockerfile:
   - Base it on `mcr.microsoft.com/playwright:v<same version as @playwright/test>-noble`.
@@ -37,7 +37,7 @@ For details and acceptance criteria, see `docs/PLAN.md` §6. At the end of each 
   - It writes `status` and `verification` {by, at, hash}.
   - It has keyboard shortcuts and an RTL-correct UI.
 - [x] 1.4 [P] Move the seeds into their category files. Draft fixtures up to 80 in total, covering every category in both ar and he (`/fixtures`).
-- [ ] 1.5 [Y] Review all 80 in the review tool, then commit the verifications yourself (`verify: …`).
+- [x] 1.5 [Y] Review all 80 in the review tool, then commit the verifications yourself (`verify: …`).
 - [x] G1 [Y] At least 80 fixtures are verified and CI is green.
 
 ## Phase 2 — Checker v0 (week 3)
