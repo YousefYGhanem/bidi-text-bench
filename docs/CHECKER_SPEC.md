@@ -27,6 +27,8 @@
   Investigate any mismatch before trusting any rule.
 
 ## 3. DOM probe
+Implemented as `probe(locator, { exclude })` in `src/probe/probe.ts`. It returns the logical `text`; each grapheme with its `[start, end)` code units, box and role; **blocks**, the nearest non-inline ancestors, each one a bidi paragraph with its own direction, `unicode-bidi` and `text-align`; each block's lines, with the visual order and the logical code-unit range the engine needs; and the context. `toGraphemeOrder` in `src/engine/bidi.ts` turns the engine's code-unit order into the probe's grapheme order.
+
 - **Logical text:** walk the container's text nodes in document order, including open shadow roots. Build the logical string and a map from each character to its node and offset.
 - **Graphemes:** split the text with `Intl.Segmenter('und', { granularity: 'grapheme' })`.
 - **Positions:** for each grapheme, create a `Range` and call `getClientRects()`. Keep the centre x/y and skip collapsed whitespace.
@@ -37,7 +39,10 @@
   - lam-alef ligatures, which share one rect;
   - emoji;
   - `white-space: pre`;
-  - hidden spans.
+  - hidden spans;
+  - a rendered space has a box and belongs in the visual order; only collapsed extra spaces have none;
+  - `input` and `textarea` values have no text nodes, so the probe records only their direction and alignment. An empty `dir="auto"` field resolves to LTR until the user types, so INP must re-read it after typing;
+  - `checkVisibility()` is false for `display: contents` elements, slots included, so those are never treated as hidden.
 
 ## 4. Rules (v0)
 Each rule returns `pass`, `fail` or `na`, with evidence. There is one rule per category ID, plus INP and STRM, which run on the `input` and `stream` surfaces (taxonomy v1, ADR-0003).

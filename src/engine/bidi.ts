@@ -102,3 +102,17 @@ export function expectedOrder(
     lines,
   };
 }
+
+/**
+ * Maps a line's visual order from code units to graphemes, so it compares with the probe:
+ * `graphemeOf[cu]` is the grapheme index of each code unit. A grapheme's code units (a letter and
+ * its tashkeel, a surrogate pair) are reversed together in RTL runs, so they collapse to one entry.
+ */
+export function toGraphemeOrder(line: number[], graphemeOf: (number | undefined)[]): number[] {
+  const out: number[] = [];
+  for (const cu of line) {
+    const g = graphemeOf[cu];
+    if (g !== undefined && out.at(-1) !== g) out.push(g);
+  }
+  return out;
+}
