@@ -19,7 +19,7 @@
     "corpus:validate": "node src/cli/corpus-validate.ts",
     "golden": "node src/cli/build-golden.ts",
     "review": "node src/cli/review.ts",
-    "zoo": "node scripts/todo.mjs zoo 2.4",
+    "zoo": "node src/cli/zoo.ts",
     "mock-llm": "node scripts/todo.mjs mock-llm 3.1",
     "audit": "node scripts/todo.mjs audit 3.3",
     "manual": "node scripts/todo.mjs manual 3.4",

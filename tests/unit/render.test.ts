@@ -1,8 +1,9 @@
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import type { Fixture } from '../../src/corpus/validate.ts';
 import { GOLDEN_PATH, goldenHtml } from '../../src/render/golden.ts';
 import { renderFixture } from '../../src/render/reference.ts';
+import { ZOO_DIR, zooFiles } from '../../src/zoo/zoo.ts';
 
 const fx = (over: Partial<Fixture>): Fixture => ({
   id: 'he-iso-999',
@@ -68,4 +69,12 @@ describe('renderFixture', () => {
 
 it('zoo/golden.html is up to date (run npm run golden)', () => {
   expect(readFileSync(GOLDEN_PATH, 'utf8')).toBe(goldenHtml());
+});
+
+it('zoo/bugs/*.html are up to date (run npm run zoo)', () => {
+  const committed = readdirSync(ZOO_DIR).sort();
+  const fresh = zooFiles();
+  expect(committed).toEqual(fresh.map(([name]) => name).sort());
+  for (const [name, html] of fresh)
+    expect(readFileSync(`${ZOO_DIR}/${name}`, 'utf8'), name).toBe(html);
 });

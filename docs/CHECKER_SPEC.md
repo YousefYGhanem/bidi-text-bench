@@ -70,7 +70,7 @@ Each rule returns `pass`, `fail` or `na`, with evidence. There is one rule per c
 - **BD** fails if a block's computed direction differs from `base_direction`, *or* if a line matches the engine's order for the opposite base direction and not the expected one. The second test catches `dir="auto"` and `unicode-bidi: plaintext` without position heuristics.
 - **NP** compares the left and right neighbours of each punctuation or symbol grapheme. **NUM** compares each number group plus one neighbour on each side. Both ignore author-span graphemes.
 - **LIST** also covers blockquotes: the quote bar (the larger of the left and right borders) must be on the inline-start side.
-- **TRUNC** applies only when the root is clipped horizontally. The visible graphemes must be a logical prefix, i.e. the end of the text is cut.
+- **TRUNC** applies only when the root is clipped horizontally. The cut must be on the inline-end side: in RTL, hidden graphemes lie past the left edge and none past the right edge (mirrored for LTR). This is defined visually, because an embedded LTR word in an RTL title legitimately loses its logical start.
 - **FONT** (notdef): the method depends on how the engine draws a missing glyph, which the probe tests per font. If U+E000 and U+E001 (private use; no font covers them) draw identically, as in Chromium and WebKit, a grapheme counts as missing when it is pixel-identical to U+E000. Otherwise (Firefox draws a box with the code point in hex), it counts as missing when its advance and ink box equal a private-use reference with as many hex digits. Metrics alone gave false positives on Windows code fonts, and WebKit reports no ink box. Emoji and whitespace are skipped. A system "last resort" font that draws different boxes per block would still hide missing glyphs (false negatives).
 - A rule with nothing to check returns `na`. On the golden page, BD, AL and FONT evaluate all 80 fixtures, NP 74, NUM 19, CODE 19, ISO 18, LIST 6 and TBL 6. TRUNC needs a truncated title surface.
 
@@ -121,6 +121,11 @@ export interface Adapter {
 
 ## 8. Quality gates for the checker itself
 - **Bug zoo** (`zoo/`): `golden.html` plus at least one labelled buggy page per rule. `npm run zoo` prints recall and false positives per rule; CI requires 100% recall and 0 false positives.
+  - The labelled bugs and controls are defined in `src/zoo/bugs.ts`. Each entry is a verified fixture, the rule it must trip, a reason, and the CSS or HTML change that breaks it. `npm run zoo` writes them to `zoo/bugs/<id>.html`; the pages are committed, and a unit test fails if they are stale. It then prints the table; `-- --browser firefox|webkit|all` picks the engine.
+  - False positives are counted on `golden.html` (every fixture) and on **control** pages, which are correct renderings the golden page cannot show, such as properly truncated RTL titles.
+  - CI runs `tests/e2e/zoo.spec.ts` in all three engines and both viewports.
+  - To add a bug: add an entry to `BUGS`, run `npm run zoo`, and commit the new page. If a new correct pattern would otherwise go unchecked, add a control as well.
+  - The zoo already caught one false positive: a correctly truncated Arabic title with an embedded English word. TRUNC is now defined visually (the cut is on the inline-end side) instead of logically.
 - **Calibration** (§2) in all three engines.
 - **Dogfooding:** bidi-text-bench checks its own review tool and report site. CI also runs axe-core (WCAG 2.1 AA) on them.
 - **Performance budget:** at most 15 minutes per target for 200 fixtures on the dev PC. Run one target at a time (16 GB RAM).

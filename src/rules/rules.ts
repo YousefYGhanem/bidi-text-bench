@@ -285,22 +285,20 @@ const check: Record<RuleId, (c: Ctx) => Outcome> = {
   TRUNC: (c) => {
     const { clipped, box } = c.probe.context;
     if (!clipped) return na('not truncated');
-    const visible = (i: number) => {
-      const g = c.probe.graphemes[i];
-      return g !== undefined && g.x >= box.left && g.x <= box.right;
-    };
-    const all = c.probe.graphemes.map((_, i) => i);
-    const shown = all.filter(visible);
-    const hidden = all.filter((i) => !visible(i));
-    if (!hidden.length) return na('clipped vertically only');
-    const lastShown = Math.max(...shown.map((i) => c.probe.graphemes[i]?.start ?? 0));
-    const firstHidden = Math.min(...hidden.map((i) => c.probe.graphemes[i]?.start ?? 0));
-    if (shown.length && lastShown > firstHidden)
+    // Cut at the inline end: in RTL, everything hidden is past the left edge and nothing is cut on
+    // the right (and the mirror image in LTR). Visual, not logical: an embedded LTR word in an RTL
+    // title legitimately loses its logical start when the line is cut on the left.
+    const rtl = c.fx.base_direction === 'rtl';
+    const cutAtStart = c.probe.graphemes.flatMap((g, i) =>
+      (rtl ? g.x > box.right : g.x < box.left) ? [i] : [],
+    );
+    const cutAtEnd = c.probe.graphemes.some((g) => (rtl ? g.x < box.left : g.x > box.right));
+    if (cutAtStart.length)
       return {
         status: 'fail',
-        evidence: { detail: 'the start of the text is cut instead of the end', diffAt: hidden },
+        evidence: { detail: 'the start of the line is cut instead of the end', diffAt: cutAtStart },
       };
-    return pass('the end is cut');
+    return cutAtEnd ? pass('the end is cut') : na('clipped vertically only');
   },
 
   FONT: (c) => {
