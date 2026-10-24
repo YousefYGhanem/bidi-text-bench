@@ -26,6 +26,8 @@
 
   Investigate any mismatch before trusting any rule.
 
+  **Status (task 2.5, 2026-10-24):** `tests/e2e/calibration.spec.ts` probes every verified fixture on `zoo/golden.html` and compares each line with `expectedLines(probe, fixture, { golden: true })`, which isolates author spans as LTR the way the reference render shows them. All 80 fixtures match, with **0 mismatches**, in Chromium, Firefox and WebKit, at 1280×800 (153 lines) and 390×844 (209 lines, 52 fixtures wrapping). A negative control confirms the comparison can fail: `he-np-002` without its LTR author span expects `++C` where the page draws `C++`.
+
 ## 3. DOM probe
 Implemented as `probe(locator, { exclude })` in `src/probe/probe.ts`. It returns the logical `text`; each grapheme with its `[start, end)` code units, box and role; **blocks**, the nearest non-inline ancestors, each one a bidi paragraph with its own direction, `unicode-bidi` and `text-align`; each block's lines, with the visual order and the logical code-unit range the engine needs; and the context. `toGraphemeOrder` in `src/engine/bidi.ts` turns the engine's code-unit order into the probe's grapheme order.
 

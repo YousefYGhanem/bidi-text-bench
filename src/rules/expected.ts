@@ -53,7 +53,15 @@ export function authorGraphemes(probe: ProbeResult, fx: Fixture): Set<number> {
   return out;
 }
 
-export function expectedLines(probe: ProbeResult, fx: Fixture): LinePair[] {
+/**
+ * `golden`: the page is the reference render, which shows author spans as correctly authored, so
+ * they are isolated as LTR too (CHECKER_SPEC §2 calibration). For real targets they stay wildcards.
+ */
+export function expectedLines(
+  probe: ProbeResult,
+  fx: Fixture,
+  opts: { golden?: boolean } = {},
+): LinePair[] {
   const of = graphemeIndex(probe);
   // Renderer-owned units (FIXTURE_SPEC §1.7): listed spans, plus inline code (LTR) and links.
   // shortcut: spans are located by string search, so an identical unformatted copy elsewhere in
@@ -62,7 +70,10 @@ export function expectedLines(probe: ProbeResult, fx: Fixture): LinePair[] {
     ...fx.isolate_spans.filter((s) => probe.text.includes(s)),
     ...roleRuns(probe, 'a'),
   ];
-  const ltrIsolate = roleRuns(probe, 'code');
+  const ltrIsolate = [
+    ...roleRuns(probe, 'code'),
+    ...(opts.golden ? fx.author_spans.filter((s) => probe.text.includes(s)) : []),
+  ];
   const opposite = fx.base_direction === 'rtl' ? 'ltr' : 'rtl';
 
   return probe.blocks.flatMap((block, b) => {

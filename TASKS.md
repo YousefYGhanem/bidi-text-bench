@@ -45,7 +45,7 @@ For details and acceptance criteria, see `docs/PLAN.md` §6. At the end of each 
 - [x] 2.2 [C] Build the DOM probe (graphemes, rects, lines, styles, overflow), with tests on hand-made pages.
 - [x] 2.3 [C] Write rules v0: BD, AL, ISO, NP, NUM, CODE, LIST, TBL, TRUNC and FONT (notdef).
 - [x] 2.4 [C] Build the bug zoo and `npm run zoo`, which prints a recall / false-positive table. CI requires 100% recall and 0 false positives.
-- [ ] 2.5 [C] Calibrate: the probe output on the golden page must equal the engine output for every verified fixture, in chromium, firefox and webkit.
+- [x] 2.5 [C] Calibrate: the probe output on the golden page must equal the engine output for every verified fixture, in chromium, firefox and webkit.
 - [ ] 2.6 [C] Run the rule-reviewer subagent on every rule and fix what it finds.
 - [ ] G2 [Y] Accept or reject each rule, based on its one-paragraph logic summary and the zoo table.
 
