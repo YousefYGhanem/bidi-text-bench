@@ -18,10 +18,9 @@
   expected_notes: >-
     The table is mirrored: the first column "מוצר" is the rightmost, then "מחיר", and "כמות" is the
     leftmost. Cell text is right-aligned. Each price keeps its digits in order (49.90, 120).
-    NEEDS-YOUSEF: should "49.90 ₪" show the shekel sign to the left of the number, as in a running
-    sentence?
+    The shekel sign shows to the left of the number, as in a running sentence.
   status: verified
-  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:46:56.608Z', hash: '278d3d6117fe2cd6945d0e7c730b49b5d020f95f8cdd20c6a455d4f826e4d1e3' }
+  verification: { by: 'Yousef Ghanem', at: '2026-10-24T13:54:41.671Z', hash: '602a10b488f1c9654fbc7f7b9269f740dbc77ceb76d492b9e3cd19877f6a99cf' }
   source: original
   related_issues: []
 
@@ -66,9 +65,9 @@
   expected_notes: >-
     The table is RTL: the "Version" column is on the right and "שינוי" is on the left, even though
     the first header is Latin. Versions keep their dots in order (v2.4.0, v2.3.1). Hebrew cells are
-    right-aligned. NEEDS-YOUSEF: should the Latin-only "Version" column be left- or right-aligned
-    inside an RTL table?
+    right-aligned. The Latin-only "Version" column is aligned to the start (right) like the rest of
+    the RTL table, not forced to the left.
   status: verified
-  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:46:58.207Z', hash: '0a4fa0ac5079ba0b23818eee20b859afae2e6cdc2423ad4d5d6f8fe1999e6da9' }
+  verification: { by: 'Yousef Ghanem', at: '2026-10-24T13:54:42.071Z', hash: 'da21c0650baa2adb95741a07b9ca78c70d94090cf87070220c98bb22ea88af11' }
   source: original
   related_issues: []

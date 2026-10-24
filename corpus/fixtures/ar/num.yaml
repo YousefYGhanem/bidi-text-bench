@@ -14,10 +14,10 @@
   expected_notes: >-
     Every number keeps its internal left-to-right order: 49.90, 20%, 31/12/2026 (day/month/year).
     The final period is at the far left. Reordered digits or date parts change the meaning (blocker).
-    NEEDS-YOUSEF: as typed, the % sits to the right of 20. Is that what Arabic readers expect here,
-    or do they expect "%20"?
+    As typed, the % sits to the right of 20 ("20%"), which is what Arabic readers expect with
+    Western digits.
   status: verified
-  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:48.907Z', hash: '89cd6a25a078d6a9b5213b1603e73faa5c2cd58c9a3247938bd8a9d2c5b4ab90' }
+  verification: { by: 'Yousef Ghanem', at: '2026-10-24T13:54:16.209Z', hash: '86cc8880f40ef56c2809ab95ec39d4331799f450ed57d3a0ab08d2a7cd73657a' }
   source: original
   related_issues: []
 
@@ -55,10 +55,10 @@
   expected_notes: >-
     Every number keeps its digit order: ١٢٣٤, ٤٩٫٩٠ (with the Arabic decimal separator) and the date
     ٣١/١٢/٢٠٢٦ (day/month/year). The slashes stay between the date parts. The digits are not
-    replaced by Western digits. NEEDS-YOUSEF: is Arabic-Indic the natural choice for a support
-    message like this, and is the decimal separator ٫ (U+066B) right, or would you type a comma?
+    replaced by Western digits. Arabic-Indic digits are a natural choice for a support message like
+    this, and the decimal separator ٫ (U+066B) is right, so no comma is expected.
   status: verified
-  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:50.402Z', hash: '8cbfbd612544128e094b297122ab644d30633375ab8d63e798eddd89d2fe9199' }
+  verification: { by: 'Yousef Ghanem', at: '2026-10-24T13:54:19.040Z', hash: '2ab27589be3f8cff356df83fa82b3b7dc2abd1a9222c6ee9161cec4cb9554f7b' }
   source: original
   related_issues: []
 

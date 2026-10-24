@@ -54,10 +54,9 @@
   expected_notes: >-
     The address reads support@example.com as one left-to-right unit. Reading right to left: "כתבו
     לנו", the prefix "ל-", the address, then "ונחזור אליכם עד מחר.". The hyphen stays between the
-    prefix and the address. NEEDS-YOUSEF: is "ל-" directly before an email natural, or would you
-    write it differently?
+    prefix and the address. "ל-" directly before an email is natural Hebrew writing.
   status: verified
-  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:45:54.034Z', hash: 'e310674103aebd1bc6ed6437f53854b2f9aa671c9ab58f576977637d1f12ff75' }
+  verification: { by: 'Yousef Ghanem', at: '2026-10-24T13:54:37.422Z', hash: '30851da381be0ff51c5831c0d06193d88b17dad6040d07f216537c03b0dbd2de' }
   source: original
   related_issues: []
 

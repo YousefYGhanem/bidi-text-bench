@@ -54,9 +54,9 @@
   expected_notes: >-
     The title is RTL even though it starts with "Python". "Python" is at the far right and stays
     visible; the end of the title is cut at the left and the ellipsis is at the far left. The title
-    is not laid out LTR with the ellipsis at the right. NEEDS-YOUSEF: for a title that starts with
-    Latin, which direction do you expect the sidebar to use?
+    is not laid out LTR with the ellipsis at the right. For a title that starts with Latin but is
+    mostly Hebrew, the sidebar uses RTL.
   status: verified
-  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:46:59.999Z', hash: 'e32fb3e39d0aaad27bbb6db587e2a581031b708b265deb517667cd2a5c61dea1' }
+  verification: { by: 'Yousef Ghanem', at: '2026-10-24T13:54:42.912Z', hash: '2ead5a94b8529515bdbb73919f0622da50267648bf91a85bd513ba015bcb534f' }
   source: original
   related_issues: []

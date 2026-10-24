@@ -75,8 +75,9 @@
     While streaming, the first chunk is only "GitHub Actions", which looks LTR. The final message is
     right-to-left, right-aligned, with "GitHub" at the far right. The layout must not flip from LTR
     to RTL once the Hebrew words arrive. The colon is after "שוב" and the period is at the far left.
-    NEEDS-YOUSEF: is a mid-stream flip major or only minor for you?
+    A mid-stream flip from LTR to RTL is major, because the whole message jumps while the user is
+    reading it.
   status: verified
-  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:44:52.645Z', hash: 'b4222afd4c604b3990a6881cba0924fa1cdb38fd737af9fc525281e8a5eeb4aa' }
+  verification: { by: 'Yousef Ghanem', at: '2026-10-24T13:54:28.667Z', hash: '4304bf147647b131081883f29bec4d035d71d4017a02053734329caf4ffd8bb9' }
   source: original
   related_issues: []

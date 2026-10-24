@@ -33,10 +33,10 @@
   expected_notes: >-
     The text uses gershayim U+05F4 in "ת״א", geresh U+05F3 in "ב׳" and maqaf U+05BE in "ה־API". All
     three render as Hebrew punctuation with no tofu. The maqaf joins "ה" to "API" at mid-height, and
-    "API" reads left to right. NEEDS-YOUSEF: is the maqaf U+05BE before a Latin word what you would
-    expect, or is the ASCII hyphen more natural for ה-API?
+    "API" reads left to right. The maqaf U+05BE before a Latin word is correct Hebrew typography, so
+    "ה־API" as typed is right; the ASCII hyphen is also common in casual typing.
   status: verified
-  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:45:50.001Z', hash: '308aee1c210eb42ab355223b1093de8f3d373690dc3a5dcc67b08c1ff7edf2b1' }
+  verification: { by: 'Yousef Ghanem', at: '2026-10-24T13:54:33.923Z', hash: '6dedc36012e0bb3723179d75d8640ef44ceeaeb35cbeef31f543b83d0a865523' }
   source: original
   related_issues: []
 
@@ -54,10 +54,9 @@
   expected_notes: >-
     Every vowel mark sits under or over its letter, and none are clipped or detached: the shin dot
     and qamats on the first letter, the holam over the vav, the shva under the shin. The question
-    mark is at the far left. NEEDS-YOUSEF: is the nikud in this sentence correct and in the usual
-    style?
+    mark is at the far left. The nikud in this sentence is correct and in the usual style.
   status: verified
-  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:45:50.983Z', hash: 'd08b04292047dfe69fb3bbf978181be91cd4e5722000f6761402df1fe61d6126' }
+  verification: { by: 'Yousef Ghanem', at: '2026-10-24T13:54:35.071Z', hash: 'bc0d0b62cf89b3cb829ab34952a9025552d60fde89d12d1a946545bd2a2a4341' }
   source: original
   related_issues: []
 
@@ -74,9 +73,9 @@
   severity: major
   expected_notes: >-
     Letters that carry both a dagesh and a vowel (יֶּ, בַּ, גַּ) show both marks without overlapping
-    each other or being clipped by the line box. The period is at the far left. NEEDS-YOUSEF: is the
-    nikud correct and does the dagesh-plus-vowel stacking look right?
+    each other or being clipped by the line box. The period is at the far left. The nikud is
+    correct, and a dagesh plus a vowel on the same letter is the usual stacking.
   status: verified
-  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:45:51.580Z', hash: '64161cad20369755d465ae7547c310a14713955374930081cc2b7ba15808920c' }
+  verification: { by: 'Yousef Ghanem', at: '2026-10-24T13:54:35.886Z', hash: 'db599bd7b8e75b74fbea525515558d12f81124b7929784ee33701ff38ad8bfd9' }
   source: original
   related_issues: []

@@ -74,9 +74,10 @@
     "@sami" reads as one unit with "@" at its left end, and the Arabic comma is to its left. The path
     reads exactly /etc/nginx/nginx.conf, left-to-right, with the leading slash at its left. An
     unisolated path shows the leading slash jumping to the end, which makes it a different path.
-    NEEDS-YOUSEF: not every UI renders @sami as a mention in plain Markdown. Keep it as a span?
+    "@sami" is kept as an isolate span: even where a UI does not render it as a mention in plain
+    Markdown, it must still read as one left-to-right unit.
   status: verified
-  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:23.856Z', hash: '00d9b1dd558dcb3efa42613562bdd519058caa83ae8c301f2ba97cb39ff2ce50' }
+  verification: { by: 'Yousef Ghanem', at: '2026-10-24T13:54:08.557Z', hash: '312839a9e744af16dff4590a9a9d71a5d001d3d737f40237e15060337221007f' }
   source: original
   related_issues: []
 

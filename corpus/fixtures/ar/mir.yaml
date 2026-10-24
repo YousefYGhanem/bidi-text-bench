@@ -15,9 +15,9 @@
     Manual check with the UI in Arabic or forced RTL. Look at: the sidebar (should be at the right),
     the back button arrow (should point right), the send button icon (should point left), and the
     chat bubbles and avatars (user side at the right). Check also that the text above is right-aligned.
-    NEEDS-YOUSEF: which elements count as a fail when the product has no Arabic UI language and only
-    the content is RTL?
+    When the product has no Arabic UI language and only the content is RTL, only the direction and
+    alignment of the content count as a fail; the mirrored layout items are then not applicable.
   status: verified
-  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:34.240Z', hash: '5ba89b54ea17cc43a6eb5380880fd3ea7aec1fcbbac98ef31f727305bd112c0f' }
+  verification: { by: 'Yousef Ghanem', at: '2026-10-24T13:54:10.874Z', hash: '14a76a66ddee28270be8cbb8ad2a990676a45f8756cba1308226217c7d04c745' }
   source: original
   related_issues: []

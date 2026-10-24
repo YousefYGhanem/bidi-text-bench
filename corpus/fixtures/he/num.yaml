@@ -14,9 +14,10 @@
   expected_notes: >-
     Every number keeps its internal left-to-right order: 49.90, 20%, 31.12.2026. Reading right-to-left,
     the shekel sign comes after the amount, so it sits visually to the left of 49.90. The final
-    period is at the far left. NEEDS-YOUSEF: confirm the expected ₪ position for this writing style.
+    period is at the far left. The shekel sign comes after the amount as typed ("49.90 ₪"), so it
+    sits to the left of 49.90, which is the usual Hebrew style.
   status: verified
-  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:46:24.550Z', hash: 'b4a717e04670cb59e5958d28043c75342b093b509b730c69dd70d6165670fc06' }
+  verification: { by: 'Yousef Ghanem', at: '2026-10-24T13:54:39.872Z', hash: '2981760c6b4df30ed8e3e6a6892f0cf65e2ff4d172ac46042226c55ece8fdaac' }
   source: original
   related_issues: []
 
@@ -34,10 +35,9 @@
   expected_notes: >-
     Both ranges keep their left-to-right order, 10:00-11:30 and 10-20, so the smaller number is on
     the left. They must not appear as 11:30-10:00 or 20-10. The final period is at the far left.
-    NEEDS-YOUSEF: is the ASCII hyphen right for ranges here, or should the fixture use an en dash or
-    maqaf?
+    The ASCII hyphen is right for ranges here, because it is what users type.
   status: verified
-  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:46:26.347Z', hash: '08253505784f58294605c547e1f119fcf8b5d64319e29a04dca7853369015fc1' }
+  verification: { by: 'Yousef Ghanem', at: '2026-10-24T13:54:40.871Z', hash: '0fed8bfc20459ab9a09923d5af26a283973fb2444695e94297348f7b630c28f4' }
   source: original
   related_issues: []
 

@@ -77,9 +77,8 @@
   expected_notes: >-
     The sentence is right-to-left and right-aligned: "iPhone 15 Pro" is one left-to-right group at
     the far right, then the Arabic words go leftwards. The question mark is at the far left, after
-    "الحل". NEEDS-YOUSEF: is "بتنطفي لحالها" natural Levantine for "turns itself off", and should
-    the spelling be adjusted?
+    "الحل". "بتنطفي لحالها" is natural Levantine for "turns itself off".
   status: verified
-  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:42:47.659Z', hash: '30fe4bd0a467fab4377a3e35ab0369ebdcb5241b2f24022a1671ee5f8c840ce4' }
+  verification: { by: 'Yousef Ghanem', at: '2026-10-24T13:53:59.128Z', hash: '5a29321b8f4e4314e1ee85537028ac01ddd7bbbb8781dc675cca55ad3638ecca' }
   source: original
   related_issues: []

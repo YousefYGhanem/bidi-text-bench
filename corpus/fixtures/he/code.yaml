@@ -48,10 +48,12 @@
     The block is left-to-right and left-aligned. The first line starts with "#" at the left,
     followed by the Hebrew comment, which reads right to left internally. In the second line "name =
     input(" is at the left, then the quoted Hebrew string, with the closing quote and parenthesis to
-    its right. The statements must not be mirrored. NEEDS-YOUSEF: where exactly should the quotes
-    and the "?" sit around the Hebrew string inside the code line?
+    its right. The statements must not be mirrored. The quotes and parenthesis follow the
+    left-to-right code line: the opening quote is at the left of the Hebrew string and the closing
+    quote and parenthesis are at its right; the "?" belongs to the string and its exact side is not
+    a pass/fail criterion.
   status: verified
-  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:44:55.570Z', hash: '1909ff3c3526360b4a4aee0e145b0b68f7b0800e469242cb35a49f89a208e190' }
+  verification: { by: 'Yousef Ghanem', at: '2026-10-24T13:54:31.511Z', hash: 'edad90523f3c3c68669e3e5b1476d79e1abdb2e3247d02d8cfcbbf8addc67440' }
   source: original
   related_issues: []
 

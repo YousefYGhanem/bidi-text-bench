@@ -15,10 +15,10 @@
     Manual check. Select the whole sentence, copy it and paste it into a plain-text editor. The
     pasted text must equal the logical text: same word order, no reversed words, and no added bidi
     controls (such as U+200E, U+200F or U+2066 to U+2069). Selecting across the command must not
-    skip or duplicate characters. NEEDS-YOUSEF: should the pasted text keep the backticks, or only
-    the command?
+    skip or duplicate characters. The pasted text has the command without the backticks, because
+    they are Markdown syntax and not part of the displayed sentence.
   status: verified
-  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:45:06.912Z', hash: '340fbf3e06c39a2af77b08e6f39113bfe28e0cd8594f91345521a46caa9b53f3' }
+  verification: { by: 'Yousef Ghanem', at: '2026-10-24T13:54:33.034Z', hash: '37a5e762ea562168a9eacba009b4482ee289c3993fbca6d8bd1dc13d8565445e' }
   source: original
   related_issues: []
 

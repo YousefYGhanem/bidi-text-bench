@@ -35,9 +35,10 @@
     Reads right-to-left: "هل تقصد", then «git rebase» as a left-to-right unit, "أم", then «git merge»,
     and the question mark at the far left. Each pair of guillemets encloses its command: the opening
     mark on its right and the closing mark on its left. Mirroring of the quote glyphs is checked by
-    eye. NEEDS-YOUSEF: do Arabic readers expect « » here, or straight double quotes?
+    eye. Arabic readers expect « » here, so the guillemets as typed are correct; straight double
+    quotes would also be understood.
   status: verified
-  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:38.537Z', hash: 'a0402426baa460b31560694582e7b827e815a8d6dadce444b835839166a943ba' }
+  verification: { by: 'Yousef Ghanem', at: '2026-10-24T13:54:11.920Z', hash: '042b4c990c914248ed1503eb0d0f25b5586e6656872a8de42e8bdc2e0e77a350' }
   source: original
   related_issues: []
 
@@ -75,8 +76,8 @@
   expected_notes: >-
     "S/M/L" reads left-to-right as written. In "أحمر/أزرق", "أحمر" is at the right and "أزرق" at its
     left, with the slash between them. The Arabic comma is after "أزرق", and the sentence ends at the
-    far left. NEEDS-YOUSEF: is "خد مقاس" fine as colloquial Levantine/Egyptian for "take size"?
+    far left. "خد مقاس" is fine colloquial Levantine/Egyptian for "take size".
   status: verified
-  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:43:45.897Z', hash: '49c29fc093731de121409c24c4d213da4f1839d0c04be82c3748ffecd80c0acf' }
+  verification: { by: 'Yousef Ghanem', at: '2026-10-24T13:54:13.363Z', hash: '8b90639f9075e572287be88df674a9c18c8df23bbb5910acf637050e5cb580dd' }
   source: original
   related_issues: []

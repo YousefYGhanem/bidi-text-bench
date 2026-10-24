@@ -56,10 +56,10 @@
     Reading right to left: "הוא כתב", the quoted string, "בקונסולה", then the bracketed part. Inside
     the quotes "Hello World" reads left to right. The brackets enclose "וזה עבד!" and are mirrored
     correctly; the exclamation mark and the final period are at the far left, in that order.
-    NEEDS-YOUSEF: are straight ASCII quotes acceptable in Hebrew text here, or should the fixture
-    use typographic quotes?
+    Straight ASCII quotes are acceptable in Hebrew text here, since they are what users type in
+    chat.
   status: verified
-  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:46:21.922Z', hash: '773e3bcb1dd0a66610aa955866fea6f516d696d62bbdf62082521df3bca02294' }
+  verification: { by: 'Yousef Ghanem', at: '2026-10-24T13:54:38.659Z', hash: '03f5cded0ce323a0891f9eb710e1c91ce5d1bc2b40d009c92b37407501aebc6d' }
   source: original
   related_issues: []
 
