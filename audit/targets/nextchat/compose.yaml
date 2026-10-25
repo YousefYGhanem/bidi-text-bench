@@ -1,0 +1,16 @@
+# NextChat pointed at the mock LLM (docs/CHECKER_SPEC.md §5). No access code, no login.
+# Start `npm run mock-llm` first. Run one target at a time and `docker compose down` after.
+services:
+  nextchat:
+    image: yidadaa/chatgpt-next-web:v2.16.1
+    ports:
+      - 127.0.0.1:3102:3000
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      BASE_URL: http://host.docker.internal:11435
+      OPENAI_API_KEY: mock
+      CUSTOM_MODELS: -all,+bidi-text-bench-mock
+      DEFAULT_MODEL: bidi-text-bench-mock
+      HIDE_USER_API_KEY: '1'
+      DISABLE_FAST_LINK: '1'

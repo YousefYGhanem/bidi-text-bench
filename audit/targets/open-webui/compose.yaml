@@ -1,0 +1,23 @@
+# Open WebUI pointed at the mock LLM (docs/CHECKER_SPEC.md §5). Single user, no login.
+# Start `npm run mock-llm` first. Run one target at a time and `docker compose down` after.
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:v0.12.4
+    ports:
+      - 127.0.0.1:3101:8080
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      WEBUI_AUTH: 'False'
+      ENABLE_OLLAMA_API: 'False'
+      OPENAI_API_BASE_URL: http://host.docker.internal:11435/v1
+      OPENAI_API_KEY: mock
+      DEFAULT_MODELS: bidi-text-bench-mock
+      # Title generation stays on: its request carries "#fx:<id>", so the title surface shows the fixture.
+      ENABLE_FOLLOW_UP_GENERATION: 'False'
+      ENABLE_TAGS_GENERATION: 'False'
+      ENABLE_AUTOCOMPLETE_GENERATION: 'False'
+      OFFLINE_MODE: 'True'
+      SCARF_NO_ANALYTICS: 'true'
+      DO_NOT_TRACK: 'true'
+      ANONYMIZED_TELEMETRY: 'false'

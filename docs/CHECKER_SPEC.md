@@ -121,15 +121,25 @@ export interface Adapter {
 }
 ```
 - **auto-chat:** self-hosted open-source chat UIs (Docker) pointed at the mock LLM. Prefer modes with authentication disabled. If a local instance needs an account, use throwaway test credentials in `.env.local` (localhost only).
+- **Where they live:** `src/adapters/<id>.ts`, registered in `src/adapters/index.ts`; the interface and `settled()` (waits until a streamed reply stops changing) are in `src/adapters/adapter.ts`. Each auto-chat target has `audit/targets/<id>/compose.yaml` with a pinned image tag, a port published on 127.0.0.1 only, and the mock as its OpenAI endpoint. Built so far:
+
+  | id | image | URL | reply container |
+  |---|---|---|---|
+  | open-webui | `ghcr.io/open-webui/open-webui:v0.12.4` (`WEBUI_AUTH=False`) | http://127.0.0.1:3101 | `.chat-assistant #response-content-container .markdown-prose` |
+  | nextchat | `yidadaa/chatgpt-next-web:v2.16.1` | http://127.0.0.1:3102 | last assistant `.markdown-body` |
+
+  `send` returns the next new reply after the ones already on the page, so a run can reuse one chat; the audit (task 3.3) still opens a fresh browser context per fixture.
+- **Smoke test for one target:** start `npm run mock-llm` and `docker compose -f audit/targets/<id>/compose.yaml up -d`, then run `TARGET=<id> npx playwright test targets --project=chromium` (skipped when `TARGET` is unset, so CI never runs it). Run `docker compose ... down` afterwards.
+- **To add a target:** add the compose file, an adapter, and an entry in `ADAPTERS`; `tests/unit/adapters.test.ts` checks that the id is in `audit/targets.yaml` with the same mode, the image is pinned, and the port is localhost-only.
 - **auto-page:** public pages with no login, visited at a low rate. Example: a GitHub issue in your own repo where you posted the fixtures once.
 - **manual:** closed products. See `docs/AUDIT_PROTOCOL.md`.
 
 ## 6. Mock LLM (`tools/mock-llm/`)
 - Uses Node's `http` module only. Its one import is the project's corpus loader, which reads every fixture (drafts included; the audit picks the ids). Run it with `npm run mock-llm`; the model id is `bidi-text-bench-mock`.
 - Implements the OpenAI-compatible `GET /v1/models` and `POST /v1/chat/completions`, both streaming and non-streaming. The `/v1` prefix is optional, because chat UIs differ in whether their base URL ends in it.
-- Finds `#fx:<id>` in the last user message and replies with that fixture's `text` verbatim. String content and the multimodal parts format are both read. With no `#fx:` id, or an unknown one, it replies with a short `bidi-text-bench mock:` note, not an error, so side requests from the UI (such as title generation) do not break it.
+- Finds the latest `#fx:<id>` in the user messages and replies with that fixture's `text` verbatim. String content and the multimodal parts format are both read. With no `#fx:` id, or an unknown one, it replies with a short `bidi-text-bench mock:` note, not an error, so side requests from the UI do not break it. A title request (NextChat appends its own prompt after the fixture's message) therefore gets the fixture text as well, so the `title` surface shows it.
 - Streaming splits the reply by graphemes: `MOCK_CHUNK` per chunk (default 3), with `MOCK_DELAY_MS` between chunks (default 30).
-- Listens on `MOCK_LLM_HOST` (default 127.0.0.1) and port `MOCK_LLM_PORT` (11435). Containers reach it at `http://host.docker.internal:11435/v1`.
+- Listens on `MOCK_LLM_HOST` (default 127.0.0.1) and port `MOCK_LLM_PORT` (11435). Containers reach it at `http://host.docker.internal:11435/v1`; Docker Desktop forwards that to the host's loopback (checked in task 3.2), and the compose files add `host-gateway` for Linux.
 - Ships with `node --test` self-tests for both modes (`npm run mock-llm:test`, part of `npm run check`).
 
 ## 7. Determinism and evidence

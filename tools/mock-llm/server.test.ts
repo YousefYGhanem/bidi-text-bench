@@ -62,6 +62,13 @@ test('content given as parts, and requests without a known fixture', () => {
   assert.equal(replyFor(parts, replies), TEXT);
   assert.match(replyFor([{ role: 'user', content: 'hi' }], replies), /no #fx/);
   assert.match(replyFor([{ role: 'user', content: '#fx:ar-xx-999' }], replies), /unknown fixture/);
+  // A title request appends its own prompt after the fixture's message.
+  const title = [
+    { role: 'user', content: '#fx:he-bd-001' },
+    { role: 'assistant', content: TEXT },
+    { role: 'user', content: 'Summarize the conversation in a short title.' },
+  ];
+  assert.equal(replyFor(title, replies), TEXT);
 });
 
 test('bad requests get OpenAI-style errors', async () => {

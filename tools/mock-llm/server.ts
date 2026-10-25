@@ -17,16 +17,22 @@ export interface MockOptions {
 type Part = { type?: string; text?: string };
 type Message = { role?: string; content?: string | Part[] | null };
 
-/** The reply for the last user message: the fixture's text, or a short note the audit will flag. */
+/**
+ * The reply: the text of the fixture named by the latest user message that has "#fx:<id>", or a
+ * short note the audit will flag. Not only the last message: title requests (NextChat) append
+ * their own prompt after it, and the title should then be the fixture too.
+ */
 export function replyFor(messages: Message[], replies: Map<string, string>): string {
-  const last = messages.findLast((m) => m.role === 'user');
-  const content = last?.content;
   // Some UIs send content as an array of parts (the multimodal format).
-  const text = Array.isArray(content)
-    ? content.map((p) => (p.type === 'text' ? (p.text ?? '') : '')).join('\n')
-    : (content ?? '');
-  const id = /#fx:([a-z]{2}-[a-z]+-\d{3})/.exec(text)?.[1];
-  if (!id) return 'bidi-text-bench mock: no #fx:<id> in the last user message.';
+  const text = (c: Message['content']) =>
+    Array.isArray(c)
+      ? c.map((p) => (p.type === 'text' ? (p.text ?? '') : '')).join('\n')
+      : (c ?? '');
+  const ids = messages
+    .filter((m) => m.role === 'user')
+    .flatMap((m) => [...text(m.content).matchAll(/#fx:([a-z]{2}-[a-z]+-\d{3})/g)].map((x) => x[1]));
+  const id = ids.at(-1);
+  if (!id) return 'bidi-text-bench mock: no #fx:<id> in any user message.';
   return replies.get(id) ?? `bidi-text-bench mock: unknown fixture ${id}.`;
 }
 
@@ -125,7 +131,7 @@ export const corpusReplies = () =>
 if (import.meta.url === pathToFileURL(process.argv[1] ?? '').href) {
   const env = process.env;
   const port = Number(env.MOCK_LLM_PORT ?? 11435);
-  // shortcut: loopback only; if a container cannot reach host.docker.internal, set MOCK_LLM_HOST=0.0.0.0 (checked in task 3.2).
+  // Loopback is enough: Docker Desktop forwards host.docker.internal to it (checked in task 3.2).
   const host = env.MOCK_LLM_HOST ?? '127.0.0.1';
   const replies = corpusReplies();
   createMockLlm({
