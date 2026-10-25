@@ -2,7 +2,8 @@
 import type { Adapter } from './adapter.ts';
 import { settled } from './adapter.ts';
 
-const URL = 'http://127.0.0.1:3102/';
+// TARGET_HOST: host.docker.internal when the browser runs in Docker (npm run audit).
+const url = () => `http://${process.env.TARGET_HOST ?? '127.0.0.1'}:3102/`;
 // Assistant messages only: the user's carry an extra chat-message-user class.
 const replies =
   'div[class*="chat_chat-message__"]:not([class*="chat-message-user"]) .markdown-body';
@@ -11,7 +12,7 @@ export const nextchat: Adapter = {
   id: 'nextchat',
   mode: 'auto-chat',
   async open(page) {
-    await page.goto(URL);
+    await page.goto(url());
     await page.locator('textarea').waitFor();
   },
   async send(page, fx) {

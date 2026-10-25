@@ -149,8 +149,15 @@ export interface Adapter {
   - browser locale `en-US` for v1 (an RTL app-UI pass comes later);
   - viewports: desktop 1280×800 and mobile 390×844;
   - animations disabled, except for STRM.
+- **Runner** (`npm run audit`, `src/cli/audit.ts` and `src/audit/run.ts`, task 3.3):
+  - The Node runner stays on the host. The browsers run in the project image through `npx playwright run-server`, as `pwuser` rather than root, because the pages come from third-party UIs. The runner connects with `browserType.connect()`.
+  - Inside the container, the browser reaches the target at `host.docker.internal`: the adapters read their host from `TARGET_HOST`.
+  - Each fixture gets a fresh browser context (`en-US`, UTC, reduced motion).
+  - One JSON line is written per rule result, `na` included, because scoring needs the applicable count. Each line has `surface`, `browser`, `viewport` and `severity`.
+  - An adapter or probe error becomes a `status: "error"` line with `rule: null`, and the run goes on.
+  - Not done yet: Playwright's seccomp profile for Chromium's sandbox.
 - Each run writes to `audit/runs/<date>-<target>/`:
-  - `env.json`: target version, commit or image digest, browser versions, bidi-text-bench commit;
+  - `env.json`: the target's images with their digests, run mode, host OS and Node version, browser versions, viewports, locale, time zone, UI language, the bidi-text-bench commit with a dirty flag, the fixture count, and the surfaces run or skipped;
   - `results.jsonl`;
   - `evidence/`: cropped PNGs of failures only.
 

@@ -17,5 +17,5 @@ RUN npm ci
 COPY . .
 
 # shortcut: runs as root, so Chromium's sandbox is off (fine for our own pages per the Playwright
-# Docker docs); switch to pwuser + seccomp_profile.json before auditing third-party UIs (Phase 3).
+# Docker docs). Audits of third-party UIs run the browsers as pwuser instead (src/cli/audit.ts).
 CMD ["npx", "playwright", "test"]

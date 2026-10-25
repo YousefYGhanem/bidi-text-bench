@@ -21,12 +21,12 @@ export interface Adapter {
 /** Resolves once the locator's text has not changed for `quietMs`: the stream has finished. */
 export async function settled(reply: Locator, quietMs = 800, timeoutMs = 30_000): Promise<void> {
   const end = Date.now() + timeoutMs;
-  let last = await reply.innerText();
+  let last = await reply.textContent();
   let since = Date.now();
   while (Date.now() - since < quietMs) {
     if (Date.now() > end) throw new Error('reply did not settle');
     await reply.page().waitForTimeout(100);
-    const now = await reply.innerText();
+    const now = await reply.textContent();
     if (now !== last) [last, since] = [now, Date.now()];
   }
 }

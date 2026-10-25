@@ -2,18 +2,22 @@
 import type { Adapter } from './adapter.ts';
 import { settled } from './adapter.ts';
 
-const URL = 'http://127.0.0.1:3101/';
+// TARGET_HOST: host.docker.internal when the browser runs in Docker (npm run audit).
+const url = () => `http://${process.env.TARGET_HOST ?? '127.0.0.1'}:3101/`;
 const replies = '.chat-assistant #response-content-container .markdown-prose';
 
 export const openWebui: Adapter = {
   id: 'open-webui',
   mode: 'auto-chat',
   async open(page) {
-    await page.goto(URL);
+    await page.goto(url());
     await page.locator('#chat-input').waitFor();
     // The release-notes dialog opens once per browser profile and blocks the compose box.
     const ok = page.getByRole('button', { name: "Okay, Let's Go!" });
-    if (await ok.isVisible({ timeout: 2000 }).catch(() => false)) await ok.click();
+    await ok
+      .waitFor({ timeout: 3000 })
+      .then(() => ok.click())
+      .catch(() => {});
   },
   async send(page, fx) {
     const before = await page.locator(replies).count();

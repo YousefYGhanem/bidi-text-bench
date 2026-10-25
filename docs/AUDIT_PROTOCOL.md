@@ -23,6 +23,16 @@ Automated runs write these to `env.json`. For manual runs, you fill in the same 
 ## 3. Automated runs
 `npm run audit -- --target <id>` runs every verified fixture on each applicable surface and writes the results to `audit/runs/<date>-<target>/`. Then run `/audit <id>` to have Claude summarise and group the failures for your triage.
 
+- **Before a run:** start `npm run mock-llm` and the target (`docker compose -f audit/targets/<id>/compose.yaml up -d`). Afterwards, run `docker compose ... down`.
+- **Flags:**
+  - `--browser chromium|firefox|webkit|all` (default chromium);
+  - `--viewport desktop|mobile|all` (default desktop);
+  - `--only <id,id>` for a subset;
+  - `--local` uses this machine's browsers instead of the Docker image. It is for debugging only, and `env.json` records it.
+- **Surfaces:** the runner checks the `message` surface only for now. `env.json` lists `input`, `stream` and `title` as skipped, with the reason.
+- **Timing:** about 2.3 s per fixture per browser and viewport (80 fixtures: 184 s in Chromium for NextChat on 2026-10-25). The 15-minute budget for 200 fixtures therefore covers 2 browser × viewport combinations, not all 6. Run the rest separately.
+- **Runs stay local** (`audit/runs/` is gitignored) until each failure is reported upstream, per §1.5.
+
 ## 4. Manual runs (closed products)
 Effort is capped at **30 fixtures per product**, stratified across categories (the helper picks them). That's about 1 hour per product.
 
