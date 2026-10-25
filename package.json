@@ -10,7 +10,7 @@
     "node": ">=22"
   },
   "scripts": {
-    "check": "npm run lint && npm run typecheck && npm test && npm run corpus:validate",
+    "check": "npm run lint && npm run typecheck && npm test && npm run mock-llm:test && npm run corpus:validate",
     "lint": "biome check .",
     "typecheck": "tsc",
     "test": "vitest run",
@@ -20,7 +20,8 @@
     "golden": "node src/cli/build-golden.ts",
     "review": "node src/cli/review.ts",
     "zoo": "node src/cli/zoo.ts",
-    "mock-llm": "node scripts/todo.mjs mock-llm 3.1",
+    "mock-llm": "node tools/mock-llm/server.ts",
+    "mock-llm:test": "node --test tools/mock-llm/",
     "audit": "node scripts/todo.mjs audit 3.3",
     "manual": "node scripts/todo.mjs manual 3.4",
     "triage": "node scripts/todo.mjs triage 3.4",

@@ -125,12 +125,12 @@ export interface Adapter {
 - **manual:** closed products. See `docs/AUDIT_PROTOCOL.md`.
 
 ## 6. Mock LLM (`tools/mock-llm/`)
-- Uses Node's `http` module only, with no dependencies.
-- Implements the OpenAI-compatible `GET /v1/models` and `POST /v1/chat/completions`, both streaming and non-streaming.
-- Finds `#fx:<id>` in the last user message and replies with that fixture's `text` verbatim.
+- Uses Node's `http` module only. Its one import is the project's corpus loader, which reads every fixture (drafts included; the audit picks the ids). Run it with `npm run mock-llm`; the model id is `bidi-text-bench-mock`.
+- Implements the OpenAI-compatible `GET /v1/models` and `POST /v1/chat/completions`, both streaming and non-streaming. The `/v1` prefix is optional, because chat UIs differ in whether their base URL ends in it.
+- Finds `#fx:<id>` in the last user message and replies with that fixture's `text` verbatim. String content and the multimodal parts format are both read. With no `#fx:` id, or an unknown one, it replies with a short `bidi-text-bench mock:` note, not an error, so side requests from the UI (such as title generation) do not break it.
 - Streaming splits the reply by graphemes: `MOCK_CHUNK` per chunk (default 3), with `MOCK_DELAY_MS` between chunks (default 30).
-- Listens on port `MOCK_LLM_PORT` (11435). Containers reach it at `http://host.docker.internal:11435/v1`.
-- Ships with `node --test` self-tests for both modes.
+- Listens on `MOCK_LLM_HOST` (default 127.0.0.1) and port `MOCK_LLM_PORT` (11435). Containers reach it at `http://host.docker.internal:11435/v1`.
+- Ships with `node --test` self-tests for both modes (`npm run mock-llm:test`, part of `npm run check`).
 
 ## 7. Determinism and evidence
 - Run audits and take screenshots in the project Docker image. It is based on `mcr.microsoft.com/playwright:v<X.Y.Z>-noble`, with the version pinned to match `@playwright/test`. The official image ships no Arabic- or Hebrew-specific fonts, so add `fonts-noto-core` and `fonts-noto-mono`. The image build asserts both languages with `fc-list :lang=ar` and `:lang=he`, filtered to Noto faces: the base image's generic fonts already cover both languages (8 Arabic and 28 Hebrew faces in v1.64.1), so an unfiltered check would always pass. A unit test keeps the image tag equal to the `@playwright/test` version.
