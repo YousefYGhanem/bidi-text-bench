@@ -302,7 +302,12 @@ export async function probeInPage(root: Element, exclude: string[]): Promise<Pro
       textOverflow: rootStyle.textOverflow,
       box: { left: rootBox.left, right: rootBox.right, top: rootBox.top, bottom: rootBox.bottom },
       clipped: root.scrollWidth > root.clientWidth + 1 || root.scrollHeight > root.clientHeight + 1,
-      clippedX: root.scrollWidth > root.clientWidth + 1 && rootStyle.overflowX !== 'visible',
+      // Not scrollWidth alone: Chromium leaves overflow past the start (right) edge of an RTL
+      // container out of scrollWidth, which is exactly the overflow that cuts a title's start.
+      clippedX:
+        rootStyle.overflowX !== 'visible' &&
+        (root.scrollWidth > root.clientWidth + 1 ||
+          graphemes.some((g) => g.x < rootBox.left || g.x > rootBox.right)),
       controls,
     },
   };

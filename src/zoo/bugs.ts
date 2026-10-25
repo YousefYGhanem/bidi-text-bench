@@ -225,6 +225,46 @@ export const BUGS: Bug[] = [
         .replace('<table>', '<table dir="ltr">')
         .replace(/<(td|th)>(.*?)<\/(td|th)>/g, '<$1><div>$2</div></$3>'),
   },
+  // Added in task 3.0 (Gate G2 condition): every TRUNC fixture, and tofu from real code points.
+  ...['ar-trunc-002', 'ar-trunc-003', 'he-trunc-002', 'he-trunc-003'].map(
+    (fixture, k): Bug => ({
+      id: `TRUNC-${k + 3}`,
+      rule: 'TRUNC',
+      fixture,
+      why: 'RTL title truncated as LTR: the start is cut',
+      css: title,
+      html: (h) => h.replace(' dir="rtl"', ' dir="ltr"'),
+    }),
+  ),
+  {
+    id: 'TRUNC-7',
+    rule: 'TRUNC',
+    fixture: 'he-trunc-003',
+    why: 'unicode-bidi: plaintext lays the Latin-first title out LTR, so its start is cut',
+    css: `${title} .fx p { unicode-bidi: plaintext; }`,
+  },
+  {
+    id: 'FONT-2',
+    rule: 'FONT',
+    fixture: 'ar-font-002',
+    // Sunuwar: the Docker image falls back to Unifont, which covers unassigned and most new code points.
+    why: 'a Sunuwar letter (Unicode 16) no font covers (U+11BC1) is drawn as tofu',
+    html: (h) => h.replace('</p>', ' \u{11BC1}</p>'),
+  },
+  {
+    id: 'FONT-3',
+    rule: 'FONT',
+    fixture: 'he-font-001',
+    why: 'tofu (Sunuwar U+11BC0, Unicode 16) inside a Hebrew word',
+    html: (h) => h.replace('שלום', 'של\u{11BC0}ום'),
+  },
+  {
+    id: 'FONT-4',
+    rule: 'FONT',
+    fixture: 'ar-font-001',
+    why: 'a plane-16 private-use character (6 hex digits) is drawn as tofu',
+    html: (h) => h.replace('</p>', ' \u{10FFFD}</p>'),
+  },
 ];
 
 export const CONTROLS: ZooPage[] = [
@@ -247,5 +287,25 @@ export const CONTROLS: ZooPage[] = [
     fixture: 'ar-font-001',
     why: 'very large Arabic text is drawn, not tofu',
     css: '.fx { font-size: 160px; }',
+  },
+  ...['ar-trunc-002', 'ar-trunc-003', 'he-trunc-002', 'he-trunc-003'].map(
+    (fixture): ZooPage => ({
+      id: `OK-TRUNC-${fixture}`,
+      fixture,
+      why: 'RTL title truncated correctly',
+      css: title,
+    }),
+  ),
+  {
+    id: 'OK-TRUNC-padded',
+    fixture: 'he-trunc-001',
+    why: 'correct truncation inside a padded title box',
+    css: `${title} .fx { padding: 0 12px; }`,
+  },
+  {
+    id: 'OK-FONT-symbols',
+    fixture: 'he-font-002',
+    why: 'text-style symbols (©, ®, ™) are drawn, not tofu',
+    html: (h) => h.replace('</p>', ' © ® ™</p>'),
   },
 ];

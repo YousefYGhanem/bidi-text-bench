@@ -73,7 +73,7 @@ Each rule returns `pass`, `fail` or `na`, with evidence. There is one rule per c
 - **NP** compares the left and right neighbours of each punctuation or symbol grapheme. **NUM** compares each number group plus one neighbour on each side. Both ignore author-span graphemes.
 - **LIST** also covers blockquotes: the quote bar (the larger of the left and right borders) must be on the inline-start side.
 - **TRUNC** applies only when the root is clipped horizontally. The cut must be on the inline-end side: in RTL, hidden graphemes lie past the left edge and none past the right edge (mirrored for LTR). This is defined visually, because an embedded LTR word in an RTL title legitimately loses its logical start.
-- **FONT** (notdef): the method depends on how the engine draws a missing glyph, which the probe tests per font. If U+E000 and U+E001 (private use; no font covers them) draw identically, as in Chromium and WebKit, a grapheme counts as missing when it is pixel-identical to U+E000. Otherwise (Firefox draws a box with the code point in hex), it counts as missing when its advance and ink box equal a private-use reference with as many hex digits. Metrics alone gave false positives on Windows code fonts, and WebKit reports no ink box. Emoji and whitespace are skipped. A system "last resort" font that draws different boxes per block would still hide missing glyphs (false negatives).
+- **FONT** (notdef): the method depends on how the engine draws a missing glyph, which the probe tests per font. If U+E000 and U+E001 (private use; no font covers them) draw identically, as in Chromium and WebKit, a grapheme counts as missing when it is pixel-identical to U+E000. Otherwise (Firefox draws a box with the code point in hex), it counts as missing when its advance and ink box equal a private-use reference with as many hex digits. Metrics alone gave false positives on Windows code fonts, and WebKit reports no ink box. Emoji and whitespace are skipped. A system "last resort" font that draws different boxes per block would still hide missing glyphs (false negatives). The Playwright Docker image falls back to Unifont, which draws a glyph (often a hex placeholder) for unassigned code points and most new scripts, so those are not tofu there; the zoo therefore uses Sunuwar (Unicode 16), which no installed font covers on Windows or in the image.
 - A rule with nothing to check returns `na`. On the golden page, BD, AL and FONT evaluate all 80 fixtures, NP 74, NUM 19, CODE 19, ISO 18, LIST 6 and TBL 6. TRUNC needs a truncated title surface.
 
 **Rule review (task 2.6, 2026-10-24).** An independent rule-reviewer agent reviewed each rule. Every claimed miss or false alarm was first added to the zoo and run *before* any fix, so only confirmed defects were changed.
@@ -87,7 +87,7 @@ Each rule returns `pass`, `fail` or `na`, with evidence. There is one rule per c
   - NUM ignored author-span neighbours inconsistently with NP.
   - NUM was missing the Arabic percent sign ٪.
   - ISO and NUM reported pass while silently skipping spans or numbers; the skips are now in the evidence, and all-skipped returns `na`.
-  - TRUNC now needs *horizontal* clipping (`clippedX`).
+  - TRUNC now needs *horizontal* clipping (`clippedX`). Not `scrollWidth` alone: Chromium leaves overflow past the start (right) edge of an RTL box out of `scrollWidth`, so the probe also counts graphemes drawn outside the box.
   - TBL groups cells by table row instead of y, and a table with no multi-cell row is `na`.
   - The probe waits for `document.fonts.ready`, and the tofu check skips only real emoji, so © ® ™ are checked.
 - **New pages that were already caught** (kept as regression tests): ISO on a mention and on `--help`; NP with punctuation trapped in an LTR span; NUM with date parts isolated separately; controls for vertical clipping and 160 px Arabic.
@@ -152,6 +152,7 @@ export interface Adapter {
   - False positives are counted on `golden.html` (every fixture) and on **control** pages, which are correct renderings the golden page cannot show, such as properly truncated RTL titles.
   - CI runs `tests/e2e/zoo.spec.ts` in all three engines and both viewports.
   - To add a bug: add an entry to `BUGS`, run `npm run zoo`, and commit the new page. If a new correct pattern would otherwise go unchecked, add a control as well.
+  - Gate G2 condition (task 3.0): TRUNC has a bug and a control for every truncation fixture, plus a `unicode-bidi: plaintext` bug and a padded-box control; FONT has tofu at the end of a paragraph, inside a Hebrew word and from a 6-hex-digit code point, plus a © ® ™ control.
   - The zoo already caught one false positive: a correctly truncated Arabic title with an embedded English word. TRUNC is now defined visually (the cut is on the inline-end side) instead of logically.
 - **Calibration** (§2) in all three engines.
 - **Dogfooding:** bidi-text-bench checks its own review tool and report site. CI also runs axe-core (WCAG 2.1 AA) on them.

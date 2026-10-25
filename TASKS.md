@@ -50,7 +50,7 @@ For details and acceptance criteria, see `docs/PLAN.md` §6. At the end of each 
 - [x] G2 [Y] Accept or reject each rule, based on its one-paragraph logic summary and the zoo table.
 
 ## Phase 3 — Pilot (week 4)
-- [ ] 3.0 [C] G2 condition: strengthen the FONT and TRUNC zoo (more labelled bugs and controls) before the pilot.
+- [x] 3.0 [C] G2 condition: strengthen the FONT and TRUNC zoo (more labelled bugs and controls) before the pilot.
 - [ ] 3.1 [C] Build tools/mock-llm: OpenAI-compatible, streaming and non-streaming, with `node --test` self-tests.
 - [ ] 3.2 [C] Write the adapter interface plus 2 auto-chat adapters. Compose files go under audit/targets/<id>/.
 - [ ] 3.3 [C] Build `npm run audit -- --target <id>`. It writes audit/runs/<date>-<target>/ containing env.json, results.jsonl and evidence/.
