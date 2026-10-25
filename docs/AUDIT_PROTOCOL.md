@@ -44,6 +44,18 @@ Effort is capped at **30 fixtures per product**, stratified across categories (t
 
 The helper saves `audit/manual/<date>-<target>/results.jsonl` and the evidence, in the same format as automated runs.
 
+- **Which fixtures:** the helper picks the same 30 for every product (round robin over category × language, with a fixed seed), so products can be compared. `--count` changes the number.
+- **First screen:** an environment form (§2), saved as `env.json`.
+- **Then, per fixture:**
+  - the prompt, with a Copy button (key C);
+  - two paste boxes, for the input screenshot and the reply screenshot;
+  - the reference render, for comparison;
+  - the checks: the fixture's own category plus BD and AL on the reply, and INP on the compose box.
+- **Content changed** is recorded as one `error` line.
+- **Saving:** S saves; J and K move between fixtures. Re-saving a fixture replaces its lines.
+- **Resuming:** `--resume audit/manual/<dir>` continues a session.
+- Lines have `viewport: "manual"` and the browser from the form. Manual runs stay local (gitignored) like automated ones.
+
 ## 5. Triage (you)
 `npm run triage` lists every failure with its expected and actual results and its evidence. Give each failure one label, and a **cause** from FIXTURE_SPEC §2:
 - **confirmed**;
@@ -52,6 +64,12 @@ The helper saves `audit/manual/<date>-<target>/results.jsonl` and the evidence, 
 - **won't report**: give the reason.
 
 Confirm or change the severity of each failure as you go. Nothing reaches the report untriaged.
+
+- **What the view shows:** `npm run triage` opens a local page over every run in `audit/runs/` and `audit/manual/`; `--run <dir>` limits it to one run. One item covers one fixture, surface and rule, across all browsers and viewports, and lists each one's detail, expected and actual order, styles and screenshot.
+- **Labels:** `confirmed`, `false-positive`, `duplicate` (needs the issue link) or `wont-report` (needs the reason), plus the cause and the severity.
+- **Keys:** S saves; U jumps to the next untriaged item; J and K move.
+- **Storage:** decisions are appended to `<run>/triage.jsonl` and the latest per item wins. `results.jsonl` is never edited.
+- **Checking:** `npm run triage -- --check` prints the untriaged count and exits 1 while it is not 0.
 
 ## 6. Scoring (rubric v0; you set the final weights at Gate G4)
 For each category, compute a severity-weighted pass rate: *s = Σ(w·pass) / Σ(w·applicable)*. The weights are w = 3 for blocker, 2 for major and 1 for minor.

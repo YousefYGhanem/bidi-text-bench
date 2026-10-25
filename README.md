@@ -24,6 +24,10 @@ npm run docker:test    # Playwright in the reference image (Noto Arabic and Hebr
 npm run golden         # rebuild zoo/golden.html (the reference render) after editing fixtures
 npm run zoo            # bug zoo: recall and false positives per checker rule
 npm run review         # review draft fixtures in the browser (yours only; see FIXTURE_SPEC §5)
+npm run mock-llm       # the mock LLM that auto-chat targets talk to
+npm run audit -- --target <id>   # run a self-hosted target (docs/AUDIT_PROTOCOL.md §3)
+npm run manual -- --target <id>  # helper for a closed product, by hand (§4)
+npm run triage         # label every failure (§5)
 ```
 
 Screenshots and audit evidence come from the Docker image, not from your machine's fonts.

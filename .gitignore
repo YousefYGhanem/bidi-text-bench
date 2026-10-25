@@ -17,7 +17,7 @@ drafts/
 scratch/
 # Audit runs stay local until each failure is reported upstream (AUDIT_PROTOCOL §1.5).
 audit/runs/
-audit/manual/*/raw/
+audit/manual/
 CLAUDE.local.md
 .claude/settings.local.json
 

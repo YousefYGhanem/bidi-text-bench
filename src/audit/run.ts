@@ -15,10 +15,12 @@ export type ViewportName = keyof typeof VIEWPORTS;
 
 export interface ResultLine extends Omit<RuleResult, 'status' | 'rule'> {
   target: string;
-  surface: 'message';
+  surface: 'message' | 'input' | 'stream' | 'title';
   browser: string;
-  viewport: ViewportName;
-  rule: RuleResult['rule'] | null;
+  /** `manual`: a person ran it (npm run manual) in a window of their own size. */
+  viewport: ViewportName | 'manual';
+  /** A rule id, or a category or surface rule (MIR, COPY, INP) checked by hand; null on errors. */
+  rule: string | null;
   /** `error`: the adapter or probe threw, so no rule ran (evidence.detail says why). */
   status: RuleResult['status'] | 'error';
   evidence: RuleResult['evidence'] & { screenshot?: string };

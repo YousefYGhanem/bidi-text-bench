@@ -23,8 +23,8 @@
     "mock-llm": "node tools/mock-llm/server.ts",
     "mock-llm:test": "node --test tools/mock-llm/",
     "audit": "node src/cli/audit.ts",
-    "manual": "node scripts/todo.mjs manual 3.4",
-    "triage": "node scripts/todo.mjs triage 3.4",
+    "manual": "node src/cli/manual.ts",
+    "triage": "node src/cli/triage.ts",
     "report": "node scripts/todo.mjs report 6.1"
   },
   "devDependencies": {
