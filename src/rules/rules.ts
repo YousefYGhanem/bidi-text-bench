@@ -126,8 +126,28 @@ const check: Record<RuleId, (c: Ctx) => Outcome> = {
     const blocks = textBlocks(c);
     if (!blocks.length) return na('no text blocks');
     // Centred blocks (by design) are skipped, not decisive: a later block can still be wrong.
-    const judged = blocks.filter(({ b }) => alignedSide(b) !== 'center');
-    if (!judged.length) return na('every block is centred by design');
+    const centred = blocks.filter(({ b }) => alignedSide(b) === 'center');
+    // So are blocks where no line has visible free space (a bubble that shrinks to fit its text):
+    // left and right alignment draw the same there, and a wrong direction is BD's finding. Space
+    // under one text height doesn't count: inline padding (code boxes) is drawn but not measured.
+    const roomy = blocks.filter(({ b }) => {
+      const width = b.content.right - b.content.left;
+      return b.lines.some((l) => {
+        const gs = l.visual.map((i) => c.probe.graphemes[i]).filter((g) => g !== undefined);
+        if (!gs.length) return false;
+        const extent =
+          Math.max(...gs.map((g) => g.x + g.width / 2)) -
+          Math.min(...gs.map((g) => g.x - g.width / 2));
+        return width - extent > Math.max(...gs.map((g) => g.height));
+      });
+    });
+    const judged = roomy.filter(({ b }) => alignedSide(b) !== 'center');
+    if (!judged.length)
+      return na(
+        centred.length === blocks.length
+          ? 'every block is centred by design'
+          : 'no block has room for its alignment to show',
+      );
     for (const { b, i } of judged) {
       const side = alignedSide(b);
       if (side !== want)

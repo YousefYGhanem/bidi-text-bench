@@ -27,6 +27,7 @@ const probe: ProbeResult = {
       unicodeBidi: 'isolate',
       textAlign: 'start',
       box: { left: 0, right: 200 },
+      content: { left: 0, right: 200 },
       quoteBar: null,
       container: null,
       cell: null,

@@ -108,6 +108,7 @@ Each rule returns `pass`, `fail` or `na`, with evidence. There is one rule per c
 - NUM compares a neighbour side only when both orders have one.
 - A link that wraps a listed isolate span plus punctuation is isolated as the span. The reference renderer keeps that punctuation outside the link (he-iso-003).
 - `Bug.clean` lists rules that must not fail on a bug page, for false positives that only occur next to a real bug.
+- AL skips blocks with no free space on any line (a bubble that shrinks to fit its text), because alignment can't be seen there. The probe records each block's content box for this (FP-6).
 
 Result record:
 ```json

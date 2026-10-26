@@ -38,6 +38,8 @@ export interface ProbeBlock {
   textAlign: string;
   /** The block element's own box, in CSS px. */
   box: { left: number; right: number };
+  /** Its content box (inside padding and borders), where text-align places the lines. */
+  content: { left: number; right: number };
   /** Inside a blockquote: the side its quote bar (border) is drawn on, or null. */
   quoteBar: 'left' | 'right' | null;
   /**
@@ -267,6 +269,16 @@ export async function probeInPage(root: Element, exclude: string[]): Promise<Pro
       unicodeBidi: style.unicodeBidi,
       textAlign: style.textAlign,
       box: { left: el.getBoundingClientRect().left, right: el.getBoundingClientRect().right },
+      content: {
+        left:
+          el.getBoundingClientRect().left +
+          Number.parseFloat(style.borderLeftWidth) +
+          Number.parseFloat(style.paddingLeft),
+        right:
+          el.getBoundingClientRect().right -
+          Number.parseFloat(style.borderRightWidth) -
+          Number.parseFloat(style.paddingRight),
+      },
       quoteBar: (() => {
         const q = el.closest('blockquote');
         if (!q) return null;

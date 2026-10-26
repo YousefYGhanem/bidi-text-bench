@@ -15,6 +15,9 @@ export const nextchat: Adapter = {
   async open(page) {
     await page.goto(url());
     await page.locator('textarea').waitFor();
+    // A new chat opens with a greeting from the bot. It can render after the compose box; counted
+    // late, it was taken for the fixture's reply (FP-7).
+    await page.locator(replies).first().waitFor();
   },
   async send(page, fx) {
     const before = await page.locator(replies).count();

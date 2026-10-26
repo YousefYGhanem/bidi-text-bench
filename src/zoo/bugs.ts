@@ -310,6 +310,24 @@ export const BUGS: Bug[] = [
     html: (h) => h.replace(' dir="rtl"', ' dir="ltr"'),
     clean: ['NUM'],
   },
+  // FP-6: NextChat's reply bubble shrinks to fit its text, so alignment can't be seen.
+  {
+    id: 'BD-5',
+    rule: 'BD',
+    fixture: 'he-bd-001',
+    why: 'message laid out LTR in a shrink-to-fit bubble; its alignment has no room to show, so AL must not fail',
+    // nowrap: one line at both viewports, like a short chat reply.
+    css: '.fx { width: fit-content; white-space: nowrap; }',
+    html: (h) => h.replace(' dir="rtl"', ' dir="ltr"'),
+    clean: ['AL'],
+  },
+  {
+    id: 'AL-4',
+    rule: 'AL',
+    fixture: 'he-al-001',
+    why: 'narrow shrink-to-fit bubble whose text wraps, left-aligned: the last line shows it',
+    css: '.fx { width: fit-content; max-width: 220px; } .fx p { text-align: left; }',
+  },
 ];
 
 export const CONTROLS: ZooPage[] = [
@@ -377,5 +395,17 @@ export const CONTROLS: ZooPage[] = [
     why: 'autolink swallowed the hyphen but is not isolated, so the hyphen is drawn in place',
     css: '.fx a { unicode-bidi: normal; }',
     html: autolinkHyphen,
+  },
+  {
+    id: 'OK-AL-shrink-code',
+    fixture: 'ar-code-004',
+    why: 'one line in a shrink-to-fit bubble ending in padded inline code (NextChat): no visible room',
+    css: '.fx { width: fit-content; white-space: nowrap; } .fx p { text-align: left; } .fx code { padding: 2px 6px; }',
+  },
+  {
+    id: 'OK-AL-shrink',
+    fixture: 'he-al-001',
+    why: 'one line in a shrink-to-fit bubble: text-align: left has no room to show',
+    css: '.fx { width: fit-content; white-space: nowrap; } .fx p { text-align: left; }',
   },
 ];

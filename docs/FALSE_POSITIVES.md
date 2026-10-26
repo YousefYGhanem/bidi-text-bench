@@ -50,5 +50,24 @@ Found by triage of the pilot runs. Sonnet proposed the labels, and Opus verified
   - Bug `NP-4`: the same link isolated LTR, which moves the hyphen and must fail.
 - **Open (Yousef):** the apps' link `mailto:-support@example.com` points to a wrong address, and its underline includes the hyphen. That is a product defect outside the bidi rules; whether to report it is undecided.
 
+### FP-6: AL failed alignment that a reader can't see
+- **Seen:** AL failed on 10 NextChat groups (ar-al-003, ar-bd-001/002/004, ar-code-004, ar-trunc-002, he-bd-001/002/004, he-trunc-003), each a single line laid out LTR. Found by the second verification pass (Opus) on 2026-10-26.
+- **Cause:** NextChat's reply bubble shrinks to fit its text, so a one-line paragraph has no free space, and left and right alignment draw identically. AL judged only the computed `text-align`. The LTR layout itself is real and is counted by BD and NP.
+- **Fix:**
+  - The probe records each block's content box.
+  - AL skips a block when none of its lines has more free space than one text height, as it already skips centred blocks. It returns `na` when no block is left to judge.
+  - The threshold started at 2 px. The re-audit showed ar-code-004 still failing: its line ends in inline code whose padded grey box is drawn but not measured from the glyphs. A misalignment smaller than one character isn't visible, so one text height is the threshold (control `OK-AL-shrink-code`).
+- **Zoo:**
+  - Control `OK-AL-shrink`: one line, `text-align: left`, in a shrink-to-fit container.
+  - Bug `BD-5`: the NextChat case, laid out LTR in a shrink-to-fit bubble, with `clean: ['AL']`.
+  - Bug `AL-4`: a narrow shrink-to-fit bubble whose text wraps, so the last line shows the wrong alignment. AL must still fail.
+  - The shrink pages use `white-space: nowrap`; at 390 px the text otherwise wraps, and then AL failing is correct.
+
+### FP-7: the NextChat adapter probed the greeting instead of the reply
+- **Seen:** BD and NP failures on ar-al-001, in one NextChat run only. The probed text was "Hello! How can I assist you today?", NextChat's greeting, not the fixture.
+- **Cause:** a race in the adapter. `send` counts the bot messages already shown and returns the next one. ar-al-001 is the first fixture of a run, and the greeting rendered just after the compose box appeared, after the count. So the greeting was taken for the reply. Earlier runs won the race by timing.
+- **Fix:** `open()` waits for the greeting before anything is sent.
+- **Not in the zoo:** this is adapter behaviour against a live app. The fix was checked by re-running NextChat (ar-al-001 passes BD again), and the BD/NP failures from that one run were not recorded as findings.
+
 ### Not a checker defect: ISO and CODE double counting
 The verifier noted that the same inline-code defect failed both ISO and CODE. After FP-3 it is counted once, under ISO. Scoring (task 4.3) should still count each fixture once per category, as FIXTURE_SPEC §2 says.
