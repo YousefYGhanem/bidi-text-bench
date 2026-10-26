@@ -68,6 +68,9 @@ kbd { border: 1px solid #aaa; border-radius: 3px; padding: 0 4px; font-size: 12p
 <script>
 ${clientApi(token)}
 let data, index = 0;
+// Agent-proposed labels ([AI…] notes) stay open until Yousef saves them as his own.
+const AI = /^\\[AI[^\\]]*\\]\\s*/;
+const done = (x) => x.decision && !AI.test(x.decision.note);
 const fill = (sel, values) => { $(sel).innerHTML = values.map((v) => '<option>' + esc(v) + '</option>').join(''); };
 async function load() {
   data = await api('items');
@@ -75,16 +78,16 @@ async function load() {
   fill('cause', data.causes);
   fill('severity', data.severities);
   $('labels').innerHTML = data.labels.map((l) => '<label><input type="radio" name="label" value="' + l + '"> ' + l.replace('-', ' ') + '</label>').join('');
-  const open = data.items.findIndex((i) => !i.decision);
+  const open = data.items.findIndex((i) => !done(i));
   show(open === -1 ? 0 : open);
 }
 function show(i) {
   index = Math.max(0, Math.min(data.items.length - 1, i));
   const it = data.items[index];
-  const open = data.items.filter((x) => !x.decision).length;
+  const open = data.items.filter((x) => !done(x)).length;
   $('item').hidden = false;
   $('position').textContent = (index + 1) + ' of ' + data.items.length + ' · ' + open + ' untriaged';
-  $('facts').textContent = it.run + ' · ' + it.fixture + ' · ' + it.surface + ' · ' + (it.rule ?? 'ERROR') + ' · ' + it.severity + (it.decision ? ' · triaged: ' + it.decision.label : '');
+  $('facts').textContent = it.run + ' · ' + it.fixture + ' · ' + it.surface + ' · ' + (it.rule ?? 'ERROR') + ' · ' + it.severity + (it.decision ? (done(it) ? ' · triaged: ' : ' · AI proposal: ') + it.decision.label : '');
   $('render').innerHTML = it.html;
   $('notes').textContent = it.notes ?? '';
   $('count').textContent = it.members.length;
@@ -101,7 +104,7 @@ function show(i) {
   $('cause').value = d?.cause ?? 'other';
   $('severity').value = d?.severity ?? it.severity;
   $('link').value = d?.link ?? '';
-  $('note').value = d?.note ?? '';
+  $('note').value = (d?.note ?? '').replace(AI, '');
 }
 async function save() {
   const it = data.items[index];
@@ -115,7 +118,7 @@ async function save() {
 }
 function nextOpen() {
   const n = data.items.length;
-  for (let k = 1; k <= n; k++) if (!data.items[(index + k) % n].decision) return show((index + k) % n);
+  for (let k = 1; k <= n; k++) if (!done(data.items[(index + k) % n])) return show((index + k) % n);
   show(index);
 }
 $('save').onclick = save;

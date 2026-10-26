@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 import type { ResultLine } from '../../src/audit/run.ts';
 import { allFixtures, loadFixtureFiles } from '../../src/corpus/load.ts';
 import { checksFor, manualLines, pickStratified } from '../../src/manual/manual.ts';
-import { findRuns, recordDecision, triageItems } from '../../src/triage/triage.ts';
+import { findRuns, recordDecision, reviewed, triageItems } from '../../src/triage/triage.ts';
 
 const fixtures = allFixtures(loadFixtureFiles());
 
@@ -125,5 +125,22 @@ describe('triage', () => {
     expect(() => recordDecision(run, { ...base, key: 'x|y|z', label: 'confirmed' }, 'x')).toThrow(
       /no failure/,
     );
+  });
+
+  it('counts agent-proposed labels as not reviewed until Yousef saves his own', () => {
+    const d = (note: string) => ({
+      decision: {
+        key: 'k',
+        label: 'confirmed',
+        cause: 'other',
+        severity: 'major',
+        link: '',
+        note,
+        at: 'T',
+      } as const,
+    });
+    expect(reviewed({ decision: null })).toBe(false);
+    expect(reviewed(d('[AI: proposed by Sonnet, verified by Opus] dir=auto'))).toBe(false);
+    expect(reviewed(d('dir=auto, see [AI] notes'))).toBe(true);
   });
 });

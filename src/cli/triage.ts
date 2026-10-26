@@ -4,7 +4,7 @@
 import { parseArgs } from 'node:util';
 import { allFixtures, loadFixtureFiles } from '../corpus/load.ts';
 import { startTriageServer } from '../triage/server.ts';
-import { findRuns, triageItems } from '../triage/triage.ts';
+import { findRuns, reviewed, triageItems } from '../triage/triage.ts';
 
 const { values } = parseArgs({
   options: {
@@ -17,7 +17,7 @@ const runs = values.run ? [values.run.replace(/[\\/]+$/, '').replaceAll('\\', '/
 if (!runs.length) throw new Error('no runs found in audit/runs or audit/manual');
 
 const items = runs.flatMap(triageItems);
-const open = items.filter((i) => !i.decision).length;
+const open = items.filter((i) => !reviewed(i)).length;
 console.log(`${runs.length} run(s), ${items.length} failure group(s), ${open} untriaged`);
 if (values.check) process.exit(open ? 1 : 0);
 

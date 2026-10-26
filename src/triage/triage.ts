@@ -18,6 +18,11 @@ export const CAUSES = [
 ] as const;
 export const SEVERITIES = ['blocker', 'major', 'minor'] as const;
 
+/** Notes of agent-proposed labels start with this tag; they count as untriaged until Yousef saves them. */
+export const AI_TAG = /^\[AI[^\]]*\]\s*/;
+export const reviewed = (i: Pick<TriageItem, 'decision'>) =>
+  !!i.decision && !AI_TAG.test(i.decision.note);
+
 export interface Decision {
   key: string;
   label: (typeof LABELS)[number];

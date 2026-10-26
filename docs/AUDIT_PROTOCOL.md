@@ -70,6 +70,7 @@ Confirm or change the severity of each failure as you go. Nothing reaches the re
 - **Keys:** S saves; U jumps to the next untriaged item; J and K move.
 - **Storage:** decisions are appended to `<run>/triage.jsonl` and the latest per item wins. `results.jsonl` is never edited.
 - **Checking:** `npm run triage -- --check` prints the untriaged count and exits 1 while it is not 0.
+- **Agent proposals:** a decision whose note starts with `[AI…]` was proposed by agents, not by you. It still counts as untriaged: the page shows it as an "AI proposal" with its reasoning in the note field, and `--check` keeps counting it until you save the item yourself (that save replaces it).
 
 ## 6. Scoring (rubric v0; you set the final weights at Gate G4)
 For each category, compute a severity-weighted pass rate: *s = Σ(w·pass) / Σ(w·applicable)*. The weights are w = 3 for blocker, 2 for major and 1 for minor.
