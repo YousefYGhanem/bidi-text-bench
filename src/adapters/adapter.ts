@@ -6,6 +6,8 @@ export interface Adapter {
   /** = the audit/targets.yaml id */
   id: string;
   mode: 'auto-chat' | 'auto-page';
+  /** The page open() loads. The audit waits until it answers before starting. */
+  url: () => string;
   /** Navigate and wait until ready. Never log in to real accounts. */
   open(page: Page): Promise<void>;
   /** auto-chat: send "#fx:<id>" and return the finished reply's container. */

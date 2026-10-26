@@ -8,6 +8,7 @@ const targets = parse(readFileSync('audit/targets.yaml', 'utf8')) as { id: strin
 it('every adapter is a listed target with the same mode, and auto-chat ones have a compose file', () => {
   for (const [id, a] of Object.entries(ADAPTERS)) {
     expect(a.id).toBe(id);
+    expect(a.url()).toMatch(/^http:\/\/127\.0\.0\.1:\d+\/$/);
     expect(targets.find((t) => t.id === id)?.mode, id).toBe(a.mode);
     if (a.mode === 'auto-chat') {
       expect(existsSync(`audit/targets/${id}/compose.yaml`), id).toBe(true);

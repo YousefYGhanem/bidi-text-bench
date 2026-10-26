@@ -52,6 +52,13 @@ if (only && fixtures.length !== only.length)
   fail(`not all of --only are verified fixtures: ${only}`);
 const mock = await fetch('http://127.0.0.1:11435/v1/models').catch(() => null);
 if (!mock?.ok) fail('the mock LLM is not running: start `npm run mock-llm` first');
+// Targets take a minute to boot after `docker compose up`; starting early fails every fixture.
+const targetUrl = adapter.url();
+for (let waited = 0; !(await fetch(targetUrl).catch(() => null))?.ok; waited += 5) {
+  if (waited >= 180) fail(`${id} is not answering at ${targetUrl} after 3 minutes`);
+  if (waited === 0) console.log(`waiting for ${id} at ${targetUrl} ...`);
+  await new Promise((r) => setTimeout(r, 5000));
+}
 
 // The image the target's compose file runs, with its digest, for env.json.
 const composeFile = `audit/targets/${id}/compose.yaml`;
@@ -79,6 +86,11 @@ try {
       ...['-p', `127.0.0.1:${PORT}:${PORT}`, '--add-host', 'host.docker.internal:host-gateway'],
       ...[IMAGE, 'npx', 'playwright', 'run-server', '--port', String(PORT), '--host', '0.0.0.0'],
     ]);
+    // Ctrl+C skips `finally`, which left the server holding the port for the next run.
+    process.once('SIGINT', () => {
+      if (container) spawnSync('docker', ['stop', container], { stdio: 'ignore' });
+      process.exit(130);
+    });
     process.env.TARGET_HOST = 'host.docker.internal';
     for (const n of names) {
       const engine = engines[n as keyof typeof engines];

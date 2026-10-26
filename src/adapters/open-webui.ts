@@ -9,6 +9,7 @@ const replies = '.chat-assistant #response-content-container .markdown-prose';
 export const openWebui: Adapter = {
   id: 'open-webui',
   mode: 'auto-chat',
+  url,
   async open(page) {
     await page.goto(url());
     await page.locator('#chat-input').waitFor();

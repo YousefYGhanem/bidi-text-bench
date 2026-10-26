@@ -11,6 +11,7 @@ const replies =
 export const nextchat: Adapter = {
   id: 'nextchat',
   mode: 'auto-chat',
+  url,
   async open(page) {
     await page.goto(url());
     await page.locator('textarea').waitFor();

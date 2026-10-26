@@ -9,6 +9,7 @@ import { escapeHtml } from '../../src/render/reference.ts';
 const fake = (dir: string, broken = false): Adapter => ({
   id: 'fake',
   mode: 'auto-chat',
+  url: () => 'about:blank',
   async open() {},
   async send(page, fx) {
     if (broken) throw new Error('reply container not found\nstack');

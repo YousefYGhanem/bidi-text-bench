@@ -23,7 +23,7 @@ Automated runs write these to `env.json`. For manual runs, you fill in the same 
 ## 3. Automated runs
 `npm run audit -- --target <id>` runs every verified fixture on each applicable surface and writes the results to `audit/runs/<date>-<target>/`. Then run `/audit <id>` to have Claude summarise and group the failures for your triage.
 
-- **Before a run:** start `npm run mock-llm` and the target (`docker compose -f audit/targets/<id>/compose.yaml up -d`). Afterwards, run `docker compose ... down`.
+- **Before a run:** start `npm run mock-llm` and the target (`docker compose -f audit/targets/<id>/compose.yaml up -d`). Afterwards, run `docker compose ... down`. The audit waits up to 3 minutes for the target to answer, because Open WebUI takes about a minute to boot. Ctrl+C also stops the browser container.
 - **Flags:**
   - `--browser chromium|firefox|webkit|all` (default chromium);
   - `--viewport desktop|mobile|all` (default desktop);
