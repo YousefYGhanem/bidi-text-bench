@@ -15,7 +15,10 @@ export interface ProbeGrapheme {
   block: number;
   /** Nearest p, li, pre, code, a, td, textarea or contenteditable element, or null. */
   role: string | null;
-  /** Computed direction of the nearest code or pre ancestor, or null outside code. */
+  /**
+   * Computed direction of the nearest code, pre or CodeMirror (.cm-content) ancestor; 'none' for
+   * inline code with unicode-bidi: normal, where CSS ignores direction; null outside code.
+   */
   codeDirection: string | null;
   /** Drawn as the missing-glyph box (tofu): no font on this machine has it. */
   notdef: boolean;
@@ -40,6 +43,7 @@ export interface ProbeBlock {
   /**
    * Nearest structural container inside the root (the block itself counts): li, td, th, pre or
    * blockquote. Rules use this, not `tag`, so wrappers such as li > p or td > div don't hide it.
+   * A CodeMirror editor's content (.cm-content, div lines) counts as pre.
    */
   container: 'li' | 'td' | 'th' | 'pre' | 'blockquote' | null;
   /** For td/th containers: table index in the root, row index in the table, column index. */
@@ -120,8 +124,10 @@ export async function probeInPage(root: Element, exclude: string[]): Promise<Pro
   };
 
   const codeDirectionOf = (el: Element) => {
-    const code = el.closest('code, pre');
-    return code && (root.contains(code) || code === root) ? getComputedStyle(code).direction : null;
+    const code = el.closest('code, pre, .cm-content');
+    if (!code || !(root.contains(code) || code === root)) return null;
+    const s = getComputedStyle(code);
+    return s.display === 'inline' && s.unicodeBidi === 'normal' ? 'none' : s.direction;
   };
   // Tofu check, method chosen by what the engine does (measured in Chromium, WebKit, Firefox):
   // - one notdef glyph for every missing character (U+E000 and U+E001 draw alike, as in Chromium
@@ -171,10 +177,26 @@ export async function probeInPage(root: Element, exclude: string[]): Promise<Pro
   const blockEls: Element[] = [];
   const graphemes: ProbeGrapheme[] = [];
   let text = '';
+  let lastBlock: Element | null = null;
   for (const node of textNodes) {
     const value = node.nodeValue ?? '';
     const parent = node.parentElement ?? root;
     const blockEl = blockOf(parent);
+    // Sibling blocks are separate bidi paragraphs even with no newline between them in the DOM
+    // (CodeMirror's div lines, apps without whitespace nodes); nested blocks keep one text run.
+    // Whitespace-only nodes (Svelte leaves them beside blocks, even directly in the root) don't
+    // count: their block is often an ancestor of everything that follows.
+    if (value.trim()) {
+      if (
+        lastBlock &&
+        !lastBlock.contains(blockEl) &&
+        !blockEl.contains(lastBlock) &&
+        text &&
+        !text.endsWith('\n')
+      )
+        text += '\n';
+      lastBlock = blockEl;
+    }
     let block = blockEls.indexOf(blockEl);
     if (block === -1) block = blockEls.push(blockEl) - 1;
     const role = roleOf(parent);
@@ -209,8 +231,10 @@ export async function probeInPage(root: Element, exclude: string[]): Promise<Pro
   };
   const tables = [...root.querySelectorAll('table')];
   const structure = (el: Element) => {
-    const c = inRoot(el.closest('li, td, th, pre, blockquote'));
-    const container = (c?.tagName.toLowerCase() ?? null) as ProbeBlock['container'];
+    const c = inRoot(el.closest('li, td, th, pre, blockquote, .cm-content'));
+    const container = (
+      c?.matches('.cm-content') ? 'pre' : (c?.tagName.toLowerCase() ?? null)
+    ) as ProbeBlock['container'];
     const row = c?.closest('tr');
     const table = c?.closest('table');
     const cell =

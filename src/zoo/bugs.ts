@@ -15,9 +15,29 @@ export interface ZooPage {
 
 export interface Bug extends ZooPage {
   rule: RuleId;
+  /** Rules that must not fail on this page: a false positive next to a real bug. */
+  clean?: RuleId[];
 }
 
 const noDir = (h: string) => h.replace(' dir="rtl"', '');
+// Open WebUI shows code blocks in CodeMirror, not pre > code (pilot, 2026-10-26).
+const codeMirror = (h: string) =>
+  h.replace(
+    // As in Open WebUI's DOM: no newline before the editor or between lines, and Svelte's
+    // whitespace text nodes beside and inside the wrapper that holds the editor.
+    /\s*<pre><code[^>]*>([\s\S]*?)\n?<\/code><\/pre>/,
+    (_, code: string) =>
+      ` <div dir="ltr"> <div class="cm-editor"><div class="cm-scroller"><div class="cm-content" style="white-space: pre">${code
+        .split('\n')
+        .map((l) => `<div class="cm-line">${l}</div>`)
+        .join('')}</div></div></div></div>`,
+  );
+// Both pilot apps autolink "ל-support@…" with the hyphen inside the link, unisolated.
+const autolinkHyphen = (h: string) =>
+  h.replace(
+    /ל-?<a [^>]*>-?support@example\.com<\/a>|ל-<bdi>support@example\.com<\/bdi>/,
+    'ל<a href="mailto:-support@example.com">-support@example.com</a>',
+  );
 const unisolatedCode = '.fx code { direction: inherit; unicode-bidi: normal; }';
 const title =
   '.fx { width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }';
@@ -265,6 +285,31 @@ export const BUGS: Bug[] = [
     why: 'a plane-16 private-use character (6 hex digits) is drawn as tofu',
     html: (h) => h.replace('</p>', ' \u{10FFFD}</p>'),
   },
+  // Added in task 3.6 from the pilot's false positives (docs/FALSE_POSITIVES.md).
+  {
+    id: 'CODE-4',
+    rule: 'CODE',
+    fixture: 'ar-code-001',
+    why: 'CodeMirror code block laid out RTL and right-aligned',
+    css: '.fx .cm-content { direction: rtl; text-align: right; }',
+    html: codeMirror,
+  },
+  {
+    id: 'NP-4',
+    rule: 'NP',
+    fixture: 'he-iso-003',
+    why: 'an autolink that swallowed the hyphen of "ל-", isolated LTR (plaintext), draws it at the far end',
+    css: '.fx a { unicode-bidi: plaintext; }',
+    html: autolinkHyphen,
+  },
+  {
+    id: 'BD-4',
+    rule: 'BD',
+    fixture: 'ar-list-002',
+    why: 'list laid out LTR; "Firefox 120" stays intact, so NUM must not fail',
+    html: (h) => h.replace(' dir="rtl"', ' dir="ltr"'),
+    clean: ['NUM'],
+  },
 ];
 
 export const CONTROLS: ZooPage[] = [
@@ -307,5 +352,30 @@ export const CONTROLS: ZooPage[] = [
     fixture: 'he-font-002',
     why: 'text-style symbols (©, ®, ™) are drawn, not tofu',
     html: (h) => h.replace('</p>', ' © ® ™</p>'),
+  },
+  {
+    id: 'OK-CODE-codemirror',
+    fixture: 'ar-code-001',
+    why: 'code block shown in CodeMirror (div lines, not pre), correctly LTR',
+    html: codeMirror,
+  },
+  {
+    id: 'OK-CODE-codemirror-he',
+    fixture: 'he-code-002',
+    why: 'CodeMirror lines are separate paragraphs: "# בדיקת כניסה" keeps # at the left',
+    html: codeMirror,
+  },
+  {
+    id: 'OK-CODE-inline-normal',
+    fixture: 'ar-code-001',
+    why: 'inline code with direction: rtl but unicode-bidi: normal, which has no effect',
+    css: '.fx p code { direction: rtl; unicode-bidi: normal; }',
+  },
+  {
+    id: 'OK-NP-autolink-hyphen',
+    fixture: 'he-iso-003',
+    why: 'autolink swallowed the hyphen but is not isolated, so the hyphen is drawn in place',
+    css: '.fx a { unicode-bidi: normal; }',
+    html: autolinkHyphen,
   },
 ];

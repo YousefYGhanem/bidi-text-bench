@@ -30,5 +30,6 @@ export const openWebui: Adapter = {
     return reply;
   },
   input: async (page) => page.locator('#chat-input'),
-  exclude: ['button'],
+  // The code block's toolbar (language label, Collapse/Save/Copy) and CodeMirror's line numbers.
+  exclude: ['button', '.sticky:has(.copy-code-button)', '.cm-gutters'],
 };

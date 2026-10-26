@@ -101,6 +101,14 @@ Each rule returns `pass`, `fail` or `na`, with evidence. There is one rule per c
   - Numbers inside author spans, such as phone numbers, are not checked.
   - Possible false alarm: legitimately RTL content inside `code` (`<code dir="rtl">`) fails CODE. None exists in the corpus; triage decides.
 
+**Pilot fixes (task 3.6, 2026-10-26).** Five false positives from the first real targets, each reproduced in the zoo first. Details are in [FALSE_POSITIVES.md](FALSE_POSITIVES.md).
+- CodeMirror's `.cm-content` counts as a `pre` container.
+- Sibling blocks are separate paragraphs in the probe text, even with no newline between them in the DOM.
+- Inline code with `unicode-bidi: normal` has code direction `none`, because its `direction` has no effect. CODE fails only on `rtl`, and ISO judges what is drawn.
+- NUM compares a neighbour side only when both orders have one.
+- A link that wraps a listed isolate span plus punctuation is isolated as the span. The reference renderer keeps that punctuation outside the link (he-iso-003).
+- `Bug.clean` lists rules that must not fail on a bug page, for false positives that only occur next to a real bug.
+
 Result record:
 ```json
 {"fixture":"ar-iso-001","target":"open-webui","surface":"message","browser":"chromium","rule":"ISO",

@@ -97,6 +97,10 @@ export async function evaluateZoo(page: Page): Promise<ZooRow[]> {
     );
     const r = row(bug.rule);
     r.bugs++;
+    noteFalses(
+      bug.id,
+      results.filter((x) => bug.clean?.includes(x.rule)),
+    );
     if (results.find((x) => x.rule === bug.rule)?.status === 'fail') r.caught++;
     else r.misses.push(bug.id);
   }

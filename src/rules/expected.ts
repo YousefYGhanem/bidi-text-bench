@@ -66,9 +66,12 @@ export function expectedLines(
   // Renderer-owned units (FIXTURE_SPEC §1.7): listed spans, plus inline code (LTR) and links.
   // shortcut: spans are located by string search, so an identical unformatted copy elsewhere in
   // the message is isolated too; switch to probe ranges if a fixture ever repeats a code span.
+  const spans = fx.isolate_spans.filter((s) => probe.text.includes(s));
+  // A link that holds a listed span plus extra characters (an autolink that swallowed the hyphen
+  // of "ל-") is isolated as the span: the fixture defines the unit, not the app's link boundary.
   const isolate = [
-    ...fx.isolate_spans.filter((s) => probe.text.includes(s)),
-    ...roleRuns(probe, 'a'),
+    ...spans,
+    ...roleRuns(probe, 'a').filter((r) => !spans.some((s) => r.includes(s))),
   ];
   const ltrIsolate = [
     ...roleRuns(probe, 'code'),

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="zoo-rule" content="none">
+<meta name="zoo-fixture" content="ar-code-001">
+<title>OK-CODE-inline-normal: inline code with direction: rtl but unicode-bidi: normal, which has no effect</title>
+<style>
+body { margin: 24px; font: 16px/1.6 "Noto Sans Arabic", "Noto Sans Hebrew", "Noto Sans", sans-serif; }
+.fx { max-width: 760px; margin-block: 0 24px; padding: 12px 16px; border: 1px solid #ccc; text-align: start; }
+.fx p, .fx ul, .fx ol, .fx blockquote, .fx table, .fx pre { margin-block: 0 8px; }
+.fx code, .fx kbd, .fx samp { direction: ltr; unicode-bidi: isolate; font-family: "Noto Sans Mono", monospace; }
+.fx pre { direction: ltr; unicode-bidi: isolate; text-align: left; padding: 8px; background: #f4f4f4; overflow-x: auto; }
+.fx a { unicode-bidi: plaintext; }
+.fx ul, .fx ol { padding-inline-start: 2em; }
+.fx blockquote { margin-inline: 0; padding-inline-start: 12px; border-inline-start: 3px solid #999; }
+.fx th, .fx td { text-align: start; padding: 4px 8px; border: 1px solid #ccc; }
+.fx p code { direction: rtl; unicode-bidi: normal; }
+</style>
+</head>
+<body>
+<article class="fx" id="ar-code-001" lang="ar" dir="rtl">
+<p>لتثبيت المكتبة نفّذ الأمرين التاليين:</p>
+<pre><code class="language-bash">$ npm install bidi-js --save-dev
+$ npm test
+</code></pre>
+<p>بعدها يجب أن تظهر رسالة <code>All tests passed</code>.</p>
+</article>
+</body>
+</html>

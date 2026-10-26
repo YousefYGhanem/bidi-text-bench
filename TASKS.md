@@ -56,7 +56,7 @@ For details and acceptance criteria, see `docs/PLAN.md` §6. At the end of each 
 - [x] 3.3 [C] Build `npm run audit -- --target <id>`. It writes audit/runs/<date>-<target>/ containing env.json, results.jsonl and evidence/.
 - [x] 3.4 [C] Build the manual helper (`npm run manual -- --target <id>`) and the triage view (`npm run triage`).
 - [ ] 3.5 [Y] Pilot on 2 automated targets (`/audit`) and 1 manual product. Triage every failure.
-- [ ] 3.6 [P] Fix the rules or adapters behind each false positive, and log it in docs/FALSE_POSITIVES.md.
+- [x] 3.6 [P] Fix the rules or adapters behind each false positive, and log it in docs/FALSE_POSITIVES.md.
 - [ ] 3.7 [P] File the first 2–3 upstream reports. Claude drafts them with `/draft-bug`; you check for duplicates, edit and post. Record them in docs/REPORTS.md.
 - [ ] G3 [Y] The pilot findings are credible and the first reports are filed.
 

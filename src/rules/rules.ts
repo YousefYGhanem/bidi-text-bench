@@ -205,12 +205,19 @@ const check: Record<RuleId, (c: Ctx) => Outcome> = {
       const l = c.lines.find((x) => gs.every((g) => x.actual.includes(g)));
       if (!l) continue; // wraps across lines
       checked++;
-      // The number plus one neighbour on each side (none at a line edge).
-      const slice = (order: number[]) => {
+      // The number plus one neighbour on each side, a side only where both orders have one: a
+      // number at a line edge in just one of them (a flipped base direction, which BD reports)
+      // says nothing about the number itself.
+      const span = (order: number[]) => {
         const pos = gs.map((g) => order.indexOf(g));
-        return order.slice(Math.max(0, Math.min(...pos) - 1), Math.max(...pos) + 2);
+        return [Math.min(...pos), Math.max(...pos), order.length] as const;
       };
-      const [a, e] = [slice(l.actual), slice(l.expected)];
+      const [sa, se] = [span(l.actual), span(l.expected)];
+      const left = sa[0] > 0 && se[0] > 0 ? 1 : 0;
+      const right = sa[1] < sa[2] - 1 && se[1] < se[2] - 1 ? 1 : 0;
+      const slice = (order: number[], [lo, hi]: readonly number[]) =>
+        order.slice((lo as number) - left, (hi as number) + 1 + right);
+      const [a, e] = [slice(l.actual, sa), slice(l.expected, se)];
       const wild = (x: number | undefined) => x !== undefined && c.author.has(x);
       const ok = a.length === e.length && a.every((x, k) => x === e[k] || wild(x) || wild(e[k]));
       if (!ok) return lineFail(c, l, 'a number is reordered or split', gs);
@@ -225,7 +232,8 @@ const check: Record<RuleId, (c: Ctx) => Outcome> = {
   CODE: (c) => {
     const code = c.probe.graphemes.filter((g) => g.codeDirection);
     if (!code.length) return na('no code');
-    const rtl = code.find((g) => g.codeDirection !== 'ltr');
+    // 'none': inline code with unicode-bidi: normal; its direction has no effect (ISO judges it).
+    const rtl = code.find((g) => g.codeDirection === 'rtl');
     if (rtl)
       return {
         status: 'fail',

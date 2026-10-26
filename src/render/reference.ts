@@ -54,11 +54,31 @@ function isolateLooseSpans(fx: Fixture, html: string, spans: string[]): string {
     .join('');
 }
 
+/**
+ * marked's autolinker reads "ל-support@example.com" as the link "-support@example.com". A link
+ * that holds a listed span plus only punctuation around it keeps that punctuation outside, as the
+ * fixture's notes expect (he-iso-003; found in task 3.6).
+ */
+function trimAutolinks(html: string, spans: string[]): string {
+  return html.replace(/<a href="([^"]*)">([^<]*)<\/a>/g, (all, href: string, text: string) => {
+    const s = spans.find((x) => text.includes(x) && text !== x);
+    if (!s) return all;
+    const at = text.indexOf(s);
+    const [pre, post] = [text.slice(0, at), text.slice(at + s.length)];
+    if (!/^[\p{P}\p{S}]+$/u.test(pre + post)) return all;
+    return `${pre}<a href="${href.replace(text, s)}">${s}</a>${post}`;
+  });
+}
+
 export function renderFixture(fx: Fixture): string {
   // Spans with HTML-special characters are left alone here; in practice those are code or links.
   const loose = [...fx.isolate_spans, ...fx.author_spans].filter((s) => s === escapeHtml(s));
   const body = fx.markdown
-    ? isolateLooseSpans(fx, markdown.parse(fx.text, { async: false }) as string, loose)
+    ? isolateLooseSpans(
+        fx,
+        trimAutolinks(markdown.parse(fx.text, { async: false }) as string, loose),
+        loose,
+      )
     : plainText(fx);
   return `<article class="fx" id="${escapeHtml(fx.id)}" lang="${fx.lang}" dir="${fx.base_direction}">\n${body.trim()}\n</article>`;
 }
