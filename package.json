@@ -21,7 +21,7 @@
     "review": "node src/cli/review.ts",
     "zoo": "node src/cli/zoo.ts",
     "mock-llm": "node tools/mock-llm/server.ts",
-    "mock-llm:test": "node --test tools/mock-llm/",
+    "mock-llm:test": "node --test \"tools/mock-llm/*.test.ts\"",
     "audit": "node src/cli/audit.ts",
     "manual": "node src/cli/manual.ts",
     "triage": "node src/cli/triage.ts",
