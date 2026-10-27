@@ -66,18 +66,18 @@
   text: 'شكرًا @sami، عدّلت الملف `/etc/nginx/nginx.conf` وأعدت تشغيل الخدمة.'
   markdown: true
   base_direction: rtl
-  isolate_spans: ['@sami', '/etc/nginx/nginx.conf']
-  author_spans: []
+  isolate_spans: ['/etc/nginx/nginx.conf']
+  author_spans: ['@sami']
   surfaces: [message]
   severity: blocker
   expected_notes: >-
-    "@sami" reads as one unit with "@" at its left end, and the Arabic comma is to its left. The path
-    reads exactly /etc/nginx/nginx.conf, left-to-right, with the leading slash at its left. An
-    unisolated path shows the leading slash jumping to the end, which makes it a different path.
-    "@sami" is kept as an isolate span: even where a UI does not render it as a mention in plain
-    Markdown, it must still read as one left-to-right unit.
-  status: verified
-  verification: { by: 'Yousef Ghanem', at: '2026-10-24T13:54:08.557Z', hash: '312839a9e744af16dff4590a9a9d71a5d001d3d737f40237e15060337221007f' }
+    The path reads exactly /etc/nginx/nginx.conf, left-to-right, with the leading slash at its left.
+    An unisolated path shows the leading slash jumping to the end, which makes it a different path.
+    "@sami" is a plain-text mention, so it is author-owned: shown as correctly authored it reads as
+    one unit with "@" at its left end and the Arabic comma to its left, but a plain-text UI may show
+    the "@" on its right without being penalised.
+  status: draft
+  verification: null
   source: original
   related_issues: []
 

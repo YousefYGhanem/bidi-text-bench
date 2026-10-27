@@ -16,7 +16,7 @@ A **fixture** is one short, realistic piece of mixed-direction text, plus a nati
    - If it is, name each control by code point in `expected_notes`.
 6. **Both languages.** Every category gets Arabic and Hebrew fixtures written natively, not translated from each other. Colloquial Arabic (for example Levantine) and everyday Hebrew tech slang are welcome, because that is where real users break things.
 7. **Who is responsible?**
-   - A span goes in `isolate_spans` only if the *renderer* controls it: Markdown code, links and auto-linked URLs, emails, mentions, chips.
+   - A span goes in `isolate_spans` only if the *renderer* controls it: Markdown code, links and auto-linked URLs, emails, and mentions the UI renders as links or chips. A plain-text @mention is author-owned ([ADR-0005](adr/0005-plain-text-mentions-are-author-spans.md)).
    - If correct display needs the *author* to add markup (e.g. plain-text `C++` inside Hebrew), put the span in `author_spans` instead. UIs are not penalised for it; Track B checks whether models emit safe markup.
    - The reference render (golden page, review tool) shows author spans *as correctly authored*: an LTR isolate, as if the author had added LRI…PDI. `expected_notes` describe that correct display, and add that plain-text UIs may show it otherwise without being penalised.
 

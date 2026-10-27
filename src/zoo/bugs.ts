@@ -179,13 +179,7 @@ export const BUGS: Bug[] = [
     why: 'centred heading, then a left-aligned paragraph',
     css: '.fx h2 { text-align: center; } .fx p { text-align: left; }',
   },
-  {
-    id: 'ISO-3',
-    rule: 'ISO',
-    fixture: 'he-iso-004',
-    why: 'mention not isolated: the @ jumps',
-    html: (h) => h.replace('<bdi>@noam-dev</bdi>', '@noam-dev'),
-  },
+  // ISO-3 (an unisolated plain-text mention) was removed in ADR-0005: such mentions are author spans.
   {
     id: 'ISO-4',
     rule: 'ISO',

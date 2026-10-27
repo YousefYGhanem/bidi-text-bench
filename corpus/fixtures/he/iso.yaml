@@ -67,16 +67,19 @@
   text: 'תודה @noam-dev על ה-PR, אפשר למזג אותו.'
   markdown: true
   base_direction: rtl
-  isolate_spans: ['@noam-dev']
-  author_spans: []
+  isolate_spans: []
+  author_spans: ['@noam-dev']
   surfaces: [message]
   severity: major
   expected_notes: >-
-    The mention is one left-to-right unit, "@noam-dev", with "@" at its left end. Reading right to
-    left: "תודה", the mention, "על", "ה-PR", then "אפשר למזג אותו" with the period at the far left.
-    The "@" must not jump to the right of "noam-dev".
-  status: verified
-  verification: { by: 'Yousef Ghanem', at: '2026-10-23T11:45:55.543Z', hash: '6e3976fa3256b98084e32cf7affd2c132a57bfa954cefc19bc011ff2d11874f6' }
+    "@noam-dev" is a plain-text mention, so it is author-owned. Shown as correctly authored, it is
+    one left-to-right unit with "@" at its left end. Reading right to left: "תודה", the mention,
+    "על", "ה-PR", then "אפשר למזג אותו" with the period at the far left. A plain-text UI may show
+    the "@" to the right of "noam-dev" without being penalised. NEEDS-YOUSEF: with no isolate span
+    left, this fixture no longer tests ISO. Keep it, move it to NP, or replace it with a mention the
+    UI renders itself?
+  status: draft
+  verification: null
   source: original
   related_issues: []
 
