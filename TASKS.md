@@ -55,7 +55,8 @@ For details and acceptance criteria, see `docs/PLAN.md` §6. At the end of each 
 - [x] 3.2 [C] Write the adapter interface plus 2 auto-chat adapters. Compose files go under audit/targets/<id>/.
 - [x] 3.3 [C] Build `npm run audit -- --target <id>`. It writes audit/runs/<date>-<target>/ containing env.json, results.jsonl and evidence/.
 - [x] 3.4 [C] Build the manual helper (`npm run manual -- --target <id>`) and the triage view (`npm run triage`).
-- [ ] 3.5 [Y] Pilot on 2 automated targets (`/audit`) and 1 manual product. Triage every failure.
+- [x] 3.5 [Y] Pilot on 2 automated targets (`/audit`) and 1 manual product. Triage every failure.
+  - Closed by Yousef on 2026-10-31 with gaps accepted: the ChatGPT manual run (2026-10-30, 30/30 pass) has no screenshots and a placeholder product version; ar-iso-004 and he-iso-004 stay draft until re-verified (ADR-0005).
 - [x] 3.6 [P] Fix the rules or adapters behind each false positive, and log it in docs/FALSE_POSITIVES.md.
 - [ ] 3.7 [P] File the first 2–3 upstream reports. Claude drafts them with `/draft-bug`; you check for duplicates, edit and post. Record them in docs/REPORTS.md.
 - [ ] G3 [Y] The pilot findings are credible and the first reports are filed.
